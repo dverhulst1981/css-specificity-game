@@ -22,7 +22,7 @@ describe('saved progress', () => {
         xp: 0,
         records: [],
         set: null,
-      },
+      } as never,
     })
     expect(progress.levels[1]?.bestStars).toBe(2)
     expect(progress.levels[2]?.bestStars).toBe(3)
@@ -42,5 +42,25 @@ describe('saved progress', () => {
     })
     expect(progress.levels[1]?.bestStars).toBe(1)
     expect(progress.levels[2]).toBeUndefined()
+  })
+
+  it('drops a leftover daily or extra continue run', () => {
+    const progress = normalizeProgress({
+      schema: 2,
+      ...emptyProgress(),
+      continueRun: {
+        kind: 'extra',
+        mode: 'daily',
+        pace: 'steady',
+        questionIds: ['l2q01'],
+        index: 0,
+        phase: 'ask',
+        streak: 0,
+        xp: 0,
+        records: [],
+        set: null,
+      } as never,
+    })
+    expect(progress.continueRun).toBeNull()
   })
 })

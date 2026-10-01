@@ -7,12 +7,10 @@ import { MatchBoard } from '../components/MatchBoard.tsx'
 import { Verdict } from '../components/Icons.tsx'
 import {
   applyBankResult,
-  applyDailyResult,
   questionsFromRun,
   scoreResponse,
   streakPeak,
 } from '../game/controller.ts'
-import { generateQuestion, mulberry32 } from '../game/engine/generator.ts'
 import { levelInfo, MAX_LEVEL } from '../game/levels/catalog.ts'
 import { formatRange } from '../game/levels/quizSet.ts'
 import { isLevelUnlocked, levelStats } from '../game/scoring/scoring.ts'
@@ -40,13 +38,10 @@ function focusStepButton(index: number, dir: 'inc' | 'dec') {
 }
 
 function usesTempo(run: SavedRun): boolean {
-  return (run.mode === 'practice' || run.mode === 'select') && run.pace === 'tempo'
+  return run.mode === 'practice' && run.pace === 'tempo'
 }
 
 function runTitle(run: SavedRun): string {
-  if (run.mode === 'daily') return 'Dagelijkse ronde'
-  if (run.mode === 'extra') return 'Extra oefenen'
-  if (run.mode === 'select') return 'Wie wordt er geselecteerd'
   const base =
     run.set && run.set.from !== run.set.to
       ? `Set ${formatRange(run.set)}`
@@ -54,8 +49,7 @@ function runTitle(run: SavedRun): string {
         ? (levelInfo(run.set.from)?.name ?? `Level ${run.set.from}`)
         : 'Ronde'
   if (run.mode === 'practice') return `${base} · Oefenen`
-  if (run.mode === 'learn') return `${base} · Leren`
-  return base
+  return `${base} · Leren`
 }
 
 export function PlayPage() {
@@ -101,19 +95,12 @@ export function PlayPage() {
   }, [run])
 
   function finish(current: Progress, active: SavedRun, list: Question[]) {
-    let next: Progress = { ...current, continueRun: null }
-    if (active.mode === 'practice' || active.mode === 'learn' || active.mode === 'select') {
-      next = applyBankResult(current, list, active.records)
-    } else if (active.mode === 'daily' && active.date) {
-      next = applyDailyResult(current, active.date, active.records, list.length)
-    }
+    const next = applyBankResult(current, list, active.records)
     const grouped = new Map<number, Question[]>()
-    if (active.mode === 'practice' || active.mode === 'learn' || active.mode === 'select') {
-      for (const item of list) {
-        const bucket = grouped.get(item.level) ?? []
-        bucket.push(item)
-        grouped.set(item.level, bucket)
-      }
+    for (const item of list) {
+      const bucket = grouped.get(item.level) ?? []
+      bucket.push(item)
+      grouped.set(item.level, bucket)
     }
     const correctIds = new Set(active.records.filter((record) => record.correct).map((record) => record.questionId))
     const summary: ResultSummary = {
@@ -135,11 +122,9 @@ export function PlayPage() {
           unlockedNext: following <= MAX_LEVEL && isLevelUnlocked(following, next),
         }
       }),
-      dailyBest: active.date ? (next.daily[active.date] ?? null) : null,
       replay: {
         mode: active.mode,
         set: active.set,
-        date: active.date,
       },
     }
     saveResult(summary)
@@ -157,7 +142,7 @@ export function PlayPage() {
     const scored = scoreResponse(currentQuestion, response, active.streak, expired)
     updateProgress({
       ...current,
-      bestStreak: active.mode === 'extra' ? current.bestStreak : Math.max(current.bestStreak, scored.streak),
+      bestStreak: Math.max(current.bestStreak, scored.streak),
       continueRun: {
         ...active,
         phase: 'feedback',
@@ -191,21 +176,6 @@ export function PlayPage() {
     if (!active) return
     const list = questionsFromRun(active)
     if (active.phase !== 'feedback') return
-    if (active.mode === 'extra') {
-      const extra = generateQuestion(mulberry32((Date.now() + list.length) >>> 0), list.length)
-      const extraQuestions = [...list, extra]
-      updateProgress({
-        ...current,
-        continueRun: {
-          ...active,
-          phase: 'ask',
-          index: active.index + 1,
-          extraQuestions,
-          questionIds: extraQuestions.map((item) => item.id),
-        },
-      })
-      return
-    }
     if (active.index + 1 >= list.length) {
       finish(current, active, list)
       return
@@ -334,7 +304,7 @@ export function PlayPage() {
             <span>
               {run.index + 1}/{asked.length} · reeks {run.streak}
             </span>
-            {run.mode === 'practice' || run.mode === 'select' ? (
+            {run.mode === 'practice' ? (
               <div className="pace">
                 <button
                   type="button"
@@ -363,12 +333,6 @@ export function PlayPage() {
           {run.mode === 'learn' ? (
             <p className="mode-line">
               Leren: de denkstap hieronder is een hint, niet het antwoord. Er loopt geen klok.
-            </p>
-          ) : null}
-          {run.mode === 'select' ? (
-            <p className="mode-line">
-              Duid elk element aan dat de selector raakt. Meerdere mogen.
-              {run.pace === 'tempo' ? ' Tempo staat aan, 15 seconden per vraag.' : ' Tempo staat uit.'}
             </p>
           ) : null}
           {question.kind === 'specificity' ? <Specimen question={question} revealed={revealed} /> : null}
@@ -448,13 +412,8 @@ export function PlayPage() {
               <p>{question.explanation}</p>
               <div className="actions">
                 <button type="button" className="btn" onClick={advance}>
-                  {run.mode === 'extra' ? 'Volgende, ongescoord' : run.index + 1 >= asked.length ? 'Naar de uitslag' : 'Volgende'}
+                  {run.index + 1 >= asked.length ? 'Naar de uitslag' : 'Volgende'}
                 </button>
-                {run.mode === 'extra' ? (
-                  <button type="button" className="btn secondary" onClick={() => finish(progress, run, asked)}>
-                    Klaar
-                  </button>
-                ) : null}
               </div>
             </div>
           ) : null}

@@ -2,7 +2,6 @@ import type { Progress } from '../../types/progress.ts'
 
 export type BadgeId =
   | 'selector-rookie'
-  | 'specificity-fighter'
   | 'id-hunter'
   | 'cascade-master'
   | 'important-survivor'
@@ -24,13 +23,6 @@ export function evaluateBadges(progress: Progress): Badge[] {
       name: 'Selector Rookie',
       detail: 'Eén ster op level 1.',
       earned: stars(1) >= 1,
-      locked: false,
-    },
-    {
-      id: 'specificity-fighter',
-      name: 'Specificity Fighter',
-      detail: 'Een reeks van vijf goede antwoorden.',
-      earned: progress.bestStreak >= 5,
       locked: false,
     },
     {

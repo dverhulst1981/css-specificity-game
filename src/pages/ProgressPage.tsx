@@ -6,7 +6,6 @@ import { Lock, Star, Stars } from '../components/Icons.tsx'
 export function ProgressPage() {
   const { progress } = useApp()
   const badges = evaluateBadges(progress)
-  const dailyEntries = Object.entries(progress.daily)
   const earned = badges.some((badge) => badge.earned)
 
   return (
@@ -53,27 +52,6 @@ export function ProgressPage() {
           </ul>
         </section>
       </div>
-      <h2 className="section-title">Dagelijkse rondes</h2>
-      {dailyEntries.length === 0 ? (
-        <p className="progress-line">Nog geen record.</p>
-      ) : (
-        <ul className="badge-list">
-          {dailyEntries
-            .sort(([a], [b]) => (a < b ? 1 : -1))
-            .slice(0, 8)
-            .map(([date, best]) => (
-              <li key={date}>
-                <span className="disc">{best.correct}</span>
-                <div>
-                  <h3>{date}</h3>
-                  <p>
-                    {best.correct}/{best.total} goed, {best.xp} xp
-                  </p>
-                </div>
-              </li>
-            ))}
-        </ul>
-      )}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import type { Answer, Question } from './question.ts'
+import type { Answer } from './question.ts'
 
 export type StarCount = 0 | 1 | 2 | 3
 
@@ -18,25 +18,22 @@ export type AnswerRecord = {
 }
 
 export type SavedRun = {
-  kind: 'bank' | 'extra'
-  mode: 'practice' | 'learn' | 'daily' | 'extra' | 'select'
+  kind: 'bank'
+  mode: 'practice' | 'learn'
   pace: 'steady' | 'tempo'
   questionIds: string[]
-  extraQuestions?: Question[]
   index: number
   phase: 'ask' | 'feedback'
   streak: number
   xp: number
   records: AnswerRecord[]
   set: { from: number; to: number } | null
-  date?: string
 }
 
 export type Progress = {
   levels: Partial<Record<number, LevelProgress>>
   totalXp: number
   bestStreak: number
-  daily: Record<string, { correct: number; total: number; xp: number }>
   selectBest: { correct: number; total: number; xp: number } | null
   continueRun: SavedRun | null
 }
@@ -46,7 +43,6 @@ export function emptyProgress(): Progress {
     levels: {},
     totalXp: 0,
     bestStreak: 0,
-    daily: {},
     selectBest: null,
     continueRun: null,
   }

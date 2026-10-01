@@ -1,7 +1,7 @@
 import type { Question } from '../types/question.ts'
 import type { AnswerRecord, StarCount } from '../types/progress.ts'
 
-export type Mode = 'practice' | 'learn' | 'daily' | 'extra' | 'select'
+export type Mode = 'practice' | 'learn'
 
 export type LevelResult = {
   level: number
@@ -20,11 +20,9 @@ export type ResultSummary = {
   bestStreak: number
   trapsMissed: number
   perLevel: LevelResult[]
-  dailyBest: { correct: number; total: number; xp: number } | null
   replay: {
     mode: Mode
     set: { from: number; to: number } | null
-    date?: string
   } | null
 }
 

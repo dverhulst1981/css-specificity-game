@@ -24,15 +24,14 @@ The graded rounds are hand-written, and every answer is checked by an owned spec
 
 ## Operating Context
 
-A bright classroom, short rounds between other work. Practice, Learn, and two-device play. A daily set of five questions is chosen from the bank by the calendar date. A hash such as `#set=1-5` opens that level range with no server. Names in a two-player round exist only for that session.
+A bright classroom, short rounds between other work. Solo practice or learn on the path, or two-device play. A hash such as `#set=1-5` opens that level range for two devices with no server. Names in a two-player round exist only for that session.
 
 ## Capabilities and Constraints
 
 - Levels 1–7, about ten questions each. Level 1 is Wie wordt er geselecteerd: a chunk of HTML and one selector, and the player marks every element that selector matches. Two stars there (9 of 10) earn Element Scout. Levels 2–6 compare a specificity tuple, a selector battle (`a`, `b`, or `tie`), or the winning rule. Level 7 is `!important`. One star on level 7 earns !important Survivor.
-- Two-device play can start any of the seven levels immediately. Solo play still unlocks the next level at one star.
+- The home screen offers solo play and two-device play. Solo starts the next open level without a star. Two-device play can start any of the seven levels immediately.
 - Solo rounds use streak and stars. Hearts exist only in two-device play.
 - Next level unlocks at one star. Three stars require 95% and every trap in that run correct.
-- The generator may only build ungraded extra practice, and only for specificity and battles, with the engine as the answer.
 - UI copy is Dutch. Selectors, properties, and the `0-1-2-1` notation stay as written in CSS.
 - No accounts, global leaderboard, or classroom dashboard. Two devices connect with a pasted WebRTC code and a public STUN server. `MatchTransport` and `QuizSet` are the seams.
 

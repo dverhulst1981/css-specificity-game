@@ -5,14 +5,62 @@ import { starsFor } from './game/scoring/scoring.ts'
 const PROGRESS_KEY = 'specificiteit.v1'
 const RESULT_KEY = 'specificiteit.result'
 
-type StoredProgress = Partial<Progress> & { schema?: number }
+type StoredRun = {
+  mode?: string
+  kind?: string
+  pace?: string
+  questionIds?: unknown
+  index?: number
+  phase?: string
+  streak?: number
+  xp?: number
+  records?: SavedRun['records']
+  set?: { from: number; to: number } | null
+}
+
+type StoredProgress = Partial<Progress> & {
+  schema?: number
+  daily?: unknown
+  continueRun?: StoredRun | null
+  selectBest?: Progress['selectBest']
+}
+
+function isSoloMode(mode: string | undefined): mode is SavedRun['mode'] {
+  return mode === 'practice' || mode === 'learn'
+}
+
+function sanitizeRun(run: StoredRun | null | undefined, shiftLevels: boolean): SavedRun | null {
+  if (!run) return null
+  if ((run.mode as string) === 'pass' || (run.kind as string) === 'pass') return null
+  if (run.mode === 'daily' || run.mode === 'extra') return null
+
+  let mode: SavedRun['mode'] | null = isSoloMode(run.mode) ? run.mode : null
+  let set = run.set ?? null
+  if (run.mode === 'select') {
+    mode = 'practice'
+    set = { from: 1, to: 1 }
+  } else if (shiftLevels && set) {
+    set = { from: set.from + 1, to: set.to + 1 }
+  }
+  if (!mode) return null
+  return {
+    kind: 'bank',
+    mode,
+    pace: run.pace === 'tempo' ? 'tempo' : 'steady',
+    questionIds: Array.isArray(run.questionIds) ? run.questionIds.filter((id): id is string => typeof id === 'string') : [],
+    index: typeof run.index === 'number' ? run.index : 0,
+    phase: run.phase === 'feedback' ? 'feedback' : 'ask',
+    streak: typeof run.streak === 'number' ? run.streak : 0,
+    xp: typeof run.xp === 'number' ? run.xp : 0,
+    records: Array.isArray(run.records) ? run.records : [],
+    set,
+  }
+}
 
 export function normalizeProgress(parsed: StoredProgress): Progress {
   const legacy = parsed.schema !== 2
-  const savedRun = parsed.continueRun
-  let continueRun: SavedRun | null =
-    savedRun && (savedRun.mode as string) !== 'pass' && (savedRun.kind as string) !== 'pass' ? savedRun : null
   let levels = { ...(parsed.levels ?? {}) }
+  let continueRun = sanitizeRun(parsed.continueRun, legacy)
   if (legacy) {
     const shifted: Progress['levels'] = {}
     for (const [key, value] of Object.entries(levels)) {
@@ -33,20 +81,12 @@ export function normalizeProgress(parsed: StoredProgress): Progress {
       }
     }
     levels = shifted
-    if (continueRun?.mode === 'select') {
-      continueRun = { ...continueRun, mode: 'practice', set: { from: 1, to: 1 } }
-    } else if (continueRun?.set) {
-      continueRun = {
-        ...continueRun,
-        set: { from: continueRun.set.from + 1, to: continueRun.set.to + 1 },
-      }
-    }
   }
   return {
     ...emptyProgress(),
-    ...parsed,
     levels,
-    daily: parsed.daily ?? {},
+    totalXp: typeof parsed.totalXp === 'number' ? parsed.totalXp : 0,
+    bestStreak: typeof parsed.bestStreak === 'number' ? parsed.bestStreak : 0,
     selectBest: parsed.selectBest ?? null,
     continueRun,
   }

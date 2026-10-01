@@ -30,19 +30,18 @@ describe('scoring', () => {
     expect(isLevelUnlocked(3, progress)).toBe(false)
   })
 
-  it('earns !important Survivor from level 7 and Element Scout from two stars on level 1', () => {
+  it('earns the solo badges from level stars', () => {
     const progress = emptyProgress()
     progress.levels[1] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
     progress.levels[3] = { bestStars: 2, bestRatio: 1, attempts: 1, xp: 1 }
     progress.levels[6] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
-    progress.bestStreak = 5
     const before = evaluateBadges(progress)
     expect(before.filter((badge) => badge.earned).map((badge) => badge.id)).toEqual([
       'selector-rookie',
-      'specificity-fighter',
       'id-hunter',
       'cascade-master',
     ])
+    expect(before.map((badge) => badge.id)).not.toContain('specificity-fighter')
     expect(before.find((badge) => badge.id === 'element-scout')?.earned).toBe(false)
     progress.levels[7] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
     expect(evaluateBadges(progress).find((badge) => badge.id === 'important-survivor')?.earned).toBe(true)
