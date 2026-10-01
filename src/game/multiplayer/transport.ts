@@ -2,7 +2,7 @@ import type { Answer } from '../../types/question.ts'
 
 export type PlayerId = 'a' | 'b'
 
-export type MatchTransportKind = 'local-pass' | 'remote'
+export type MatchTransportKind = 'remote'
 
 export interface MatchTransport {
   readonly kind: MatchTransportKind
@@ -22,29 +22,9 @@ export type RemoteLink = {
   send(message: AnswerWire): void
 }
 
-export function createTransport(kind: 'local-pass'): LocalPassTransport
-export function createTransport(kind: 'remote', link: RemoteLink): RemoteTransport
-export function createTransport(kind: MatchTransportKind, link?: RemoteLink): MatchTransport {
-  if (kind === 'local-pass') return new LocalPassTransport()
-  if (!link) throw new Error('Remote transport heeft een kanaal nodig')
+export function createTransport(kind: 'remote', link: RemoteLink): RemoteTransport {
+  if (kind !== 'remote') throw new Error('Remote transport heeft een kanaal nodig')
   return new RemoteTransport(link)
-}
-
-export class LocalPassTransport implements MatchTransport {
-  readonly kind = 'local-pass' as const
-  private readonly answers = new Map<string, Answer>()
-
-  submit(player: PlayerId, questionId: string, answer: Answer): void {
-    this.answers.set(`${player}:${questionId}`, answer)
-  }
-
-  answerFor(player: PlayerId, questionId: string): Answer | null {
-    return this.answers.get(`${player}:${questionId}`) ?? null
-  }
-
-  bothAnswered(questionId: string): boolean {
-    return this.answerFor('a', questionId) !== null && this.answerFor('b', questionId) !== null
-  }
 }
 
 export class RemoteTransport implements MatchTransport {

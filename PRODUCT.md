@@ -12,7 +12,7 @@ Vite, React, and TypeScript. Fully client-side. Vitest for the engine. Progress 
 
 ## Users
 
-Classmates sharing one laptop in a lesson, racing a round at arm’s length. A teacher can hand them a link to a level range. A single learner can practice the same rounds alone.
+A single learner practicing a round, or two classmates each on their own device. A teacher can hand them a link to a level range.
 
 ## Product Purpose
 
@@ -24,16 +24,16 @@ The graded rounds are hand-written, and every answer is checked by an owned spec
 
 ## Operating Context
 
-A bright classroom, one shared screen, short rounds between other work. Practice, Learn, and same-device pass-and-play. A daily set of five questions is chosen from the bank by the calendar date. A hash such as `#set=1-5` opens that level range with no server. Names in a two-player round exist only for that session.
+A bright classroom, short rounds between other work. Practice, Learn, and two-device play. A daily set of five questions is chosen from the bank by the calendar date. A hash such as `#set=1-5` opens that level range with no server. Names in a two-player round exist only for that session.
 
 ## Capabilities and Constraints
 
 - Levels 1–5, about ten questions each, three answer shapes: a specificity tuple, a selector battle (`a`, `b`, or `tie`), or the id of the winning rule.
-- Solo rounds use streak and stars. Hearts exist only in pass-and-play.
+- Solo rounds use streak and stars. Hearts exist only in two-device play.
 - Next level unlocks at one star. Three stars require 95% and every trap in that run correct.
 - The generator may only build ungraded extra practice, and only for specificity and battles, with the engine as the answer.
 - UI copy is Dutch. Selectors, properties, and the `0-1-2-1` notation stay as written in CSS.
-- No accounts, WebRTC, global leaderboard, or classroom dashboard in this version. `MatchTransport` and `QuizSet` are the seams for those later.
+- No accounts, global leaderboard, or classroom dashboard. Two devices connect with a pasted WebRTC code and a public STUN server. `MatchTransport` and `QuizSet` are the seams.
 
 ## Brand Commitments
 

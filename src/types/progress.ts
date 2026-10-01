@@ -18,27 +18,18 @@ export type AnswerRecord = {
 }
 
 export type SavedRun = {
-  kind: 'bank' | 'extra' | 'pass'
-  mode: 'practice' | 'learn' | 'daily' | 'extra' | 'pass'
+  kind: 'bank' | 'extra'
+  mode: 'practice' | 'learn' | 'daily' | 'extra'
   pace: 'steady' | 'tempo'
   questionIds: string[]
   extraQuestions?: Question[]
   index: number
-  phase: 'ask' | 'feedback' | 'handoff' | 'reveal'
+  phase: 'ask' | 'feedback'
   streak: number
   xp: number
   records: AnswerRecord[]
   set: { from: number; to: number } | null
   date?: string
-  pass?: {
-    names: { a: string; b: string }
-    turn: 'a' | 'b'
-    hearts: { a: number; b: number }
-    xp: { a: number; b: number }
-    streak: { a: number; b: number }
-    correct: { a: number; b: number }
-    answers: { a: Answer | null; b: Answer | null }
-  }
 }
 
 export type Progress = {

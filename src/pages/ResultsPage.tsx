@@ -27,10 +27,6 @@ export function ResultsPage() {
       navigate('/')
       return
     }
-    if (result.replay.mode === 'pass') {
-      navigate('/samen')
-      return
-    }
     if (result.replay.mode === 'extra') {
       begin(
         createRun({
@@ -71,30 +67,6 @@ export function ResultsPage() {
   return (
     <div className="page results">
       <h1>{result.title}</h1>
-      {result.pass ? (
-        <>
-          <p className="lede">
-            {result.pass.winner === 'tie'
-              ? 'Gelijkspel.'
-              : `${result.pass.winner === 'a' ? result.pass.names.a : result.pass.names.b} wint dit spel.`}
-          </p>
-          <div className="reveal">
-            <div className="reveal-a">
-              <h2>{result.pass.names.a}</h2>
-              <p>
-                {result.pass.correct.a} goed · {result.pass.xp.a} xp · {result.pass.hearts.a} levens
-              </p>
-            </div>
-            <div className="reveal-b">
-              <h2>{result.pass.names.b}</h2>
-              <p>
-                {result.pass.correct.b} goed · {result.pass.xp.b} xp · {result.pass.hearts.b} levens
-              </p>
-            </div>
-          </div>
-        </>
-      ) : (
-        <>
           <p className="lede">
             {result.correct} van {result.total} goed.
             {result.mode === 'extra' ? ' Dit telt niet mee voor sterren.' : ` Deze ronde leverde ${result.xp} xp op.`}
@@ -117,8 +89,6 @@ export function ResultsPage() {
               Record van vandaag: {result.dailyBest.correct}/{result.dailyBest.total}.
             </p>
           ) : null}
-        </>
-      )}
       {result.perLevel.length > 1 ? (
         <ol className="path">
           {result.perLevel.map((level) => (

@@ -4,7 +4,6 @@ import { Sandbox } from '../components/Sandbox.tsx'
 import { Specimen } from '../components/Specimen.tsx'
 import { emptyTuple, Stepper } from '../components/Stepper.tsx'
 import { Ladder, previewLadder } from '../components/Ladder.tsx'
-import { Hearts, Verdict } from '../components/Icons.tsx'
 import {
   applyBankResult,
   applyDailyResult,
@@ -18,7 +17,6 @@ import { levelInfo } from '../game/levels/catalog.ts'
 import { formatRange } from '../game/levels/quizSet.ts'
 import { isLevelUnlocked, levelStats } from '../game/scoring/scoring.ts'
 import { correctNotation, describeAnswer } from '../game/format.ts'
-import { createTransport, type MatchTransport } from '../game/multiplayer/transport.ts'
 import type { ResultSummary } from '../game/results.ts'
 import { countCorrect, missedTraps } from '../game/results.ts'
 import { saveResult } from '../storage.ts'
@@ -41,20 +39,9 @@ function focusStepButton(index: number, dir: 'inc' | 'dec') {
   document.querySelector<HTMLButtonElement>(`[data-step="${index}"] [data-step-dir="${dir}"]`)?.focus()
 }
 
-function passWinner(pass: NonNullable<SavedRun['pass']>): 'a' | 'b' | 'tie' {
-  const aOut = pass.hearts.a <= 0
-  const bOut = pass.hearts.b <= 0
-  if (aOut && !bOut) return 'b'
-  if (bOut && !aOut) return 'a'
-  if (pass.xp.a !== pass.xp.b) return pass.xp.a > pass.xp.b ? 'a' : 'b'
-  if (pass.hearts.a !== pass.hearts.b) return pass.hearts.a > pass.hearts.b ? 'a' : 'b'
-  return 'tie'
-}
-
 function runTitle(run: SavedRun): string {
   if (run.mode === 'daily') return 'Dagelijkse ronde'
   if (run.mode === 'extra') return 'Extra oefenen'
-  if (run.mode === 'pass' && run.pass) return `${run.pass.names.a} tegen ${run.pass.names.b}`
   const base =
     run.set && run.set.from !== run.set.to
       ? `Set ${formatRange(run.set)}`
@@ -71,14 +58,13 @@ export function PlayPage() {
   const progressRef = useRef(progress)
   progressRef.current = progress
   const run = progress.continueRun
-  const transportRef = useRef<MatchTransport>(createTransport('local-pass'))
   const [tuple, setTuple] = useState<Specificity>(emptyTuple())
   const [field, setField] = useState(0)
   const [battle, setBattle] = useState<'a' | 'b' | 'tie' | null>(null)
   const [ruleId, setRuleId] = useState<string | null>(null)
   const [seconds, setSeconds] = useState(25)
   const timedOut = useRef(false)
-  const roundKey = `${run?.index ?? ''}:${run?.phase ?? ''}:${run?.pass?.turn ?? ''}`
+  const roundKey = `${run?.index ?? ''}:${run?.phase ?? ''}`
   const [seenRound, setSeenRound] = useState(roundKey)
   const [seenPace, setSeenPace] = useState(run?.pace)
   if (seenRound !== roundKey) {
@@ -98,14 +84,6 @@ export function PlayPage() {
 
   const asked = run ? questionsFromRun(run) : []
   const question = run ? asked[run.index] : undefined
-
-  useEffect(() => {
-    if (!run || run.mode !== 'pass' || !question) return
-    const transport = createTransport('local-pass')
-    if (run.pass?.answers.a) transport.submit('a', question.id, run.pass.answers.a)
-    if (run.pass?.answers.b) transport.submit('b', question.id, run.pass.answers.b)
-    transportRef.current = transport
-  }, [run, question])
 
   useEffect(() => {
     if (!run || run.mode !== 'practice' || run.pace !== 'tempo' || run.phase !== 'ask') return
@@ -134,8 +112,8 @@ export function PlayPage() {
     const summary: ResultSummary = {
       mode: active.mode,
       title: runTitle(active),
-      correct: active.pass ? active.pass.correct.a + active.pass.correct.b : countCorrect(active.records),
-      total: active.pass ? active.index + 1 : list.length,
+      correct: countCorrect(active.records),
+      total: list.length,
       xp: active.xp,
       bestStreak: streakPeak(active.records),
       trapsMissed: missedTraps(list, active.records),
@@ -156,15 +134,6 @@ export function PlayPage() {
         set: active.set,
         date: active.date,
       },
-      pass: active.pass
-        ? {
-            names: active.pass.names,
-            xp: active.pass.xp,
-            hearts: active.pass.hearts,
-            correct: active.pass.correct,
-            winner: passWinner(active.pass),
-          }
-        : undefined,
     }
     saveResult(summary)
     updateProgress(next)
@@ -174,7 +143,7 @@ export function PlayPage() {
   function submitSolo(response: Answer | null, expired = false) {
     const current = progressRef.current
     const active = current.continueRun
-    if (!active || active.phase !== 'ask' || active.mode === 'pass') return
+    if (!active || active.phase !== 'ask') return
     const list = questionsFromRun(active)
     const currentQuestion = list[active.index]
     if (!currentQuestion) return
@@ -192,65 +161,11 @@ export function PlayPage() {
     })
   }
 
-  function submitPass(response: Answer) {
-    const current = progressRef.current
-    const active = current.continueRun
-    if (!active?.pass || active.phase !== 'ask') return
-    const list = questionsFromRun(active)
-    const currentQuestion = list[active.index]
-    if (!currentQuestion) return
-    const player = active.pass.turn
-    transportRef.current.submit(player, currentQuestion.id, response)
-    if (player === 'a') {
-      updateProgress({
-        ...current,
-        continueRun: {
-          ...active,
-          phase: 'handoff',
-          pass: {
-            ...active.pass,
-            turn: 'b',
-            answers: { a: response, b: null },
-          },
-        },
-      })
-      return
-    }
-    const answerA = active.pass.answers.a
-    if (!answerA) return
-    const scoredA = scoreResponse(currentQuestion, answerA, active.pass.streak.a)
-    const scoredB = scoreResponse(currentQuestion, response, active.pass.streak.b)
-    updateProgress({
-      ...current,
-      continueRun: {
-        ...active,
-        phase: 'reveal',
-        records: [...active.records, scoredA.record, scoredB.record],
-        pass: {
-          ...active.pass,
-          turn: 'a',
-          answers: { a: answerA, b: response },
-          hearts: {
-            a: Math.max(0, active.pass.hearts.a - (scoredA.correct ? 0 : 1)),
-            b: Math.max(0, active.pass.hearts.b - (scoredB.correct ? 0 : 1)),
-          },
-          xp: { a: active.pass.xp.a + scoredA.xp, b: active.pass.xp.b + scoredB.xp },
-          streak: { a: scoredA.streak, b: scoredB.streak },
-          correct: {
-            a: active.pass.correct.a + (scoredA.correct ? 1 : 0),
-            b: active.pass.correct.b + (scoredB.correct ? 1 : 0),
-          },
-        },
-      },
-    })
-  }
-
   function submitCurrent() {
     if (!question || !run || run.phase !== 'ask') return
     const response = responseFromState(question)
     if (!response) return
-    if (run.mode === 'pass') submitPass(response)
-    else submitSolo(response)
+    submitSolo(response)
   }
 
   function responseFromState(currentQuestion: Question): Answer | null {
@@ -266,32 +181,6 @@ export function PlayPage() {
     const active = current.continueRun
     if (!active) return
     const list = questionsFromRun(active)
-    if (active.mode === 'pass') {
-      if (active.phase === 'handoff' && active.pass) {
-        updateProgress({
-          ...current,
-          continueRun: { ...active, phase: 'ask', pass: { ...active.pass, turn: 'b' } },
-        })
-        return
-      }
-      if (active.phase !== 'reveal' || !active.pass) return
-      const ended =
-        active.pass.hearts.a === 0 || active.pass.hearts.b === 0 || active.index + 1 >= list.length
-      if (ended) {
-        finish(current, active, list)
-        return
-      }
-      updateProgress({
-        ...current,
-        continueRun: {
-          ...active,
-          index: active.index + 1,
-          phase: 'ask',
-          pass: { ...active.pass, turn: 'a', answers: { a: null, b: null } },
-        },
-      })
-      return
-    }
     if (active.phase !== 'feedback') return
     if (active.mode === 'extra') {
       const extra = generateQuestion(mulberry32((Date.now() + list.length) >>> 0), list.length)
@@ -350,7 +239,7 @@ export function PlayPage() {
       const list = active ? questionsFromRun(active) : []
       const currentQuestion = active ? list[active.index] : undefined
       if (!active || !currentQuestion) return
-      if (active.phase === 'feedback' || active.phase === 'reveal' || active.phase === 'handoff') {
+      if (active.phase === 'feedback') {
         if (event.key === 'Enter') {
           event.preventDefault()
           advance()
@@ -416,38 +305,19 @@ export function PlayPage() {
     )
   }
 
-  const revealed = run.phase === 'feedback' || run.phase === 'reveal'
+  const revealed = run.phase === 'feedback'
   const record = run.records[run.records.length - 1]
   const showSoloFeedback = run.phase === 'feedback' && record?.questionId === question.id
-
-  if (run.phase === 'handoff' && run.pass) {
-    return (
-      <div className="page handoff">
-        <h1>Kijk weg.</h1>
-        <p className="lede">Geef de laptop aan {run.pass.names.b}. Het antwoord van {run.pass.names.a} blijft verborgen.</p>
-        <button type="button" className="btn" onClick={advance}>
-          Ik ben {run.pass.names.b}
-        </button>
-      </div>
-    )
-  }
-
-  const playerName = run.pass ? run.pass.names[run.pass.turn] : null
 
   return (
     <div className="page">
       <div className="play">
         <div className="play-main">
           <div className="hud">
-            <strong>
-              {runTitle(run)}
-              {playerName ? ` · Jij speelt als ${playerName}` : ''}
-            </strong>
+            <strong>{runTitle(run)}</strong>
             <span>
-              {run.index + 1}/{asked.length}
-              {run.mode !== 'pass' ? ` · reeks ${run.streak}` : null}
+              {run.index + 1}/{asked.length} · reeks {run.streak}
             </span>
-            {run.pass ? <Hearts count={run.pass.hearts[run.pass.turn]} /> : null}
             {run.mode === 'practice' ? (
               <div className="pace">
                 <button
@@ -552,45 +422,9 @@ export function PlayPage() {
               </div>
             </div>
           ) : null}
-          {run.phase === 'reveal' && run.pass ? (
-            <div aria-live="polite">
-              <div className="reveal">
-                <div className="reveal-a">
-                  <h2>
-                    {run.pass.names.a}
-                    <Verdict correct={Boolean(run.pass.answers.a && isPlayerCorrect(question, run.pass.answers.a))} />
-                  </h2>
-                  <p>{describeAnswer(question, run.pass.answers.a)}</p>
-                </div>
-                <div className="reveal-b">
-                  <h2>
-                    {run.pass.names.b}
-                    <Verdict correct={Boolean(run.pass.answers.b && isPlayerCorrect(question, run.pass.answers.b))} />
-                  </h2>
-                  <p>{describeAnswer(question, run.pass.answers.b)}</p>
-                </div>
-              </div>
-              <div className="feedback">
-                {question.trap && question.trapLead ? <p className="trap">{question.trapLead}</p> : null}
-                <p>
-                  De uitkomst is <strong>{correctNotation(question)}</strong>.
-                </p>
-                <p>{question.explanation}</p>
-                <button type="button" className="btn" onClick={advance}>
-                  {run.pass.hearts.a === 0 || run.pass.hearts.b === 0 || run.index + 1 >= asked.length
-                    ? 'Naar de uitslag'
-                    : 'Volgende vraag'}
-                </button>
-              </div>
-            </div>
-          ) : null}
         </div>
         <Ladder rungs={revealed ? ladderFor(question) : previewLadder()} />
       </div>
     </div>
   )
-}
-
-function isPlayerCorrect(question: Question, response: Answer): boolean {
-  return scoreResponse(question, response, 0).correct
 }

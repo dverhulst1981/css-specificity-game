@@ -110,7 +110,7 @@ The seed read was “editorial gold.” The classroom scene overrides that mood:
 
 ### Secondary
 
-- **Chalk** (`oklch(0.280 0.080 255)`): player B in a pass-and-play reveal, and nothing else. White text when the fill is chalk.
+- **Chalk** (`oklch(0.280 0.080 255)`): player B in a two-device reveal, and nothing else. White text when the fill is chalk.
 
 ### Neutral
 

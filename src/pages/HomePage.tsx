@@ -75,10 +75,10 @@ export function HomePage() {
   return (
     <>
       <section className="home-intro">
-        <h1>Eén laptop, één ronde.</h1>
+        <h1>Tel de cascade.</h1>
         <p className="lede">
-          Twee klasgenoten, één scherm, de cascade hardop. Je telt inline, ids, klassen en elementen. Nooit
-          optellen tot één getal.
+          Inline, ids, klassen en elementen. Nooit optellen tot één getal. Alleen, of tegen iemand op een tweede
+          toestel.
         </p>
       </section>
       <section className="arena" aria-label="Start een ronde">
@@ -104,10 +104,6 @@ export function HomePage() {
         <button type="button" className="arena-row" onClick={startDaily}>
           Dagelijkse ronde
           <span>{dailyBest ? `record ${dailyBest.correct}/${dailyBest.total}` : 'vijf vragen'}</span>
-        </button>
-        <button type="button" className="arena-row" onClick={() => navigate('/samen')}>
-          Samen op één laptop
-          <span>3 levens</span>
         </button>
         <button type="button" className="arena-row" onClick={() => navigate('/twee')}>
           Twee toestellen

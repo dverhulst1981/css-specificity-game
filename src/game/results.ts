@@ -1,7 +1,7 @@
 import type { Question } from '../types/question.ts'
 import type { AnswerRecord, StarCount } from '../types/progress.ts'
 
-export type Mode = 'practice' | 'learn' | 'daily' | 'extra' | 'pass'
+export type Mode = 'practice' | 'learn' | 'daily' | 'extra'
 
 export type LevelResult = {
   level: number
@@ -26,13 +26,6 @@ export type ResultSummary = {
     set: { from: number; to: number } | null
     date?: string
   } | null
-  pass?: {
-    names: { a: string; b: string }
-    xp: { a: number; b: number }
-    hearts: { a: number; b: number }
-    correct: { a: number; b: number }
-    winner: 'a' | 'b' | 'tie'
-  }
 }
 
 export function countCorrect(records: AnswerRecord[]): number {

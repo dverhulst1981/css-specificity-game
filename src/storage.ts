@@ -9,12 +9,16 @@ export function loadProgress(): { progress: Progress; persistent: boolean } {
     const raw = localStorage.getItem(PROGRESS_KEY)
     if (!raw) return { progress: emptyProgress(), persistent: true }
     const parsed = JSON.parse(raw) as Partial<Progress>
+    const savedRun = parsed.continueRun
+    const continueRun =
+      savedRun && (savedRun.mode as string) !== 'pass' && (savedRun.kind as string) !== 'pass' ? savedRun : null
     return {
       progress: {
         ...emptyProgress(),
         ...parsed,
         levels: parsed.levels ?? {},
         daily: parsed.daily ?? {},
+        continueRun,
       },
       persistent: true,
     }

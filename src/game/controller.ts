@@ -101,10 +101,9 @@ export function createRun(options: {
   asked: Question[]
   set: SavedRun['set']
   date?: string
-  pass?: SavedRun['pass']
 }): SavedRun {
   return {
-    kind: options.mode === 'extra' ? 'extra' : options.mode === 'pass' ? 'pass' : 'bank',
+    kind: options.mode === 'extra' ? 'extra' : 'bank',
     mode: options.mode,
     pace: options.pace,
     questionIds: options.asked.map((question) => question.id),
@@ -116,6 +115,5 @@ export function createRun(options: {
     records: [],
     set: options.set,
     date: options.date,
-    pass: options.pass,
   }
 }

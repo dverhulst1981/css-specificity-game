@@ -19,7 +19,7 @@ import type { Specificity } from '../types/specificity.ts'
 type Stage = 'pick' | 'host' | 'guest'
 
 export function RemotePage() {
-  const { progress, range, navigate } = useApp()
+  const { progress, range } = useApp()
   const [stage, setStage] = useState<Stage>('pick')
   const [name, setName] = useState('')
   const [level, setLevel] = useState(1)
@@ -305,9 +305,6 @@ export function RemotePage() {
         </button>
         <button type="button" className="btn secondary" onClick={() => { setError(''); setStage('guest') }}>
           Ik doe mee
-        </button>
-        <button type="button" className="btn secondary" onClick={() => navigate('/samen')}>
-          Liever één laptop
         </button>
       </div>
     </div>
