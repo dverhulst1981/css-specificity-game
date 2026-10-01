@@ -819,6 +819,27 @@ button.quiet-link {
   font-weight: 600;
 }
 
+.code-label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+  margin-top: 16px;
+  max-width: 40rem;
+}
+
+.code-box {
+  width: 100%;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-panel);
+  background: var(--paper);
+  padding: 12px;
+  min-height: 8rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  resize: vertical;
+}
+
 .form input,
 .level-picks {
   border: 2px solid var(--ink);

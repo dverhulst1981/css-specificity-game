@@ -7,7 +7,7 @@ import { formatRange, questionsForRange } from '../game/levels/quizSet.ts'
 import { isLevelUnlocked } from '../game/scoring/scoring.ts'
 
 export function PassSetupPage() {
-  const { progress, range, begin } = useApp()
+  const { progress, range, begin, navigate } = useApp()
   const [nameA, setNameA] = useState('')
   const [nameB, setNameB] = useState('')
   const [level, setLevel] = useState(1)
@@ -84,6 +84,10 @@ export function PassSetupPage() {
           Start de ronde
         </button>
       </form>
+      <p className="mode-line">Elk een eigen toestel? Wissel een code uit. Er is geen server van ons.</p>
+      <button type="button" className="btn secondary" onClick={() => navigate('/twee')}>
+        Twee toestellen
+      </button>
     </div>
   )
 }

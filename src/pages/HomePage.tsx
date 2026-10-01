@@ -109,6 +109,10 @@ export function HomePage() {
           Samen op één laptop
           <span>3 levens</span>
         </button>
+        <button type="button" className="arena-row" onClick={() => navigate('/twee')}>
+          Twee toestellen
+          <span>code, geen server</span>
+        </button>
       </section>
       <div className="page">
         <button type="button" className="quiet-link" onClick={startExtra}>

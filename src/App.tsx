@@ -5,6 +5,7 @@ import { PassSetupPage } from './pages/PassSetupPage.tsx'
 import { PathPage } from './pages/PathPage.tsx'
 import { PlayPage } from './pages/PlayPage.tsx'
 import { ProgressPage } from './pages/ProgressPage.tsx'
+import { RemotePage } from './pages/RemotePage.tsx'
 import { ResultsPage } from './pages/ResultsPage.tsx'
 
 function Routes() {
@@ -12,6 +13,7 @@ function Routes() {
   if (path.startsWith('/pad')) return <PathPage />
   if (path.startsWith('/spelen')) return <PlayPage />
   if (path.startsWith('/samen')) return <PassSetupPage />
+  if (path.startsWith('/twee')) return <RemotePage />
   if (path.startsWith('/resultaat')) return <ResultsPage />
   if (path.startsWith('/voortgang')) return <ProgressPage />
   return <HomePage />
