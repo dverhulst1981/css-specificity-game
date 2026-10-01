@@ -63,21 +63,6 @@ a {
   color: inherit;
 }
 
-.skip {
-  position: absolute;
-  left: 12px;
-  top: -40px;
-  background: var(--ink);
-  color: var(--paper);
-  padding: 8px 12px;
-  border-radius: var(--radius-pill);
-  z-index: 5;
-}
-
-.skip:focus {
-  top: 12px;
-}
-
 .top {
   display: flex;
   justify-content: space-between;

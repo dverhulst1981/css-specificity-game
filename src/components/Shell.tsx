@@ -13,9 +13,6 @@ export function Shell({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <a className="skip" href="#inhoud">
-        Naar de inhoud
-      </a>
       <header className="top">
         <a className="wordmark" href={publicPath('/')} aria-label="Selector Wars" onClick={(event) => go(event, '/')}>
           <span className="logo" aria-hidden="true">
@@ -37,7 +34,7 @@ export function Shell({ children }: { children: ReactNode }) {
         </nav>
       </header>
       {!persistent ? <p className="notice">Deze browser bewaart je ronde niet.</p> : null}
-      <main id="inhoud">{children}</main>
+      <main>{children}</main>
     </>
   )
 }
