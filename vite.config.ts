@@ -14,6 +14,7 @@ function spaFallback(): Plugin {
 }
 
 export default defineConfig({
+  base: '/css-specificity-game/',
   plugins: [react(), spaFallback()],
   server: {
     host: '0.0.0.0',

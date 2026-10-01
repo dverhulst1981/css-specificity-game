@@ -1,4 +1,5 @@
 import type { MouseEvent, ReactNode } from 'react'
+import { publicPath } from '../base.ts'
 import { useApp } from '../app-context.tsx'
 
 export function Shell({ children }: { children: ReactNode }) {
@@ -16,15 +17,15 @@ export function Shell({ children }: { children: ReactNode }) {
         Naar de inhoud
       </a>
       <header className="top">
-        <a className="wordmark" href="/" onClick={(event) => go(event, '/')}>
+        <a className="wordmark" href={publicPath('/')} onClick={(event) => go(event, '/')}>
           Specificiteit
         </a>
         <nav>
-          <a href="/pad" aria-current={path === '/pad' ? 'page' : undefined} onClick={(event) => go(event, '/pad')}>
+          <a href={publicPath('/pad')} aria-current={path === '/pad' ? 'page' : undefined} onClick={(event) => go(event, '/pad')}>
             Levelpad
           </a>
           <a
-            href="/voortgang"
+            href={publicPath('/voortgang')}
             aria-current={path === '/voortgang' ? 'page' : undefined}
             onClick={(event) => go(event, '/voortgang')}
           >

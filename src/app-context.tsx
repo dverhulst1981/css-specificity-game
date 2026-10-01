@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { appPath, publicPath } from './base.ts'
 import { parseSetHash, type LevelRange } from './game/levels/quizSet.ts'
 import type { SavedRun } from './types/progress.ts'
 import type { Progress } from './types/progress.ts'
@@ -17,7 +18,7 @@ type AppContextValue = {
 const AppContext = createContext<AppContextValue | null>(null)
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [path, setPath] = useState(() => window.location.pathname)
+  const [path, setPath] = useState(() => appPath(window.location.pathname))
   const [hash, setHash] = useState(() => window.location.hash)
   const loaded = loadProgress()
   const [progress, setProgress] = useState<Progress>(loaded.progress)
@@ -25,7 +26,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     function sync() {
-      setPath(window.location.pathname)
+      setPath(appPath(window.location.pathname))
       setHash(window.location.hash)
     }
     window.addEventListener('popstate', sync)
@@ -43,7 +44,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       persistent,
       range: parseSetHash(hash),
       navigate(next: string) {
-        const url = `${next}${window.location.hash}`
+        const url = `${publicPath(next)}${window.location.hash}`
         window.history.pushState({}, '', url)
         setPath(next)
       },
@@ -55,7 +56,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         const next = { ...progress, continueRun: run }
         setProgress(next)
         setPersistent(saveProgress(next))
-        const url = `/spelen${window.location.hash}`
+        const url = `${publicPath('/spelen')}${window.location.hash}`
         window.history.pushState({}, '', url)
         setPath('/spelen')
       },

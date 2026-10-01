@@ -11,7 +11,9 @@ npm install
 npm run dev
 ```
 
-The dev server listens on port `47231`.
+The dev server listens on port `47231`, under `/css-specificity-game/`.
+
+Published site: https://dverhulst1981.github.io/css-specificity-game/
 
 ```bash
 npm test
