@@ -76,7 +76,7 @@ export function ResultsPage() {
           <p className="lede">
             {result.pass.winner === 'tie'
               ? 'Gelijkspel.'
-              : `${result.pass.winner === 'a' ? result.pass.names.a : result.pass.names.b} wint de laptop.`}
+              : `${result.pass.winner === 'a' ? result.pass.names.a : result.pass.names.b} wint dit spel.`}
           </p>
           <div className="reveal">
             <div className="reveal-a">

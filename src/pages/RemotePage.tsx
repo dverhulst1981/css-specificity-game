@@ -445,7 +445,7 @@ function RemotePlay({ peer, onLeave }: { peer: RemotePeer; onLeave: () => void }
                   <p>
                     {view.winner === 'tie'
                       ? 'Gelijkspel.'
-                      : `${view.winner === 'a' ? view.names.a || 'Speler 1' : view.names.b || 'Speler 2'} wint de laptop.`}
+                      : `${view.winner === 'a' ? view.names.a || 'Speler 1' : view.names.b || 'Speler 2'} wint dit spel.`}
                   </p>
                 ) : null}
                 <div className="actions">
