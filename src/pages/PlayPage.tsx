@@ -3,11 +3,13 @@ import { useApp } from '../app-context.tsx'
 import { Sandbox } from '../components/Sandbox.tsx'
 import { Specimen } from '../components/Specimen.tsx'
 import { emptyTuple, Stepper } from '../components/Stepper.tsx'
-import { Ladder, previewLadder } from '../components/Ladder.tsx'
+import { Ladder, previewLadder, previewMatchLadder } from '../components/Ladder.tsx'
+import { MatchBoard } from '../components/MatchBoard.tsx'
 import { Verdict } from '../components/Icons.tsx'
 import {
   applyBankResult,
   applyDailyResult,
+  applySelectResult,
   questionsFromRun,
   scoreResponse,
   streakPeak,
@@ -40,9 +42,14 @@ function focusStepButton(index: number, dir: 'inc' | 'dec') {
   document.querySelector<HTMLButtonElement>(`[data-step="${index}"] [data-step-dir="${dir}"]`)?.focus()
 }
 
+function usesTempo(run: SavedRun): boolean {
+  return (run.mode === 'practice' || run.mode === 'select') && run.pace === 'tempo'
+}
+
 function runTitle(run: SavedRun): string {
   if (run.mode === 'daily') return 'Dagelijkse ronde'
   if (run.mode === 'extra') return 'Extra oefenen'
+  if (run.mode === 'select') return 'Wie wordt er geselecteerd'
   const base =
     run.set && run.set.from !== run.set.to
       ? `Set ${formatRange(run.set)}`
@@ -63,6 +70,7 @@ export function PlayPage() {
   const [field, setField] = useState(0)
   const [battle, setBattle] = useState<'a' | 'b' | 'tie' | null>(null)
   const [ruleId, setRuleId] = useState<string | null>(null)
+  const [picks, setPicks] = useState<string[]>([])
   const [seconds, setSeconds] = useState(15)
   const timedOut = useRef(false)
   const roundKey = `${run?.index ?? ''}:${run?.phase ?? ''}`
@@ -75,6 +83,7 @@ export function PlayPage() {
     setField(0)
     setBattle(null)
     setRuleId(null)
+    setPicks([])
     setSeconds(15)
     timedOut.current = false
   } else if (seenPace !== run?.pace) {
@@ -87,7 +96,7 @@ export function PlayPage() {
   const question = run ? asked[run.index] : undefined
 
   useEffect(() => {
-    if (!run || run.mode !== 'practice' || run.pace !== 'tempo' || run.phase !== 'ask') return
+    if (!run || !usesTempo(run) || run.phase !== 'ask') return
     const id = window.setInterval(() => {
       setSeconds((current) => (current <= 1 ? 0 : current - 1))
     }, 1000)
@@ -96,7 +105,9 @@ export function PlayPage() {
 
   function finish(current: Progress, active: SavedRun, list: Question[]) {
     let next: Progress = { ...current, continueRun: null }
-    if (active.mode === 'practice' || active.mode === 'learn') {
+    if (active.mode === 'select') {
+      next = applySelectResult(current, active.records, list.length)
+    } else if (active.mode === 'practice' || active.mode === 'learn') {
       next = applyBankResult(current, list, active.records)
     } else if (active.mode === 'daily' && active.date) {
       next = applyDailyResult(current, active.date, active.records, list.length)
@@ -174,7 +185,9 @@ export function PlayPage() {
     if (currentQuestion.kind === 'selector-battle') {
       return battle ? { kind: 'selector-battle', value: battle } : null
     }
-    return ruleId ? { kind: 'which-rule-wins', ruleId } : null
+    if (currentQuestion.kind === 'who-matches') return { kind: 'who-matches', ids: picks }
+    if (currentQuestion.kind === 'which-rule-wins') return ruleId ? { kind: 'which-rule-wins', ruleId } : null
+    return null
   }
 
   function advance() {
@@ -214,7 +227,7 @@ export function PlayPage() {
   useEffect(() => {
     if (seconds !== 0 || timedOut.current) return
     const active = progressRef.current.continueRun
-    if (!active || active.mode !== 'practice' || active.pace !== 'tempo' || active.phase !== 'ask') return
+    if (!active || !usesTempo(active) || active.phase !== 'ask') return
     timedOut.current = true
     timeoutRef.current()
   }, [seconds])
@@ -281,6 +294,13 @@ export function PlayPage() {
         }
         return
       }
+      if (currentQuestion.kind === 'who-matches') {
+        if (event.key === 'Enter') {
+          event.preventDefault()
+          submitCurrent()
+        }
+        return
+      }
       if (/^[1-9]$/.test(event.key)) {
         const index = Number(event.key) - 1
         const rule = currentQuestion.rules[index]
@@ -319,7 +339,7 @@ export function PlayPage() {
             <span>
               {run.index + 1}/{asked.length} · reeks {run.streak}
             </span>
-            {run.mode === 'practice' ? (
+            {run.mode === 'practice' || run.mode === 'select' ? (
               <div className="pace">
                 <button
                   type="button"
@@ -350,7 +370,25 @@ export function PlayPage() {
               Leren: de denkstap hieronder is een hint, niet het antwoord. Er loopt geen klok.
             </p>
           ) : null}
+          {run.mode === 'select' ? (
+            <p className="mode-line">
+              Duid elk element aan dat de selector raakt. Meerdere mogen.
+              {run.pace === 'tempo' ? ' Tempo staat aan, 15 seconden per vraag.' : ' Tempo staat uit.'}
+            </p>
+          ) : null}
           {question.kind === 'specificity' ? <Specimen question={question} revealed={revealed} /> : null}
+          {question.kind === 'who-matches' ? (
+            <MatchBoard
+              question={question}
+              picked={
+                revealed ? (record?.response?.kind === 'who-matches' ? record.response.ids : []) : picks
+              }
+              revealed={revealed}
+              onToggle={(id) =>
+                setPicks((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]))
+              }
+            />
+          ) : null}
           {question.kind === 'which-rule-wins' ? <Sandbox html={question.html} rules={question.rules} /> : null}
           {run.mode === 'learn' && run.phase === 'ask' ? (
             <details className="lesson" open>
@@ -427,7 +465,11 @@ export function PlayPage() {
             </div>
           ) : null}
         </div>
-        <Ladder rungs={revealed ? ladderFor(question) : previewLadder()} />
+        <Ladder
+          rungs={
+            revealed ? ladderFor(question) : question.kind === 'who-matches' ? previewMatchLadder() : previewLadder()
+          }
+        />
       </div>
     </div>
   )

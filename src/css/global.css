@@ -1032,3 +1032,85 @@ button.quiet-link {
   font-size: clamp(2rem, 5vw, 3rem);
   margin-bottom: 12px;
 }
+
+.match-html {
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-panel);
+  overflow-x: auto;
+  padding: 8px 0;
+}
+
+.match-line {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-left: 4px solid transparent;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  padding-top: 6px;
+  padding-right: 12px;
+  padding-bottom: 6px;
+  min-height: 44px;
+  font: inherit;
+}
+
+.match-line code {
+  font-family: var(--font-mono);
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+button.match-line {
+  cursor: pointer;
+}
+
+button.match-line:hover {
+  background: var(--surface);
+}
+
+button.match-line:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: -2px;
+}
+
+button.match-line:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.match-line.is-selected,
+.match-line.is-hit,
+.match-line.is-hit:disabled {
+  background: var(--honey);
+  color: var(--honey-on);
+  border-left-color: var(--honey-deep);
+}
+
+.match-line.is-selected:hover,
+.match-line.is-hit:hover {
+  background: var(--honey-deep);
+}
+
+.match-line.is-miss,
+.match-line.is-miss:disabled {
+  background: var(--surface);
+  color: var(--ink);
+  border-left-color: var(--chalk);
+  box-shadow: inset 0 0 0 2px var(--chalk);
+}
+
+.match-line.is-extra,
+.match-line.is-extra:disabled {
+  color: var(--muted);
+  border-left-color: var(--muted);
+  text-decoration: line-through;
+}
+
+.match-legend {
+  margin: 10px 0 0;
+  max-width: 62ch;
+  color: var(--ink);
+}

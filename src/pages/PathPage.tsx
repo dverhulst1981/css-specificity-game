@@ -1,4 +1,4 @@
-import { questions } from '../data/questions/index.ts'
+import { matchQuestions, questions } from '../data/questions/index.ts'
 import { useApp } from '../app-context.tsx'
 import { createRun } from '../game/controller.ts'
 import { LEVELS } from '../game/levels/catalog.ts'
@@ -8,6 +8,17 @@ import { Stars } from '../components/Icons.tsx'
 
 export function PathPage() {
   const { progress, begin } = useApp()
+
+  function startSelect() {
+    begin(
+      createRun({
+        mode: 'select',
+        pace: 'steady',
+        asked: sampleRound(matchQuestions),
+        set: null,
+      }),
+    )
+  }
 
   function start(level: number, mode: 'practice' | 'learn') {
     begin(
@@ -69,6 +80,16 @@ export function PathPage() {
           )
         })}
       </ol>
+      <h2 className="section-title">Wie wordt er geselecteerd</h2>
+      <p className="lede">
+        Een brok HTML en één selector. Duid elk element aan dat die selector raakt. Tien vragen, elke ronde een nieuwe
+        greep.
+      </p>
+      <div className="actions">
+        <button type="button" className="btn" onClick={startSelect}>
+          Start een ronde
+        </button>
+      </div>
     </div>
   )
 }

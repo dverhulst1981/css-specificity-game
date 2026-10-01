@@ -1,4 +1,4 @@
-import { questions } from '../data/questions/index.ts'
+import { matchQuestions, questions } from '../data/questions/index.ts'
 import { useApp } from '../app-context.tsx'
 import { createRun } from '../game/controller.ts'
 import { generateQuestion, mulberry32 } from '../game/engine/generator.ts'
@@ -44,6 +44,17 @@ export function HomePage() {
         pace: 'steady',
         asked: sampleRound(questionsForRange(questions, range)),
         set: range,
+      }),
+    )
+  }
+
+  function startSelect() {
+    begin(
+      createRun({
+        mode: 'select',
+        pace: 'steady',
+        asked: sampleRound(matchQuestions),
+        set: null,
       }),
     )
   }
@@ -101,6 +112,14 @@ export function HomePage() {
             <span>link</span>
           </button>
         ) : null}
+        <button type="button" className="arena-row" onClick={startSelect}>
+          Wie wordt er geselecteerd
+          <span>
+            {progress.selectBest
+              ? `record ${progress.selectBest.correct}/${progress.selectBest.total}`
+              : 'duid de elementen aan'}
+          </span>
+        </button>
         <button type="button" className="arena-row" onClick={startDaily}>
           Dagelijkse ronde
           <span>{dailyBest ? `record ${dailyBest.correct}/${dailyBest.total}` : 'vijf vragen'}</span>

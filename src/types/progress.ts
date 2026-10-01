@@ -19,7 +19,7 @@ export type AnswerRecord = {
 
 export type SavedRun = {
   kind: 'bank' | 'extra'
-  mode: 'practice' | 'learn' | 'daily' | 'extra'
+  mode: 'practice' | 'learn' | 'daily' | 'extra' | 'select'
   pace: 'steady' | 'tempo'
   questionIds: string[]
   extraQuestions?: Question[]
@@ -37,6 +37,7 @@ export type Progress = {
   totalXp: number
   bestStreak: number
   daily: Record<string, { correct: number; total: number; xp: number }>
+  selectBest: { correct: number; total: number; xp: number } | null
   continueRun: SavedRun | null
 }
 
@@ -46,6 +47,7 @@ export function emptyProgress(): Progress {
     totalXp: 0,
     bestStreak: 0,
     daily: {},
+    selectBest: null,
     continueRun: null,
   }
 }

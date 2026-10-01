@@ -1,5 +1,6 @@
 import type { Question } from '../../types/question.ts'
 import { formatSpecificity } from '../../types/specificity.ts'
+import { answerIds, elementLabel } from './match.ts'
 import { declarationFromRule, solveBattle, tuplesTie } from './solve.ts'
 import { specificityOf } from './parse.ts'
 
@@ -15,6 +16,7 @@ export type RungView = {
 }
 
 export function ladderFor(question: Question): RungView[] {
+  if (question.kind === 'who-matches') return matchLadder(question)
   const tie = tuplesTie(question)
   return [
     {
@@ -52,6 +54,48 @@ export function ladderFor(question: Question): RungView[] {
   ]
 }
 
+function matchLadder(question: Extract<Question, { kind: 'who-matches' }>): RungView[] {
+  const names = answerIds(question).map((id) => elementLabel(question.tree, id))
+  const detail =
+    names.length === 0
+      ? 'Deze selector raakt geen enkel element in de HTML.'
+      : names.length === 1
+        ? `Deze selector raakt ${names[0]}.`
+        : `Deze selector raakt ${names.length} elementen: ${names.join(', ')}.`
+  return [
+    {
+      id: 'match',
+      label: 'Welke regels matchen',
+      state: 'lit',
+      detail,
+    },
+    {
+      id: 'importance',
+      label: 'Origin en importance',
+      state: 'locked',
+      detail: '!important hoort hier, niet bij specificiteit. Dit niveau komt later.',
+    },
+    {
+      id: 'layers',
+      label: 'Cascade layers',
+      state: 'locked',
+      detail: 'Cascade layers bestaan in de vergelijker en zijn in deze levels nog gesloten.',
+    },
+    {
+      id: 'specificity',
+      label: 'Specificiteit',
+      state: 'dim',
+      detail: 'Matchen komt vóór de specificity waarde. Die tel je in de andere levels.',
+    },
+    {
+      id: 'order',
+      label: 'Volgorde in de bron',
+      state: 'dim',
+      detail: 'De volgorde in de bron beslist pas als de specificity waarden gelijk zijn.',
+    },
+  ]
+}
+
 function specificityDetail(question: Question): string {
   if (question.kind === 'specificity') {
     return `De specificity waarde is ${formatSpecificity(question.answer)}. De cijfers worden niet opgeteld.`
@@ -62,6 +106,9 @@ function specificityDetail(question: Question): string {
     const verdict = solveBattle(question.a, question.b)
     const who = verdict === 'tie' ? 'Gelijk' : verdict === 'a' ? 'A wint' : 'B wint'
     return `A is ${left}. B is ${right}. ${who}.`
+  }
+  if (question.kind !== 'which-rule-wins') {
+    return 'Matchen komt vóór de specificity waarde.'
   }
   const parts = question.rules
     .map((rule) => {

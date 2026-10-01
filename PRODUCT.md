@@ -29,6 +29,7 @@ A bright classroom, short rounds between other work. Practice, Learn, and two-de
 ## Capabilities and Constraints
 
 - Levels 1–5, about ten questions each, three answer shapes: a specificity tuple, a selector battle (`a`, `b`, or `tie`), or the id of the winning rule.
+- A separate round, Wie wordt er geselecteerd: a chunk of HTML and one selector. The player marks every element that selector matches. Ten questions, drawn from a hand-written bank. It awards xp and leaves level stars unchanged.
 - Solo rounds use streak and stars. Hearts exist only in two-device play.
 - Next level unlocks at one star. Three stars require 95% and every trap in that run correct.
 - The generator may only build ungraded extra practice, and only for specificity and battles, with the engine as the answer.

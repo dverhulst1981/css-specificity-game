@@ -47,7 +47,24 @@ export type RuleQuestion = QuestionBase & {
   answer: string
 }
 
-export type Question = SpecificityQuestion | BattleQuestion | RuleQuestion
+export type MatchNode = {
+  id: string
+  tag: string
+  idAttr?: string
+  className?: string
+  attrs?: { name: string; value: string }[]
+  text?: string
+  children?: MatchNode[]
+}
+
+export type MatchQuestion = QuestionBase & {
+  kind: 'who-matches'
+  selector: string
+  tree: MatchNode[]
+  answer: string[]
+}
+
+export type Question = SpecificityQuestion | BattleQuestion | RuleQuestion | MatchQuestion
 
 export type SpecificityAnswer = {
   kind: 'specificity'
@@ -64,4 +81,9 @@ export type RuleAnswer = {
   ruleId: string
 }
 
-export type Answer = SpecificityAnswer | BattleAnswer | RuleAnswer
+export type MatchAnswer = {
+  kind: 'who-matches'
+  ids: string[]
+}
+
+export type Answer = SpecificityAnswer | BattleAnswer | RuleAnswer | MatchAnswer

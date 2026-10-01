@@ -4,9 +4,12 @@ import { level2 } from './level-2.ts'
 import { level3 } from './level-3.ts'
 import { level4 } from './level-4.ts'
 import { level5 } from './level-5.ts'
+import { matchQuestions } from './match.ts'
 
 export const questions: Question[] = [...level1, ...level2, ...level3, ...level4, ...level5]
 
+export { matchQuestions }
+
 export function questionById(id: string): Question | undefined {
-  return questions.find((question) => question.id === id)
+  return questions.find((question) => question.id === id) ?? matchQuestions.find((question) => question.id === id)
 }

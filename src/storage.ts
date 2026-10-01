@@ -18,6 +18,7 @@ export function loadProgress(): { progress: Progress; persistent: boolean } {
         ...parsed,
         levels: parsed.levels ?? {},
         daily: parsed.daily ?? {},
+        selectBest: parsed.selectBest ?? null,
         continueRun,
       },
       persistent: true,

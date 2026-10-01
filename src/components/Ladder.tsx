@@ -3,13 +3,13 @@ import { Info, Lock } from './Icons.tsx'
 
 const HELP: Record<RungId, string> = {
   match:
-    'Alleen een selector die het element raakt, doet mee. In deze levels matchen de selectors die je ziet al, dus dat is nog geen vraag.',
+    'Alleen een selector die het element raakt, doet mee. In de specificity-levels is dat al gebeurd. In Wie wordt er geselecteerd is dit het niveau dat je speelt.',
   importance:
     'Hier hoort !important, en ook het verschil tussen je eigen stylesheet en die van de browser. Dit niveau zit op slot. Het hoort niet bij de specificity waarde.',
   layers:
     '@layer kan een zwaardere selector alsnog laten verliezen. Ook dit niveau zit op slot. De levels leren dat nog niet.',
   specificity:
-    'Dit is het niveau van deze levels. Na je antwoord staat hier de specificity waarde, bijvoorbeeld 0-0-1-0. De cijfers worden niet opgeteld. Je vergelijkt van links naar rechts.',
+    'In de specificity-levels is dit de vraag. Na je antwoord staat hier de specificity waarde, bijvoorbeeld 0-0-1-0. De cijfers worden niet opgeteld. Je vergelijkt van links naar rechts.',
   order:
     'Alleen als de specificity waarden gelijk zijn, wint de regel die later in de stylesheet staat. Zijn ze niet gelijk, dan blijft dit niveau uit. De volgorde beslist die ronde niet.',
 }
@@ -49,6 +49,18 @@ const lockedPreview: RungView[] = [
 
 export function previewLadder(): RungView[] {
   return lockedPreview
+}
+
+export function previewMatchLadder(): RungView[] {
+  return lockedPreview.map((rung) => {
+    if (rung.id === 'match') {
+      return { ...rung, detail: 'Dit niveau is de vraag. Duid de elementen aan.' }
+    }
+    if (rung.id === 'specificity') {
+      return { ...rung, detail: 'De specificity waarde tel je in de andere levels.' }
+    }
+    return rung
+  })
 }
 
 export function Ladder({ rungs }: { rungs: RungView[] }) {

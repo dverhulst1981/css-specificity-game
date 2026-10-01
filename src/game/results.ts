@@ -1,7 +1,7 @@
 import type { Question } from '../types/question.ts'
 import type { AnswerRecord, StarCount } from '../types/progress.ts'
 
-export type Mode = 'practice' | 'learn' | 'daily' | 'extra'
+export type Mode = 'practice' | 'learn' | 'daily' | 'extra' | 'select'
 
 export type LevelResult = {
   level: number

@@ -67,6 +67,13 @@ export function Specimen({ question, revealed }: { question: Question; revealed:
       </div>
     )
   }
+  if (question.kind === 'who-matches') {
+    return (
+      <div className="specimen">
+        <p className="selector">{question.selector}</p>
+      </div>
+    )
+  }
   return (
     <div className="specimen">
       <p className="selector">{question.rules.map((rule) => rule.selector).join('  ')}</p>

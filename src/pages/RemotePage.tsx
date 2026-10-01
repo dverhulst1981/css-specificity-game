@@ -333,7 +333,8 @@ function RemotePlay({ peer, onLeave }: { peer: RemotePeer; onLeave: () => void }
   function responseOf(current: Question): Answer | null {
     if (current.kind === 'specificity') return { kind: 'specificity', value: tuple }
     if (current.kind === 'selector-battle') return battle ? { kind: 'selector-battle', value: battle } : null
-    return ruleId ? { kind: 'which-rule-wins', ruleId } : null
+    if (current.kind === 'which-rule-wins') return ruleId ? { kind: 'which-rule-wins', ruleId } : null
+    return null
   }
 
   if (!question) {

@@ -27,7 +27,7 @@ describe('question bank', () => {
         expect(question.answer).toEqual(solveSpecificity(question.selector))
       } else if (question.kind === 'selector-battle') {
         expect(question.answer).toBe(solveBattle(question.a, question.b))
-      } else {
+      } else if (question.kind === 'which-rule-wins') {
         expect(question.answer).toBe(solveRules(question.rules))
         expect(question.rules.every((rule) => !rule.important && !rule.layer)).toBe(true)
       }

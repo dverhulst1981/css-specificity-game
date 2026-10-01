@@ -1,5 +1,6 @@
 import type { Answer, Question } from '../types/question.ts'
 import { formatSpecificity } from '../types/specificity.ts'
+import { answerIds, describeSelection } from './engine/match.ts'
 
 export function describeAnswer(question: Question, response: Answer | null): string {
   if (!response) return 'geen antwoord'
@@ -12,6 +13,9 @@ export function describeAnswer(question: Question, response: Answer | null): str
     const rule = question.rules.find((item) => item.id === response.ruleId)
     return rule ? rule.selector : response.ruleId
   }
+  if (question.kind === 'who-matches' && response.kind === 'who-matches') {
+    return describeSelection(question, response.ids)
+  }
   return 'geen antwoord'
 }
 
@@ -21,6 +25,7 @@ export function correctNotation(question: Question): string {
     if (question.answer === 'tie') return 'gelijk'
     return question.answer === 'a' ? question.a : question.b
   }
+  if (question.kind === 'who-matches') return describeSelection(question, answerIds(question))
   const rule = question.rules.find((item) => item.id === question.answer)
   return rule?.selector ?? question.answer
 }

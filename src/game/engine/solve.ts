@@ -2,6 +2,7 @@ import type { Answer, Question, RuleSpec } from '../../types/question.ts'
 import type { CascadeDeclaration, Specificity } from '../../types/specificity.ts'
 import { compareSpecificity, sameSpec } from '../../types/specificity.ts'
 import { winningDeclaration } from './cascade.ts'
+import { answerIds, sameSelection } from './match.ts'
 import { specificityOf } from './parse.ts'
 
 export type BattleVerdict = 'a' | 'b' | 'tie'
@@ -38,6 +39,9 @@ export function expectedAnswer(question: Question): Answer {
   if (question.kind === 'selector-battle') {
     return { kind: 'selector-battle', value: question.answer }
   }
+  if (question.kind === 'who-matches') {
+    return { kind: 'who-matches', ids: answerIds(question) }
+  }
   return { kind: 'which-rule-wins', ruleId: question.answer }
 }
 
@@ -52,15 +56,16 @@ export function isCorrect(question: Question, response: Answer | null): boolean 
   if (question.kind === 'which-rule-wins' && response.kind === 'which-rule-wins') {
     return question.answer === response.ruleId
   }
+  if (question.kind === 'who-matches' && response.kind === 'who-matches') {
+    return sameSelection(answerIds(question), response.ids)
+  }
   return false
 }
 
 export function tuplesTie(question: Question): boolean {
   if (question.kind === 'selector-battle') return question.answer === 'tie'
-  if (question.kind === 'which-rule-wins') {
-    const decls = question.rules.map(declarationFromRule)
-    const winner = winningDeclaration(decls)
-    return decls.filter((item) => sameSpec(item.specificity, winner.specificity)).length > 1
-  }
-  return false
+  if (question.kind !== 'which-rule-wins') return false
+  const decls = question.rules.map(declarationFromRule)
+  const winner = winningDeclaration(decls)
+  return decls.filter((item) => sameSpec(item.specificity, winner.specificity)).length > 1
 }

@@ -55,6 +55,20 @@ export function applyBankResult(progress: Progress, asked: Question[], records: 
   }
 }
 
+export function applySelectResult(progress: Progress, records: AnswerRecord[], total: number): Progress {
+  const correct = records.filter((record) => record.correct).length
+  const xp = records.reduce((sum, record) => sum + record.xp, 0)
+  const previous = progress.selectBest
+  const better = !previous || correct > previous.correct || (correct === previous.correct && xp > previous.xp)
+  return {
+    ...progress,
+    totalXp: progress.totalXp + xp,
+    bestStreak: Math.max(progress.bestStreak, streakPeak(records)),
+    selectBest: better ? { correct, total, xp } : previous,
+    continueRun: null,
+  }
+}
+
 export function applyDailyResult(
   progress: Progress,
   isoDate: string,
