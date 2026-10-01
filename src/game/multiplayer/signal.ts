@@ -15,8 +15,9 @@ export async function decodeSignal(code: string): Promise<string> {
   try {
     const bytes = base64UrlToBytes(code.replace(/\s+/g, ''))
     const stream = blobFromBytes(bytes).stream().pipeThrough(new DecompressionStream('gzip'))
-    const sdp = (await new Response(stream).text()).trim()
+    let sdp = (await new Response(stream).text()).replace(/^[\uFEFF\r\n\t ]+/, '')
     if (!sdp.startsWith('v=0')) throw new Error('geen sdp')
+    if (!sdp.endsWith('\n')) sdp += '\r\n'
     return sdp
   } catch (error) {
     if (error instanceof SignalError) throw error
