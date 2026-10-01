@@ -3,7 +3,7 @@ import { useApp } from '../app-context.tsx'
 import { createRun } from '../game/controller.ts'
 import { generateQuestion, mulberry32 } from '../game/engine/generator.ts'
 import { dailyQuestions } from '../game/levels/daily.ts'
-import { questionsForRange } from '../game/levels/quizSet.ts'
+import { questionsForRange, sampleRound } from '../game/levels/quizSet.ts'
 import { levelInfo } from '../game/levels/catalog.ts'
 import { loadResult } from '../storage.ts'
 import { Stars } from '../components/Icons.tsx'
@@ -51,7 +51,8 @@ export function ResultsPage() {
       return
     }
     const set = result.replay.set
-    const asked = set ? questionsForRange(questions, set) : questions
+    const pool = set ? questionsForRange(questions, set) : questions
+    const asked = sampleRound(pool)
     begin(
       createRun({
         mode: result.replay.mode === 'learn' ? 'learn' : 'practice',

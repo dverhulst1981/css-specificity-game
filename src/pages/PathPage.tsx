@@ -2,6 +2,7 @@ import { questions } from '../data/questions/index.ts'
 import { useApp } from '../app-context.tsx'
 import { createRun } from '../game/controller.ts'
 import { LEVELS } from '../game/levels/catalog.ts'
+import { sampleRound } from '../game/levels/quizSet.ts'
 import { isLevelUnlocked } from '../game/scoring/scoring.ts'
 import { Stars } from '../components/Icons.tsx'
 
@@ -13,7 +14,7 @@ export function PathPage() {
       createRun({
         mode,
         pace: 'steady',
-        asked: questions.filter((question) => question.level === level),
+        asked: sampleRound(questions.filter((question) => question.level === level)),
         set: { from: level, to: level },
       }),
     )

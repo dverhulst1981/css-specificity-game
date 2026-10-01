@@ -10,7 +10,7 @@ import { ladderFor } from '../game/engine/ladder.ts'
 import { isCorrect } from '../game/engine/solve.ts'
 import { correctNotation, describeAnswer } from '../game/format.ts'
 import { LEVELS } from '../game/levels/catalog.ts'
-import { formatRange, questionsForRange } from '../game/levels/quizSet.ts'
+import { formatRange, questionsForRange, sampleRound } from '../game/levels/quizSet.ts'
 import { RemotePeer, SignalError } from '../game/multiplayer/remote.ts'
 import { isLevelUnlocked } from '../game/scoring/scoring.ts'
 import type { Answer, Question } from '../types/question.ts'
@@ -65,7 +65,8 @@ export function RemotePage() {
       setError('Je naam is nodig. Die ziet de ander straks.')
       return
     }
-    const asked = range ? questionsForRange(questions, range) : questions.filter((item) => item.level === level)
+    const pool = range ? questionsForRange(questions, range) : questions.filter((item) => item.level === level)
+    const asked = sampleRound(pool)
     setError('')
     setPending('Het pad wordt gezocht. De code verschijnt zodra dat klaar is.')
     try {

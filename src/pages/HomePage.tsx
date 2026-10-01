@@ -3,7 +3,7 @@ import { useApp } from '../app-context.tsx'
 import { createRun } from '../game/controller.ts'
 import { generateQuestion, mulberry32 } from '../game/engine/generator.ts'
 import { dailyQuestions, localIsoDate } from '../game/levels/daily.ts'
-import { formatRange, questionsForRange } from '../game/levels/quizSet.ts'
+import { formatRange, questionsForRange, sampleRound } from '../game/levels/quizSet.ts'
 import { LEVELS } from '../game/levels/catalog.ts'
 import { isLevelUnlocked } from '../game/scoring/scoring.ts'
 
@@ -30,7 +30,7 @@ export function HomePage() {
       createRun({
         mode: 'practice',
         pace: 'steady',
-        asked: questions.filter((question) => question.level === level),
+        asked: sampleRound(questions.filter((question) => question.level === level)),
         set: { from: level, to: level },
       }),
     )
@@ -42,7 +42,7 @@ export function HomePage() {
       createRun({
         mode: 'practice',
         pace: 'steady',
-        asked: questionsForRange(questions, range),
+        asked: sampleRound(questionsForRange(questions, range)),
         set: range,
       }),
     )

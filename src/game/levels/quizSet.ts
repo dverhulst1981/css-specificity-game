@@ -19,6 +19,19 @@ export function questionsForRange(bank: Question[], range: LevelRange): Question
   return bank.filter((question) => question.level >= range.from && question.level <= range.to)
 }
 
+export const ROUND_SIZE = 10
+
+export function sampleRound(bank: Question[], count = ROUND_SIZE): Question[] {
+  const copy = [...bank]
+  for (let index = copy.length - 1; index > 0; index -= 1) {
+    const swap = Math.floor(Math.random() * (index + 1))
+    const current = copy[index]!
+    copy[index] = copy[swap]!
+    copy[swap] = current
+  }
+  return copy.slice(0, Math.min(count, copy.length))
+}
+
 export function formatRange(range: LevelRange): string {
   return range.from === range.to ? String(range.from) : `${range.from}–${range.to}`
 }
