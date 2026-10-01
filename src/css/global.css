@@ -739,6 +739,53 @@ button.quiet-link {
   line-height: 1.2;
 }
 
+.rung-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.info {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+}
+
+.info-btn {
+  width: 1.35rem;
+  height: 1.35rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+}
+
+.info-tip {
+  position: absolute;
+  z-index: 4;
+  top: calc(100% + 6px);
+  right: 0;
+  width: min(18rem, 70vw);
+  padding: 10px 12px;
+  border-radius: var(--radius-well);
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.35;
+  text-wrap: pretty;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.info:hover .info-tip,
+.info:focus-within .info-tip {
+  visibility: visible;
+  opacity: 1;
+}
+
 .rung p {
   margin-top: 4px;
   font-size: 0.92rem;

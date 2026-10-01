@@ -63,7 +63,7 @@ export function PlayPage() {
   const [field, setField] = useState(0)
   const [battle, setBattle] = useState<'a' | 'b' | 'tie' | null>(null)
   const [ruleId, setRuleId] = useState<string | null>(null)
-  const [seconds, setSeconds] = useState(25)
+  const [seconds, setSeconds] = useState(15)
   const timedOut = useRef(false)
   const roundKey = `${run?.index ?? ''}:${run?.phase ?? ''}`
   const [seenRound, setSeenRound] = useState(roundKey)
@@ -75,11 +75,11 @@ export function PlayPage() {
     setField(0)
     setBattle(null)
     setRuleId(null)
-    setSeconds(25)
+    setSeconds(15)
     timedOut.current = false
   } else if (seenPace !== run?.pace) {
     setSeenPace(run?.pace)
-    setSeconds(25)
+    setSeconds(15)
     timedOut.current = false
   }
 
@@ -332,7 +332,7 @@ export function PlayPage() {
                     })
                   }
                 >
-                  Tempo 25s
+                  Tempo 15s
                 </button>
                 {run.pace === 'tempo' && run.phase === 'ask' ? <span className="pace-count">{seconds}</span> : null}
               </div>
@@ -342,7 +342,7 @@ export function PlayPage() {
           {run.mode === 'practice' ? (
             <p className="mode-line">
               Oefenen: geen denkstap. De uitleg komt na je antwoord.
-              {run.pace === 'tempo' ? ' Tempo staat aan, 25 seconden per vraag.' : ' Tempo staat uit.'}
+              {run.pace === 'tempo' ? ' Tempo staat aan, 15 seconden per vraag.' : ' Tempo staat uit.'}
             </p>
           ) : null}
           {run.mode === 'learn' ? (

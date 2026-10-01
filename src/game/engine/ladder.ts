@@ -27,7 +27,7 @@ export function ladderFor(question: Question): RungView[] {
       id: 'importance',
       label: 'Origin en importance',
       state: 'locked',
-      detail: '!important hoort hier, niet bij specificiteit. Die sport komt later.',
+      detail: '!important hoort hier, niet bij specificiteit. Dit niveau komt later.',
     },
     {
       id: 'layers',

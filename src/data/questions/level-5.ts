@@ -89,7 +89,7 @@ export const level5 = [
     ],
     answer: 'id',
     prompt: 'Welke declaratie wint voor color?',
-    lesson: 'Source order is de laatste sport, niet de eerste.',
+    lesson: 'Source order is het laatste niveau, niet het eerste.',
     explanation: '`#title` is 0-1-0-0. `.a.b.c` is 0-0-3-0. Het id wint, ook al staat het eerder.',
   }),
   ruleQuestion({

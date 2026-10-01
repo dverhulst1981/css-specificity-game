@@ -1,12 +1,25 @@
-import type { RungView } from '../game/engine/ladder.ts'
-import { Lock } from './Icons.tsx'
+import type { RungId, RungView } from '../game/engine/ladder.ts'
+import { Info, Lock } from './Icons.tsx'
+
+const HELP: Record<RungId, string> = {
+  match:
+    'Alleen een selector die het element raakt, doet mee. In deze levels matchen de selectors die je ziet al, dus dat is nog geen vraag.',
+  importance:
+    'Hier hoort !important, en ook het verschil tussen je eigen stylesheet en die van de browser. Dit niveau zit op slot. Het hoort niet bij de specificity waarde.',
+  layers:
+    '@layer kan een zwaardere selector alsnog laten verliezen. Ook dit niveau zit op slot. De levels leren dat nog niet.',
+  specificity:
+    'Dit is het niveau van deze levels. Na je antwoord staat hier de specificity waarde, bijvoorbeeld 0-0-1-0. De cijfers worden niet opgeteld. Je vergelijkt van links naar rechts.',
+  order:
+    'Alleen als de specificity waarden gelijk zijn, wint de regel die later in de stylesheet staat. Zijn ze niet gelijk, dan blijft dit niveau uit. De volgorde beslist die ronde niet.',
+}
 
 const lockedPreview: RungView[] = [
   {
     id: 'match',
     label: 'Welke regels matchen',
     state: 'dim',
-    detail: 'Deze sport licht op na je antwoord.',
+    detail: 'Dit niveau licht op na je antwoord.',
   },
   {
     id: 'importance',
@@ -24,7 +37,7 @@ const lockedPreview: RungView[] = [
     id: 'specificity',
     label: 'Specificiteit',
     state: 'dim',
-    detail: 'Deze sport licht op na je antwoord.',
+    detail: 'Dit niveau licht op na je antwoord.',
   },
   {
     id: 'order',
@@ -46,14 +59,24 @@ export function Ladder({ rungs }: { rungs: RungView[] }) {
           <span className="rung-index">{index + 1}</span>
           <div>
             <h3>
-              {rung.state === 'locked' ? (
-                <span className="lock-row">
-                  <Lock />
-                  {rung.label}
+              <span className="rung-title">
+                {rung.state === 'locked' ? (
+                  <span className="lock-row">
+                    <Lock />
+                    {rung.label}
+                  </span>
+                ) : (
+                  rung.label
+                )}
+                <span className="info">
+                  <button type="button" className="info-btn" aria-label={`Uitleg over ${rung.label}`}>
+                    <Info />
+                  </button>
+                  <span className="info-tip" role="tooltip">
+                    {HELP[rung.id]}
+                  </span>
                 </span>
-              ) : (
-                rung.label
-              )}
+              </span>
             </h3>
             <p>{rung.detail}</p>
           </div>

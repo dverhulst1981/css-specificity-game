@@ -26,7 +26,7 @@ export function PathPage() {
       <p className="lede">Vijf levels. Eén ster opent het volgende. Drie sterren eisen elke valkuil in die ronde.</p>
       <div className="mode-split">
         <p>
-          <strong>Oefenen</strong> stelt dezelfde vragen zonder hint. Tempo is een schakelaar in de ronde: 25 seconden
+          <strong>Oefenen</strong> stelt dezelfde vragen zonder hint. Tempo is een schakelaar in de ronde: 15 seconden
           per vraag, of uit.
         </p>
         <p>
