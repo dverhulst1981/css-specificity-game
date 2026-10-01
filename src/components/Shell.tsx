@@ -17,8 +17,11 @@ export function Shell({ children }: { children: ReactNode }) {
         Naar de inhoud
       </a>
       <header className="top">
-        <a className="wordmark" href={publicPath('/')} onClick={(event) => go(event, '/')}>
-          Specificiteit
+        <a className="wordmark" href={publicPath('/')} aria-label="Selector Wars" onClick={(event) => go(event, '/')}>
+          <span className="logo" aria-hidden="true">
+            ⚔️
+          </span>
+          Selector Wars
         </a>
         <nav>
           <a href={publicPath('/pad')} aria-current={path === '/pad' ? 'page' : undefined} onClick={(event) => go(event, '/pad')}>

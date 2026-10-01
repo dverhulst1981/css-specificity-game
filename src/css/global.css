@@ -81,16 +81,24 @@ a {
 .top {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   gap: 16px;
   padding: 20px 20px 0;
 }
 
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   font-weight: 700;
   font-size: 1.25rem;
   letter-spacing: -0.03em;
   text-decoration: none;
+}
+
+.logo {
+  font-size: 1.35rem;
+  line-height: 1;
 }
 
 .top nav {

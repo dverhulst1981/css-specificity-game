@@ -1,4 +1,4 @@
-# Specificiteit
+# Selector Wars ⚔️
 
 A fully client-side game that teaches CSS specificity the way a browser compares it: inline, ids, classes, elements — lexicographic, never a sum. The interface is Dutch. Selectors, properties, and the `0-1-2-1` notation stay in CSS.
 
