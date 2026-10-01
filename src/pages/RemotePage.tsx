@@ -349,6 +349,7 @@ function RemotePlay({ peer, onLeave }: { peer: RemotePeer; onLeave: () => void }
 
   const revealed = view.playPhase === 'reveal' || view.playPhase === 'done'
   const name = view.names[player] || (player === 'a' ? 'Speler 1' : 'Speler 2')
+  const mineCorrect = isCorrect(question, view.shown[player])
 
   return (
     <div className="page">
@@ -440,7 +441,11 @@ function RemotePlay({ peer, onLeave }: { peer: RemotePeer; onLeave: () => void }
                   <p>{view.score.hearts.b} levens · {view.score.xp.b} xp</p>
                 </div>
               </div>
-              <div className="feedback">
+              <div className={mineCorrect ? 'feedback verdict-good' : 'feedback'}>
+                <h2>
+                  {mineCorrect ? 'Goed.' : 'Mis.'}
+                  <Verdict correct={mineCorrect} />
+                </h2>
                 {question.trap && question.trapLead ? <p className="trap">{question.trapLead}</p> : null}
                 <p>
                   De uitkomst is <strong>{correctNotation(question)}</strong>.

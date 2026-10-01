@@ -647,6 +647,10 @@ button.quiet-link {
 }
 
 .feedback h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   font-size: 1.75rem;
   margin-bottom: 8px;
 }

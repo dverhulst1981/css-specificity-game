@@ -4,6 +4,7 @@ import { Sandbox } from '../components/Sandbox.tsx'
 import { Specimen } from '../components/Specimen.tsx'
 import { emptyTuple, Stepper } from '../components/Stepper.tsx'
 import { Ladder, previewLadder } from '../components/Ladder.tsx'
+import { Verdict } from '../components/Icons.tsx'
 import {
   applyBankResult,
   applyDailyResult,
@@ -402,7 +403,10 @@ export function PlayPage() {
           ) : null}
           {showSoloFeedback ? (
             <div className={record.correct ? 'feedback verdict-good' : 'feedback'} aria-live="polite">
-              <h2>{record.timedOut ? 'De tijd is om.' : record.correct ? 'Goed.' : 'Mis.'}</h2>
+              <h2>
+                {record.timedOut ? 'De tijd is om.' : record.correct ? 'Goed.' : 'Mis.'}
+                <Verdict correct={record.correct} />
+              </h2>
               {question.trap && question.trapLead ? <p className="trap">{question.trapLead}</p> : null}
               <p>
                 De uitkomst is <strong>{correctNotation(question)}</strong>
