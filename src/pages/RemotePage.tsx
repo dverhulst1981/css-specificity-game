@@ -357,7 +357,7 @@ function RemotePlay({ peer, onLeave }: { peer: RemotePeer; onLeave: () => void }
         <div className="play-main">
           <div className="hud">
             <strong>
-              {view.names.a || 'Speler 1'} tegen {view.names.b || 'Speler 2'} · {name}
+              {view.names.a || 'Speler 1'} tegen {view.names.b || 'Speler 2'} · Jij speelt als {name}
             </strong>
             <span>
               {view.index + 1}/{view.questionIds.length}

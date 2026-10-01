@@ -441,7 +441,7 @@ export function PlayPage() {
           <div className="hud">
             <strong>
               {runTitle(run)}
-              {playerName ? ` · ${playerName}` : ''}
+              {playerName ? ` · Jij speelt als ${playerName}` : ''}
             </strong>
             <span>
               {run.index + 1}/{asked.length}
