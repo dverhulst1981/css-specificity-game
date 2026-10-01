@@ -1,0 +1,23 @@
+:root {
+  --paper: oklch(1 0 0);
+  --surface: oklch(0.955 0 0);
+  --ink: oklch(0.22 0.025 55);
+  --muted: oklch(0.4 0.02 58);
+  --honey: oklch(0.5 0.145 58);
+  --honey-deep: oklch(0.44 0.14 58);
+  --honey-on: oklch(1 0 0);
+  --chalk: oklch(0.28 0.08 255);
+  --line: oklch(0.22 0.025 55);
+  --font-ui: "Schibsted Grotesk", ui-sans-serif, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --radius-panel: 12px;
+  --radius-well: 8px;
+  --radius-pill: 999px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 48px;
+  --ease-out: cubic-bezier(0.22, 0, 0.2, 1);
+  color-scheme: light;
+}

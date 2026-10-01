@@ -1,0 +1,23 @@
+# Specificiteit
+
+A fully client-side game that teaches CSS specificity the way a browser compares it: inline, ids, classes, elements — lexicographic, never a sum. The interface is Dutch. Selectors, properties, and the `0-1-2-1` notation stay in CSS.
+
+Levels 1–5, a daily set of five, and same-device pass-and-play. Progress lives in `localStorage`. There is no backend.
+
+## Run
+
+```bash
+npm install
+npm run dev
+```
+
+The dev server listens on port `47231`.
+
+```bash
+npm test
+npm run build
+```
+
+`npm run build` writes a static site to `dist/`. `dist/404.html` is a copy of `index.html`, so a static host can fall back to the app for routes such as `/pad`.
+
+Open a shared set with the hash `#set=1-5` (or `#set=3` for one level).

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T12:30:00.000Z",
+  "title": "Design System: Specificiteit",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "oklch(1 0 0)"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(0.220 0.025 55)"
+      },
+      "honey": {
+        "role": "primary",
+        "displayName": "Arena honey",
+        "canonical": "oklch(0.500 0.145 58)",
+        "tonalRamp": [
+          "oklch(0.22 0.06 58)",
+          "oklch(0.32 0.09 58)",
+          "oklch(0.42 0.12 58)",
+          "oklch(0.50 0.145 58)",
+          "oklch(0.62 0.13 58)",
+          "oklch(0.74 0.10 58)",
+          "oklch(0.86 0.06 58)",
+          "oklch(0.95 0.03 58)"
+        ]
+      },
+      "chalk": {
+        "role": "accent",
+        "displayName": "Chalk",
+        "canonical": "oklch(0.280 0.080 255)"
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Home heading." },
+      "mono": { "displayName": "Selectors", "purpose": "CSS selectors and 0-1-2-1 tuples only." }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.22, 0, 0.2, 1)",
+        "purpose": "Token landing. Reduced motion fades instead."
+      }
+    ],
+    "breakpoints": [
+      { "name": "phone", "value": "720px" },
+      { "name": "desk", "value": "960px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Honey pill for the single primary action.",
+      "html": "<button class=\"ds-btn-primary\">Dit is mijn antwoord</button>",
+      "css": ".ds-btn-primary { background: oklch(0.5 0.145 58); color: oklch(1 0 0); border: 0; border-radius: 999px; padding: 12px 22px; font-family: Schibsted Grotesk, sans-serif; font-weight: 600; } .ds-btn-primary:hover { background: oklch(0.44 0.14 58); } .ds-btn-primary:focus-visible { outline: 3px solid oklch(0.5 0.145 58); outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Paper pill with an ink frame.",
+      "html": "<button class=\"ds-btn-secondary\">Leren</button>",
+      "css": ".ds-btn-secondary { background: oklch(1 0 0); color: oklch(0.22 0.025 55); border: 2px solid oklch(0.22 0.025 55); border-radius: 999px; padding: 12px 22px; font-family: Schibsted Grotesk, sans-serif; font-weight: 600; } .ds-btn-secondary:focus-visible { outline: 3px solid oklch(0.5 0.145 58); outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Shared Laptop",
+    "overview": "Two classmates lean over one machine in a bright classroom. The page is that laptop: white daylight, ink, and a single saturated honey that is the arena they are racing inside.",
+    "keyCharacteristics": [
+      "One honey field does the shouting. White and ink do the reading.",
+      "Levels are a vertical path, a real sequence, never a card grid.",
+      "Panels are flat, framed with a 2px ink line, radius at most 16px.",
+      "Controls are pills. The arena rows are full-bleed, not tiles.",
+      "Motion is a short ease-out stagger when tokens land. Reduced motion fades."
+    ],
+    "rules": [
+      {
+        "name": "The One Arena Rule",
+        "body": "Honey is a region, not a highlight. If a screen has no race to point at, honey stays on the single primary action.",
+        "section": "colors"
+      },
+      {
+        "name": "The Code Face Rule",
+        "body": "IBM Plex Mono is for selectors, properties, values, and 0-1-2-1. UI words stay in the grotesque.",
+        "section": "typography"
+      }
+    ],
+    "dos": [
+      "Do keep honey on the arena, the current station, and the primary action."
+    ],
+    "donts": [
+      "Don't use a dark code-editor theme, a cream or sand page, or a grid of identical level cards.",
+      "Don't use gradient text, glassmorphism, side-stripe borders, eyebrow labels above headings, or hero-metric XP blocks."
+    ]
+  }
+}
