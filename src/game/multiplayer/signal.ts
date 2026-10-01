@@ -5,23 +5,39 @@ export class SignalError extends Error {
   }
 }
 
-export async function encodeSignal(sdp: string): Promise<string> {
+const incomplete =
+  'De code is niet volledig. Gebruik Kopieer de code en plak het hele blok, ook de regels die je moet scrollen.'
+
+export async function encodeSignal(sdp: string, role: 'o' | 'a'): Promise<string> {
   const stream = new Blob([sdp]).stream().pipeThrough(new CompressionStream('gzip'))
   const bytes = new Uint8Array(await new Response(stream).arrayBuffer())
-  return bytesToBase64Url(bytes)
+  const payload = bytesToBase64Url(bytes)
+  const body = `1.${role}.${payload.length}.${payload}`
+  return body.replace(/(.{64})/g, '$1\n').replace(/\n$/, '')
 }
 
-export async function decodeSignal(code: string): Promise<string> {
+export async function decodeSignal(code: string): Promise<{ role: 'o' | 'a'; sdp: string }> {
+  const compact = code.replace(/\s+/g, '')
+  const match = /^1\.([oa])\.(\d+)\.(.+)$/.exec(compact)
+  if (!match) throw new SignalError(incomplete)
+  const role = match[1] as 'o' | 'a'
+  const expected = Number(match[2])
+  const payload = match[3]
+  if (payload.length !== expected) {
+    throw new SignalError(
+      `De code telt ${payload.length} tekens, het moeten er ${expected} zijn. Kopieer opnieuw met de knop.`,
+    )
+  }
   try {
-    const bytes = base64UrlToBytes(code.replace(/\s+/g, ''))
+    const bytes = base64UrlToBytes(payload)
     const stream = blobFromBytes(bytes).stream().pipeThrough(new DecompressionStream('gzip'))
     let sdp = (await new Response(stream).text()).replace(/^[\uFEFF\r\n\t ]+/, '')
     if (!sdp.startsWith('v=0')) throw new Error('geen sdp')
     if (!sdp.endsWith('\n')) sdp += '\r\n'
-    return sdp
+    return { role, sdp }
   } catch (error) {
     if (error instanceof SignalError) throw error
-    throw new SignalError('Die code is geen geldige verbinding. Plak de hele code.')
+    throw new SignalError(incomplete)
   }
 }
 

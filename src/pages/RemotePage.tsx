@@ -104,7 +104,7 @@ export function RemotePage() {
       setPending('')
     } catch (caught) {
       setPending('')
-      setError(caught instanceof SignalError ? caught.message : 'Die code is geen geldige verbinding. Plak de hele code.')
+      setError(caught instanceof SignalError ? caught.message : 'Die code is niet volledig. Kopieer opnieuw met de knop.')
     }
   }
 
@@ -158,12 +158,21 @@ export function RemotePage() {
       <div className="page">
         <h1>Code voor speler 2</h1>
         <p className="lede">
-          Stuur deze code naar het andere toestel. Speler 2 stuurt daarna een antwoordcode terug. Plak die hier.
+          Stuur deze code naar het andere toestel. Gebruik de knop, dan gaat het hele blok mee. Speler 2 stuurt daarna
+          een antwoordcode terug. Plak die hier.
         </p>
         <label className="code-label">
           Jouw code
-          <textarea className="code-box" readOnly value={peer.view.localCode} rows={6} spellCheck={false} />
+          <textarea
+            className="code-box"
+            readOnly
+            value={peer.view.localCode}
+            rows={8}
+            spellCheck={false}
+            onFocus={(event) => event.currentTarget.select()}
+          />
         </label>
+        <p className="code-count">{peer.view.localCode.replace(/\s+/g, '').length} tekens</p>
         <div className="actions">
           <button type="button" className="btn" onClick={() => copyCode(peer.view.localCode)}>
             {copied ? 'Gekopieerd' : 'Kopieer de code'}
@@ -188,11 +197,21 @@ export function RemotePage() {
     return (
       <div className="page">
         <h1>Antwoordcode</h1>
-        <p className="lede">Stuur deze code terug naar speler 1. De ronde begint als die code daar geplakt is.</p>
+        <p className="lede">
+          Stuur deze code terug naar speler 1 met de knop. De ronde begint als dat hele blok daar geplakt is.
+        </p>
         <label className="code-label">
           Jouw antwoordcode
-          <textarea className="code-box" readOnly value={peer.view.localCode} rows={6} spellCheck={false} />
+          <textarea
+            className="code-box"
+            readOnly
+            value={peer.view.localCode}
+            rows={8}
+            spellCheck={false}
+            onFocus={(event) => event.currentTarget.select()}
+          />
         </label>
+        <p className="code-count">{peer.view.localCode.replace(/\s+/g, '').length} tekens</p>
         <div className="actions">
           <button type="button" className="btn" onClick={() => copyCode(peer.view.localCode)}>
             {copied ? 'Gekopieerd' : 'Kopieer de code'}

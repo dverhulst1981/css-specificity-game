@@ -117,7 +117,7 @@ export class RemotePeer {
     const offer = await peer.pc.createOffer()
     await peer.pc.setLocalDescription(offer)
     await waitForIce(peer.pc)
-    peer.view.localCode = await encodeSignal(peer.pc.localDescription?.sdp ?? '')
+    peer.view.localCode = await encodeSignal(peer.pc.localDescription?.sdp ?? '', 'o')
     peer.view.phase = 'offer'
     peer.emit()
     return peer
@@ -126,20 +126,34 @@ export class RemotePeer {
   static async openGuest(name: string, offerCode: string): Promise<RemotePeer> {
     const peer = new RemotePeer('guest', name, [])
     peer.pc.addEventListener('datachannel', (event) => peer.bindChannel(event.channel))
-    const sdp = await decodeSignal(offerCode)
-    await peer.pc.setRemoteDescription({ type: 'offer', sdp })
+    const signal = await decodeSignal(offerCode)
+    if (signal.role !== 'o') {
+      throw new SignalError('Dit is de antwoordcode. Plak die bij speler 1, niet hier.')
+    }
+    try {
+      await peer.pc.setRemoteDescription({ type: 'offer', sdp: signal.sdp })
+    } catch {
+      throw new SignalError('De code is volledig, maar dit toestel neemt hem niet aan. Maak bij speler 1 een nieuwe code.')
+    }
     const answer = await peer.pc.createAnswer()
     await peer.pc.setLocalDescription(answer)
     await waitForIce(peer.pc)
-    peer.view.localCode = await encodeSignal(peer.pc.localDescription?.sdp ?? '')
+    peer.view.localCode = await encodeSignal(peer.pc.localDescription?.sdp ?? '', 'a')
     peer.view.phase = 'reply'
     peer.emit()
     return peer
   }
 
   async acceptAnswer(code: string): Promise<void> {
-    const sdp = await decodeSignal(code)
-    await this.pc.setRemoteDescription({ type: 'answer', sdp })
+    const signal = await decodeSignal(code)
+    if (signal.role !== 'a') {
+      throw new SignalError('Dit is de code van speler 1. Plak hier de antwoordcode van speler 2.')
+    }
+    try {
+      await this.pc.setRemoteDescription({ type: 'answer', sdp: signal.sdp })
+    } catch {
+      throw new SignalError('De antwoordcode is volledig, maar de verbinding lukt niet. Begin allebei opnieuw.')
+    }
     this.view.phase = 'connecting'
     this.emit()
   }
