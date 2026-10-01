@@ -3,7 +3,7 @@ import { battleQuestion, specificityQuestion, tuple } from './build.ts'
 export const level1 = [
   specificityQuestion({
     id: 'l1q01',
-    level: 1,
+    level: 2,
     difficulty: 1,
     selector: 'p',
     answer: tuple(0, 0, 1),
@@ -13,7 +13,7 @@ export const level1 = [
   }),
   specificityQuestion({
     id: 'l1q02',
-    level: 1,
+    level: 2,
     difficulty: 1,
     selector: '.title',
     answer: tuple(0, 1, 0),
@@ -23,7 +23,7 @@ export const level1 = [
   }),
   specificityQuestion({
     id: 'l1q03',
-    level: 1,
+    level: 2,
     difficulty: 1,
     selector: 'h2',
     answer: tuple(0, 0, 1),
@@ -33,7 +33,7 @@ export const level1 = [
   }),
   specificityQuestion({
     id: 'l1q04',
-    level: 1,
+    level: 2,
     difficulty: 2,
     selector: '*',
     answer: tuple(0, 0, 0),
@@ -43,7 +43,7 @@ export const level1 = [
   }),
   battleQuestion({
     id: 'l1q05',
-    level: 1,
+    level: 2,
     difficulty: 1,
     a: 'article',
     b: 'section',
@@ -54,7 +54,7 @@ export const level1 = [
   }),
   specificityQuestion({
     id: 'l1q06',
-    level: 1,
+    level: 2,
     difficulty: 2,
     selector: 'div span',
     answer: tuple(0, 0, 2),
@@ -64,7 +64,7 @@ export const level1 = [
   }),
   specificityQuestion({
     id: 'l1q07',
-    level: 1,
+    level: 2,
     difficulty: 2,
     selector: '.card .title',
     answer: tuple(0, 2, 0),
@@ -74,7 +74,7 @@ export const level1 = [
   }),
   battleQuestion({
     id: 'l1q08',
-    level: 1,
+    level: 2,
     difficulty: 1,
     a: '.title',
     b: 'p',
@@ -85,7 +85,7 @@ export const level1 = [
   }),
   specificityQuestion({
     id: 'l1q09',
-    level: 1,
+    level: 2,
     difficulty: 3,
     trap: true,
     trapLead: 'Twee klassen aan elkaar geplakt zijn samen één klasse.',
@@ -97,7 +97,7 @@ export const level1 = [
   }),
   specificityQuestion({
     id: 'l1q10',
-    level: 1,
+    level: 2,
     difficulty: 2,
     selector: 'ul li a',
     answer: tuple(0, 0, 3),
@@ -107,7 +107,7 @@ export const level1 = [
   }),
   specificityQuestion({
     id: 'l1q11',
-    level: 1,
+    level: 2,
     difficulty: 1,
     selector: 'span',
     answer: tuple(0, 0, 1),
@@ -117,7 +117,7 @@ export const level1 = [
   }),
   specificityQuestion({
     id: 'l1q12',
-    level: 1,
+    level: 2,
     difficulty: 2,
     selector: '.note.alert',
     answer: tuple(0, 2, 0),
@@ -127,7 +127,7 @@ export const level1 = [
   }),
   specificityQuestion({
     id: 'l1q13',
-    level: 1,
+    level: 2,
     difficulty: 2,
     selector: 'main > p',
     answer: tuple(0, 0, 2),
@@ -137,7 +137,7 @@ export const level1 = [
   }),
   battleQuestion({
     id: 'l1q14',
-    level: 1,
+    level: 2,
     difficulty: 2,
     a: 'h1',
     b: 'h1 h2',
@@ -148,7 +148,7 @@ export const level1 = [
   }),
   specificityQuestion({
     id: 'l1q15',
-    level: 1,
+    level: 2,
     difficulty: 1,
     selector: 'em strong',
     answer: tuple(0, 0, 2),
@@ -158,7 +158,7 @@ export const level1 = [
   }),
   battleQuestion({
     id: 'l1q16',
-    level: 1,
+    level: 2,
     difficulty: 1,
     a: '.card .title',
     b: '.card',
@@ -169,7 +169,7 @@ export const level1 = [
   }),
   specificityQuestion({
     id: 'l1q17',
-    level: 1,
+    level: 2,
     difficulty: 3,
     trap: true,
     trapLead: 'Het teken > telt als een extra element.',
@@ -181,7 +181,7 @@ export const level1 = [
   }),
   specificityQuestion({
     id: 'l1q18',
-    level: 1,
+    level: 2,
     difficulty: 2,
     selector: 'figure figcaption',
     answer: tuple(0, 0, 2),
@@ -191,7 +191,7 @@ export const level1 = [
   }),
   battleQuestion({
     id: 'l1q19',
-    level: 1,
+    level: 2,
     difficulty: 2,
     a: '*',
     b: 'span',
@@ -202,7 +202,7 @@ export const level1 = [
   }),
   specificityQuestion({
     id: 'l1q20',
-    level: 1,
+    level: 2,
     difficulty: 2,
     selector: 'h2 + p',
     answer: tuple(0, 0, 2),

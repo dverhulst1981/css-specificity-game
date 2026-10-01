@@ -8,7 +8,6 @@ import { Verdict } from '../components/Icons.tsx'
 import {
   applyBankResult,
   applyDailyResult,
-  applySelectResult,
   questionsFromRun,
   scoreResponse,
   streakPeak,
@@ -103,15 +102,13 @@ export function PlayPage() {
 
   function finish(current: Progress, active: SavedRun, list: Question[]) {
     let next: Progress = { ...current, continueRun: null }
-    if (active.mode === 'select') {
-      next = applySelectResult(current, active.records, list.length)
-    } else if (active.mode === 'practice' || active.mode === 'learn') {
+    if (active.mode === 'practice' || active.mode === 'learn' || active.mode === 'select') {
       next = applyBankResult(current, list, active.records)
     } else if (active.mode === 'daily' && active.date) {
       next = applyDailyResult(current, active.date, active.records, list.length)
     }
     const grouped = new Map<number, Question[]>()
-    if (active.mode === 'practice' || active.mode === 'learn') {
+    if (active.mode === 'practice' || active.mode === 'learn' || active.mode === 'select') {
       for (const item of list) {
         const bucket = grouped.get(item.level) ?? []
         bucket.push(item)

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore, type FormEvent } from 'react'
 import { questionById, questions } from '../data/questions/index.ts'
 import { useApp } from '../app-context.tsx'
+import { MatchBoard } from '../components/MatchBoard.tsx'
 import { Sandbox } from '../components/Sandbox.tsx'
 import { Specimen } from '../components/Specimen.tsx'
 import { emptyTuple, Stepper } from '../components/Stepper.tsx'
@@ -10,14 +11,13 @@ import { correctNotation, describeAnswer, formatDeclaration } from '../game/form
 import { LEVELS } from '../game/levels/catalog.ts'
 import { formatRange, questionsForRange, sampleRound } from '../game/levels/quizSet.ts'
 import { RemotePeer, SignalError } from '../game/multiplayer/remote.ts'
-import { isLevelUnlocked } from '../game/scoring/scoring.ts'
 import type { Answer, Question } from '../types/question.ts'
 import type { Specificity } from '../types/specificity.ts'
 
 type Stage = 'pick' | 'host' | 'guest'
 
 export function RemotePage() {
-  const { progress, range } = useApp()
+  const { range } = useApp()
   const [stage, setStage] = useState<Stage>('pick')
   const [name, setName] = useState('')
   const [level, setLevel] = useState(1)
@@ -240,24 +240,23 @@ export function RemotePage() {
           {range ? (
             <p>Set {formatRange(range)} staat klaar, ook als een level op het pad nog dicht is.</p>
           ) : (
-            <fieldset className="level-picks">
-              <legend>Level</legend>
-              {LEVELS.map((item) => {
-                const unlocked = isLevelUnlocked(item.level, progress)
-                return (
+            <>
+              <p>Alle zeven levels zijn open.</p>
+              <fieldset className="level-picks">
+                <legend>Level</legend>
+                {LEVELS.map((item) => (
                   <button
                     key={item.level}
                     type="button"
                     className="btn secondary"
                     aria-pressed={level === item.level}
-                    disabled={!unlocked}
                     onClick={() => setLevel(item.level)}
                   >
                     {item.level} {item.name}
                   </button>
-                )
-              })}
-            </fieldset>
+                ))}
+              </fieldset>
+            </>
           )}
           {error ? <p role="alert">{error}</p> : null}
           <button type="submit" className="btn">
@@ -318,6 +317,7 @@ function RemotePlay({ peer, onLeave }: { peer: RemotePeer; onLeave: () => void }
   const [field, setField] = useState(0)
   const [battle, setBattle] = useState<'a' | 'b' | 'tie' | null>(null)
   const [ruleId, setRuleId] = useState<string | null>(null)
+  const [picks, setPicks] = useState<string[]>([])
   const roundKey = `${view.index}:${view.playPhase}`
   const [seen, setSeen] = useState(roundKey)
   if (seen !== roundKey && view.playPhase === 'ask') {
@@ -326,11 +326,13 @@ function RemotePlay({ peer, onLeave }: { peer: RemotePeer; onLeave: () => void }
     setField(0)
     setBattle(null)
     setRuleId(null)
+    setPicks([])
   }
 
   function responseOf(current: Question): Answer | null {
     if (current.kind === 'specificity') return { kind: 'specificity', value: tuple }
     if (current.kind === 'selector-battle') return battle ? { kind: 'selector-battle', value: battle } : null
+    if (current.kind === 'who-matches') return { kind: 'who-matches', ids: picks }
     if (current.kind === 'which-rule-wins') return ruleId ? { kind: 'which-rule-wins', ruleId } : null
     return null
   }
@@ -365,6 +367,21 @@ function RemotePlay({ peer, onLeave }: { peer: RemotePeer; onLeave: () => void }
           </div>
           <h1 className="prompt">{question.prompt}</h1>
           {question.kind === 'specificity' ? <Specimen question={question} revealed={revealed} /> : null}
+          {question.kind === 'who-matches' ? (
+            <MatchBoard
+              question={question}
+              picked={
+                view.shown[player]?.kind === 'who-matches' && view.playPhase !== 'ask'
+                  ? view.shown[player].ids
+                  : picks
+              }
+              revealed={revealed}
+              locked={view.playPhase !== 'ask'}
+              onToggle={(id) =>
+                setPicks((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]))
+              }
+            />
+          ) : null}
           {question.kind === 'which-rule-wins' ? <Sandbox html={question.html} rules={question.rules} /> : null}
           {view.playPhase === 'ask' && question.kind === 'specificity' ? (
             <Stepper value={tuple} active={field} onChange={setTuple} onActivate={setField} />

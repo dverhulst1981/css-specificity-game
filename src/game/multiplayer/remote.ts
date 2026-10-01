@@ -67,6 +67,7 @@ function isAnswer(value: unknown): value is Answer {
   if (answer.kind === 'specificity') return Boolean(answer.value)
   if (answer.kind === 'selector-battle') return answer.value === 'a' || answer.value === 'b' || answer.value === 'tie'
   if (answer.kind === 'which-rule-wins') return typeof answer.ruleId === 'string'
+  if (answer.kind === 'who-matches') return Array.isArray(answer.ids) && answer.ids.every((id) => typeof id === 'string')
   return false
 }
 

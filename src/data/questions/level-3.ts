@@ -3,7 +3,7 @@ import { battleQuestion, rule, ruleQuestion, specificityQuestion, tuple, HONEY, 
 export const level3 = [
   specificityQuestion({
     id: 'l3q01',
-    level: 3,
+    level: 4,
     difficulty: 1,
     selector: 'button:hover',
     answer: tuple(0, 1, 1),
@@ -13,7 +13,7 @@ export const level3 = [
   }),
   specificityQuestion({
     id: 'l3q02',
-    level: 3,
+    level: 4,
     difficulty: 2,
     selector: 'p::before',
     answer: tuple(0, 0, 2),
@@ -23,7 +23,7 @@ export const level3 = [
   }),
   specificityQuestion({
     id: 'l3q03',
-    level: 3,
+    level: 4,
     difficulty: 1,
     selector: 'a:focus',
     answer: tuple(0, 1, 1),
@@ -33,7 +33,7 @@ export const level3 = [
   }),
   specificityQuestion({
     id: 'l3q04',
-    level: 3,
+    level: 4,
     difficulty: 2,
     selector: 'li:first-child',
     answer: tuple(0, 1, 1),
@@ -43,7 +43,7 @@ export const level3 = [
   }),
   battleQuestion({
     id: 'l3q05',
-    level: 3,
+    level: 4,
     difficulty: 1,
     a: 'button:hover',
     b: 'button',
@@ -54,7 +54,7 @@ export const level3 = [
   }),
   specificityQuestion({
     id: 'l3q06',
-    level: 3,
+    level: 4,
     difficulty: 2,
     selector: 'a:hover::before',
     answer: tuple(0, 1, 2),
@@ -64,7 +64,7 @@ export const level3 = [
   }),
   specificityQuestion({
     id: 'l3q07',
-    level: 3,
+    level: 4,
     difficulty: 3,
     trap: true,
     trapLead: '`::after` is een pseudo-klasse, dus die telt als klasse.',
@@ -76,7 +76,7 @@ export const level3 = [
   }),
   battleQuestion({
     id: 'l3q08',
-    level: 3,
+    level: 4,
     difficulty: 3,
     trap: true,
     trapLead: 'Een pseudo-element is een speciale selector en verslaat een klasse.',
@@ -89,7 +89,7 @@ export const level3 = [
   }),
   specificityQuestion({
     id: 'l3q09',
-    level: 3,
+    level: 4,
     difficulty: 2,
     selector: 'input:disabled',
     answer: tuple(0, 1, 1),
@@ -99,7 +99,7 @@ export const level3 = [
   }),
   ruleQuestion({
     id: 'l3q10',
-    level: 3,
+    level: 4,
     difficulty: 2,
     html: '<p class="lead">De openingszin van de poster.</p>',
     rules: [
@@ -113,7 +113,7 @@ export const level3 = [
   }),
   specificityQuestion({
     id: 'l3q11',
-    level: 3,
+    level: 4,
     difficulty: 1,
     selector: ':hover',
     answer: tuple(0, 1, 0),
@@ -123,7 +123,7 @@ export const level3 = [
   }),
   specificityQuestion({
     id: 'l3q12',
-    level: 3,
+    level: 4,
     difficulty: 2,
     selector: '::before',
     answer: tuple(0, 0, 1),
@@ -133,7 +133,7 @@ export const level3 = [
   }),
   specificityQuestion({
     id: 'l3q13',
-    level: 3,
+    level: 4,
     difficulty: 1,
     selector: 'a:visited',
     answer: tuple(0, 1, 1),
@@ -143,7 +143,7 @@ export const level3 = [
   }),
   specificityQuestion({
     id: 'l3q14',
-    level: 3,
+    level: 4,
     difficulty: 2,
     selector: 'p::first-line',
     answer: tuple(0, 0, 2),
@@ -153,7 +153,7 @@ export const level3 = [
   }),
   battleQuestion({
     id: 'l3q15',
-    level: 3,
+    level: 4,
     difficulty: 1,
     a: 'button:focus',
     b: 'button:hover',
@@ -164,7 +164,7 @@ export const level3 = [
   }),
   specificityQuestion({
     id: 'l3q16',
-    level: 3,
+    level: 4,
     difficulty: 2,
     selector: 'label:focus-within',
     answer: tuple(0, 1, 1),
@@ -174,7 +174,7 @@ export const level3 = [
   }),
   specificityQuestion({
     id: 'l3q17',
-    level: 3,
+    level: 4,
     difficulty: 3,
     trap: true,
     trapLead: '`:before` met één dubbele punt is een klasse, want er staat geen tweede punt.',
@@ -186,7 +186,7 @@ export const level3 = [
   }),
   specificityQuestion({
     id: 'l3q18',
-    level: 3,
+    level: 4,
     difficulty: 2,
     selector: 'dialog::backdrop',
     answer: tuple(0, 0, 2),
@@ -196,7 +196,7 @@ export const level3 = [
   }),
   battleQuestion({
     id: 'l3q19',
-    level: 3,
+    level: 4,
     difficulty: 2,
     a: 'a:hover',
     b: '.link',
@@ -207,7 +207,7 @@ export const level3 = [
   }),
   ruleQuestion({
     id: 'l3q20',
-    level: 3,
+    level: 4,
     difficulty: 2,
     html: '<p class="kicker">Let op de titel.</p>',
     rules: [

@@ -30,11 +30,11 @@ describe('scoring', () => {
     expect(isLevelUnlocked(3, progress)).toBe(false)
   })
 
-  it('earns !important Survivor from level 6 and Element Scout from the selection round', () => {
+  it('earns !important Survivor from level 7 and Element Scout from two stars on level 1', () => {
     const progress = emptyProgress()
-    progress.levels[1] = { bestStars: 1, bestRatio: 1, attempts: 1, xp: 1 }
-    progress.levels[2] = { bestStars: 2, bestRatio: 1, attempts: 1, xp: 1 }
-    progress.levels[5] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
+    progress.levels[1] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
+    progress.levels[3] = { bestStars: 2, bestRatio: 1, attempts: 1, xp: 1 }
+    progress.levels[6] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
     progress.bestStreak = 5
     const before = evaluateBadges(progress)
     expect(before.filter((badge) => badge.earned).map((badge) => badge.id)).toEqual([
@@ -43,15 +43,12 @@ describe('scoring', () => {
       'id-hunter',
       'cascade-master',
     ])
-    progress.levels[6] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
+    expect(before.find((badge) => badge.id === 'element-scout')?.earned).toBe(false)
+    progress.levels[7] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
     expect(evaluateBadges(progress).find((badge) => badge.id === 'important-survivor')?.earned).toBe(true)
-    expect(evaluateBadges(progress).find((badge) => badge.id === 'element-scout')?.earned).toBe(false)
-    progress.selectBest = { correct: 8, total: 10, xp: 1 }
-    expect(evaluateBadges(progress).find((badge) => badge.id === 'element-scout')?.earned).toBe(false)
-    progress.selectBest = { correct: 9, total: 10, xp: 1 }
+    progress.levels[1] = { bestStars: 2, bestRatio: 0.9, attempts: 1, xp: 1 }
     const after = evaluateBadges(progress)
     expect(after.find((badge) => badge.id === 'element-scout')?.earned).toBe(true)
     expect(after.every((badge) => !badge.locked)).toBe(true)
-    expect(after.map((badge) => badge.id)).not.toContain('css-wizard')
   })
 })

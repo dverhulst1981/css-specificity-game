@@ -5,11 +5,13 @@ export function MatchBoard({
   question,
   picked,
   revealed,
+  locked = false,
   onToggle,
 }: {
   question: MatchQuestion
   picked: readonly string[]
   revealed: boolean
+  locked?: boolean
   onToggle: (id: string) => void
 }) {
   const lines = htmlLines(question.tree)
@@ -61,7 +63,7 @@ export function MatchBoard({
               style={pad}
               aria-pressed={on}
               aria-label={status}
-              disabled={revealed}
+              disabled={revealed || locked}
               onClick={() => onToggle(id)}
             >
               <code>{line.source}</code>

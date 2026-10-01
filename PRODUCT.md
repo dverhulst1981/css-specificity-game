@@ -28,8 +28,8 @@ A bright classroom, short rounds between other work. Practice, Learn, and two-de
 
 ## Capabilities and Constraints
 
-- Levels 1–6, about ten questions each. Levels 1–5 compare a specificity tuple, a selector battle (`a`, `b`, or `tie`), or the winning rule. Level 6 is `!important`. One star on level 6 earns !important Survivor.
-- A separate round, Wie wordt er geselecteerd: a chunk of HTML and one selector. The player marks every element that selector matches. Ten questions, drawn from a hand-written bank. It awards xp and leaves level stars unchanged. Nine correct in one round earns Element Scout.
+- Levels 1–7, about ten questions each. Level 1 is Wie wordt er geselecteerd: a chunk of HTML and one selector, and the player marks every element that selector matches. Two stars there (9 of 10) earn Element Scout. Levels 2–6 compare a specificity tuple, a selector battle (`a`, `b`, or `tie`), or the winning rule. Level 7 is `!important`. One star on level 7 earns !important Survivor.
+- Two-device play can start any of the seven levels immediately. Solo play still unlocks the next level at one star.
 - Solo rounds use streak and stars. Hearts exist only in two-device play.
 - Next level unlocks at one star. Three stars require 95% and every trap in that run correct.
 - The generator may only build ungraded extra practice, and only for specificity and battles, with the engine as the answer.

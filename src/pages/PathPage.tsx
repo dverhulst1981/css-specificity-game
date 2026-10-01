@@ -1,4 +1,4 @@
-import { matchQuestions, questions } from '../data/questions/index.ts'
+import { questions } from '../data/questions/index.ts'
 import { useApp } from '../app-context.tsx'
 import { createRun } from '../game/controller.ts'
 import { LEVELS } from '../game/levels/catalog.ts'
@@ -8,17 +8,6 @@ import { Stars } from '../components/Icons.tsx'
 
 export function PathPage() {
   const { progress, begin } = useApp()
-
-  function startSelect() {
-    begin(
-      createRun({
-        mode: 'select',
-        pace: 'steady',
-        asked: sampleRound(matchQuestions),
-        set: null,
-      }),
-    )
-  }
 
   function start(level: number, mode: 'practice' | 'learn') {
     begin(
@@ -34,14 +23,14 @@ export function PathPage() {
   return (
     <div className="page">
       <h1>Het pad</h1>
-      <p className="lede">Zes levels. Eén ster opent het volgende. Drie sterren eisen elke valkuil in die ronde.</p>
+      <p className="lede">Zeven levels. Eén ster opent het volgende. Drie sterren eisen elke valkuil in die ronde.</p>
       <div className="mode-split">
         <p>
           <strong>Oefenen</strong> stelt dezelfde vragen zonder hint. Tempo is een schakelaar in de ronde: 15 seconden
           per vraag, of uit.
         </p>
         <p>
-          <strong>Leren</strong> zet de denkstap open voordat je antwoordt. Die hint verklapt de specificity waarde niet. Er loopt
+          <strong>Leren</strong> zet de denkstap open voordat je antwoordt. Die hint verklapt het antwoord niet. Er loopt
           geen klok.
         </p>
         <p>Beide rondes tellen voor sterren en xp.</p>
@@ -80,16 +69,6 @@ export function PathPage() {
           )
         })}
       </ol>
-      <h2 className="section-title">Wie wordt er geselecteerd</h2>
-      <p className="lede">
-        Een brok HTML en één selector. Duid elk element aan dat die selector raakt. Tien vragen, elke ronde een nieuwe
-        greep.
-      </p>
-      <div className="actions">
-        <button type="button" className="btn" onClick={startSelect}>
-          Start een ronde
-        </button>
-      </div>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { battleQuestion, specificityQuestion, tuple } from './build.ts'
 export const level4 = [
   specificityQuestion({
     id: 'l4q01',
-    level: 4,
+    level: 5,
     difficulty: 2,
     selector: ':not(.active)',
     answer: tuple(0, 1, 0),
@@ -13,7 +13,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q02',
-    level: 4,
+    level: 5,
     difficulty: 2,
     selector: ':is(#app, .container)',
     answer: tuple(1, 0, 0),
@@ -23,7 +23,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q03',
-    level: 4,
+    level: 5,
     difficulty: 3,
     trap: true,
     trapLead: '`:where()` werkt als `:is()`: het sterkste argument telt, dus het id.',
@@ -35,7 +35,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q04',
-    level: 4,
+    level: 5,
     difficulty: 2,
     selector: ':has(.title)',
     answer: tuple(0, 1, 0),
@@ -45,7 +45,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q05',
-    level: 4,
+    level: 5,
     difficulty: 3,
     selector: 'div:is(.card, #app)',
     answer: tuple(1, 0, 1),
@@ -55,7 +55,7 @@ export const level4 = [
   }),
   battleQuestion({
     id: 'l4q06',
-    level: 4,
+    level: 5,
     difficulty: 3,
     trap: true,
     trapLead: '`:is()` neemt het eerste argument, `.card`, en verliest van drie klassen.',
@@ -68,7 +68,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q07',
-    level: 4,
+    level: 5,
     difficulty: 3,
     selector: ':where(.card) .title',
     answer: tuple(0, 1, 0),
@@ -78,7 +78,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q08',
-    level: 4,
+    level: 5,
     difficulty: 2,
     selector: ':not(#app)',
     answer: tuple(1, 0, 0),
@@ -88,7 +88,7 @@ export const level4 = [
   }),
   battleQuestion({
     id: 'l4q09',
-    level: 4,
+    level: 5,
     difficulty: 2,
     a: ':where(#app)',
     b: 'p',
@@ -99,7 +99,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q10',
-    level: 4,
+    level: 5,
     difficulty: 3,
     selector: 'section:has(#app .card)',
     answer: tuple(1, 1, 1),
@@ -109,7 +109,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q11',
-    level: 4,
+    level: 5,
     difficulty: 2,
     selector: ':not(p)',
     answer: tuple(0, 0, 1),
@@ -119,7 +119,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q12',
-    level: 4,
+    level: 5,
     difficulty: 2,
     selector: ':is(.a, .b)',
     answer: tuple(0, 1, 0),
@@ -129,7 +129,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q13',
-    level: 4,
+    level: 5,
     difficulty: 2,
     selector: ':where(p, .title)',
     answer: tuple(0, 0, 0),
@@ -139,7 +139,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q14',
-    level: 4,
+    level: 5,
     difficulty: 2,
     selector: 'article:not(.draft)',
     answer: tuple(0, 1, 1),
@@ -149,7 +149,7 @@ export const level4 = [
   }),
   battleQuestion({
     id: 'l4q15',
-    level: 4,
+    level: 5,
     difficulty: 2,
     a: ':has(#nav)',
     b: ':has(.nav)',
@@ -160,7 +160,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q16',
-    level: 4,
+    level: 5,
     difficulty: 3,
     selector: ':is(:where(#app), .card)',
     answer: tuple(0, 1, 0),
@@ -170,7 +170,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q17',
-    level: 4,
+    level: 5,
     difficulty: 3,
     trap: true,
     trapLead: 'Het id in :where() lekt naar buiten via :not().',
@@ -182,7 +182,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q18',
-    level: 4,
+    level: 5,
     difficulty: 2,
     selector: 'main:has(h1)',
     answer: tuple(0, 0, 2),
@@ -192,7 +192,7 @@ export const level4 = [
   }),
   battleQuestion({
     id: 'l4q19',
-    level: 4,
+    level: 5,
     difficulty: 3,
     a: ':where(.a, .b, #c)',
     b: '*',
@@ -203,7 +203,7 @@ export const level4 = [
   }),
   specificityQuestion({
     id: 'l4q20',
-    level: 4,
+    level: 5,
     difficulty: 3,
     selector: ':not(.a.b)',
     answer: tuple(0, 2, 0),

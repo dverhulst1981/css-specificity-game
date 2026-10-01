@@ -7,7 +7,7 @@ import { level5 } from './level-5.ts'
 import { level6 } from './level-6.ts'
 import { matchQuestions } from './match.ts'
 
-export const questions: Question[] = [...level1, ...level2, ...level3, ...level4, ...level5, ...level6]
+export const questions: Question[] = [...matchQuestions, ...level1, ...level2, ...level3, ...level4, ...level5, ...level6]
 
 export { matchQuestions }
 

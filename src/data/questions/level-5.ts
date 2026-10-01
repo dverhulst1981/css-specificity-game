@@ -12,7 +12,7 @@ import {
 export const level5 = [
   specificityQuestion({
     id: 'l5q01',
-    level: 5,
+    level: 6,
     difficulty: 2,
     selector: ':nth-child(2)',
     answer: tuple(0, 1, 0),
@@ -22,7 +22,7 @@ export const level5 = [
   }),
   specificityQuestion({
     id: 'l5q02',
-    level: 5,
+    level: 6,
     difficulty: 3,
     selector: ':nth-child(n of .item)',
     answer: tuple(0, 2, 0),
@@ -32,7 +32,7 @@ export const level5 = [
   }),
   specificityQuestion({
     id: 'l5q03',
-    level: 5,
+    level: 6,
     difficulty: 3,
     selector: 'li:nth-child(odd of #list .row)',
     answer: tuple(1, 2, 1),
@@ -42,7 +42,7 @@ export const level5 = [
   }),
   specificityQuestion({
     id: 'l5q04',
-    level: 5,
+    level: 6,
     difficulty: 3,
     selector: ':nth-last-child(1 of .card)',
     answer: tuple(0, 2, 0),
@@ -52,7 +52,7 @@ export const level5 = [
   }),
   specificityQuestion({
     id: 'l5q05',
-    level: 5,
+    level: 6,
     difficulty: 3,
     trap: true,
     trapLead: 'Het getal 3 telt als drie extra punten bij de klassen.',
@@ -64,7 +64,7 @@ export const level5 = [
   }),
   ruleQuestion({
     id: 'l5q06',
-    level: 5,
+    level: 6,
     difficulty: 2,
     html: '<p class="intro">De klas leest dit hardop.</p>',
     rules: [
@@ -78,7 +78,7 @@ export const level5 = [
   }),
   ruleQuestion({
     id: 'l5q07',
-    level: 5,
+    level: 6,
     difficulty: 3,
     trap: true,
     trapLead: 'De laatste regel in het bestand wint altijd.',
@@ -94,7 +94,7 @@ export const level5 = [
   }),
   ruleQuestion({
     id: 'l5q08',
-    level: 5,
+    level: 6,
     difficulty: 2,
     html: '<p class="note">Bewaar dit voor de volgende ronde.</p>',
     rules: [
@@ -108,7 +108,7 @@ export const level5 = [
   }),
   battleQuestion({
     id: 'l5q09',
-    level: 5,
+    level: 6,
     difficulty: 3,
     a: ':nth-child(n of #app)',
     b: '.item.extra',
@@ -119,7 +119,7 @@ export const level5 = [
   }),
   ruleQuestion({
     id: 'l5q10',
-    level: 5,
+    level: 6,
     difficulty: 2,
     html: '<a class="btn" id="go">Start de ronde</a>',
     rules: [
@@ -134,7 +134,7 @@ export const level5 = [
   }),
   specificityQuestion({
     id: 'l5q11',
-    level: 5,
+    level: 6,
     difficulty: 2,
     selector: ':nth-child(2n)',
     answer: tuple(0, 1, 0),
@@ -144,7 +144,7 @@ export const level5 = [
   }),
   specificityQuestion({
     id: 'l5q12',
-    level: 5,
+    level: 6,
     difficulty: 2,
     selector: ':nth-last-child(n+2)',
     answer: tuple(0, 1, 0),
@@ -154,7 +154,7 @@ export const level5 = [
   }),
   specificityQuestion({
     id: 'l5q13',
-    level: 5,
+    level: 6,
     difficulty: 2,
     selector: 'tr:nth-child(even)',
     answer: tuple(0, 1, 1),
@@ -164,7 +164,7 @@ export const level5 = [
   }),
   specificityQuestion({
     id: 'l5q14',
-    level: 5,
+    level: 6,
     difficulty: 3,
     selector: ':nth-child(n of .card, #pin)',
     answer: tuple(1, 1, 0),
@@ -174,7 +174,7 @@ export const level5 = [
   }),
   battleQuestion({
     id: 'l5q15',
-    level: 5,
+    level: 6,
     difficulty: 3,
     trap: true,
     trapLead: 'Een hoger getal maakt de selector zwaarder. 10 verslaat 1.',
@@ -187,7 +187,7 @@ export const level5 = [
   }),
   ruleQuestion({
     id: 'l5q16',
-    level: 5,
+    level: 6,
     difficulty: 2,
     html: '<li class="row">Eerste punt</li>',
     rules: [
@@ -201,7 +201,7 @@ export const level5 = [
   }),
   ruleQuestion({
     id: 'l5q17',
-    level: 5,
+    level: 6,
     difficulty: 2,
     html: '<li>Punt op de lijst</li>',
     rules: [
@@ -215,7 +215,7 @@ export const level5 = [
   }),
   specificityQuestion({
     id: 'l5q18',
-    level: 5,
+    level: 6,
     difficulty: 3,
     selector: ':nth-child(3n+1 of span)',
     answer: tuple(0, 1, 1),
@@ -225,7 +225,7 @@ export const level5 = [
   }),
   battleQuestion({
     id: 'l5q19',
-    level: 5,
+    level: 6,
     difficulty: 3,
     a: ':nth-last-child(2 of #id)',
     b: '#id',
@@ -236,7 +236,7 @@ export const level5 = [
   }),
   ruleQuestion({
     id: 'l5q20',
-    level: 5,
+    level: 6,
     difficulty: 2,
     html: '<p class="note">Tip van de dag</p>',
     rules: [

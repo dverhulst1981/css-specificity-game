@@ -5,7 +5,7 @@ const prompt = 'Welke declaratie wint voor color?'
 export const level6 = [
   ruleQuestion({
     id: 'l6q01',
-    level: 6,
+    level: 7,
     difficulty: 1,
     html: '<p>De klas leest dit hardop.</p>',
     rules: [
@@ -19,7 +19,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q02',
-    level: 6,
+    level: 7,
     difficulty: 2,
     trap: true,
     trapLead: 'Het id is zwaarder, dus !important doet er niet toe.',
@@ -35,7 +35,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q03',
-    level: 6,
+    level: 7,
     difficulty: 2,
     html: '<h1 id="titel" class="titel">Selector Wars</h1>',
     rules: [
@@ -49,7 +49,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q04',
-    level: 6,
+    level: 7,
     difficulty: 2,
     html: '<p>Nog een zin.</p>',
     rules: [
@@ -63,7 +63,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q05',
-    level: 6,
+    level: 7,
     difficulty: 1,
     html: '<p class="note">Een tip.</p>',
     rules: [
@@ -77,7 +77,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q06',
-    level: 6,
+    level: 7,
     difficulty: 2,
     html: '<p id="titel" class="a b">Twee klassen.</p>',
     rules: [
@@ -91,7 +91,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q07',
-    level: 6,
+    level: 7,
     difficulty: 2,
     html: '<p id="go" class="btn">Start</p>',
     rules: [
@@ -105,7 +105,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q08',
-    level: 6,
+    level: 7,
     difficulty: 2,
     html: '<a id="menu" class="link">Pad</a>',
     rules: [
@@ -120,7 +120,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q09',
-    level: 6,
+    level: 7,
     difficulty: 3,
     trap: true,
     trapLead: 'Bij twee keer !important wint de regel die later staat.',
@@ -136,7 +136,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q10',
-    level: 6,
+    level: 7,
     difficulty: 2,
     html: '<p class="note">Tip van de dag</p>',
     rules: [
@@ -150,7 +150,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q11',
-    level: 6,
+    level: 7,
     difficulty: 1,
     html: '<p class="card">Kaart</p>',
     rules: [
@@ -164,7 +164,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q12',
-    level: 6,
+    level: 7,
     difficulty: 2,
     html: '<p>Derde zin.</p>',
     rules: [
@@ -179,7 +179,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q13',
-    level: 6,
+    level: 7,
     difficulty: 3,
     html: '<p id="titel" class="note">Met id en klasse</p>',
     rules: [
@@ -193,7 +193,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q14',
-    level: 6,
+    level: 7,
     difficulty: 3,
     trap: true,
     trapLead: 'De laatste !important wint altijd.',
@@ -209,7 +209,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q15',
-    level: 6,
+    level: 7,
     difficulty: 2,
     html: '<button class="btn">Bewaar</button>',
     rules: [
@@ -223,7 +223,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q16',
-    level: 6,
+    level: 7,
     difficulty: 2,
     html: '<nav id="nav"><a class="here">Pad</a></nav>',
     rules: [
@@ -237,7 +237,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q17',
-    level: 6,
+    level: 7,
     difficulty: 2,
     html: '<h2 id="kop">Deel</h2>',
     rules: [
@@ -251,7 +251,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q18',
-    level: 6,
+    level: 7,
     difficulty: 1,
     html: '<span class="tag">Label</span>',
     rules: [
@@ -265,7 +265,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q19',
-    level: 6,
+    level: 7,
     difficulty: 3,
     html: '<li class="row">Eerste punt</li>',
     rules: [
@@ -280,7 +280,7 @@ export const level6 = [
   }),
   ruleQuestion({
     id: 'l6q20',
-    level: 6,
+    level: 7,
     difficulty: 2,
     html: '<p class="lead">Openingszin.</p>',
     rules: [

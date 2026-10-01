@@ -10,7 +10,7 @@ import { spec, type Specificity } from '../../types/specificity.ts'
 
 type Common = {
   id: string
-  level: 1 | 2 | 3 | 4 | 5 | 6
+  level: 1 | 2 | 3 | 4 | 5 | 6 | 7
   difficulty: Difficulty
   prompt: string
   lesson: string

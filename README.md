@@ -2,7 +2,7 @@
 
 A fully client-side game that teaches CSS specificity the way a browser compares it: inline, ids, classes, elements — lexicographic, never a sum. The interface is Dutch. Selectors, properties, and the `0-1-2-1` notation stay in CSS.
 
-Levels 1–6, a daily set of five, a round called Wie wordt er geselecteerd (mark every element a selector hits in a chunk of HTML), and two-device play with a pasted code. Level 6 is `!important`. Nine correct answers in one selection round earn the Element Scout badge. Progress lives in `localStorage`. There is no backend.
+Levels 1–7 and a daily set of five. Level 1 is Wie wordt er geselecteerd: mark every element a selector hits in a chunk of HTML. Level 7 is `!important`. Two devices can start any level at once; solo play opens the next level with one star. Progress lives in `localStorage`. There is no backend.
 
 ## Run
 

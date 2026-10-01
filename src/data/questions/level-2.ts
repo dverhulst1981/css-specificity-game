@@ -3,7 +3,7 @@ import { battleQuestion, specificityQuestion, tuple } from './build.ts'
 export const level2 = [
   specificityQuestion({
     id: 'l2q01',
-    level: 2,
+    level: 3,
     difficulty: 1,
     selector: '#app',
     answer: tuple(1, 0, 0),
@@ -13,7 +13,7 @@ export const level2 = [
   }),
   specificityQuestion({
     id: 'l2q02',
-    level: 2,
+    level: 3,
     difficulty: 1,
     selector: '[hidden]',
     answer: tuple(0, 1, 0),
@@ -23,7 +23,7 @@ export const level2 = [
   }),
   specificityQuestion({
     id: 'l2q03',
-    level: 2,
+    level: 3,
     difficulty: 2,
     selector: 'input[type="text"]',
     answer: tuple(0, 1, 1),
@@ -33,7 +33,7 @@ export const level2 = [
   }),
   specificityQuestion({
     id: 'l2q04',
-    level: 2,
+    level: 3,
     difficulty: 2,
     selector: '#app .card',
     answer: tuple(1, 1, 0),
@@ -43,7 +43,7 @@ export const level2 = [
   }),
   specificityQuestion({
     id: 'l2q05',
-    level: 2,
+    level: 3,
     difficulty: 2,
     selector: 'a[href]',
     answer: tuple(0, 1, 1),
@@ -53,7 +53,7 @@ export const level2 = [
   }),
   specificityQuestion({
     id: 'l2q06',
-    level: 2,
+    level: 3,
     difficulty: 2,
     selector: '#nav a.active',
     answer: tuple(1, 1, 1),
@@ -63,7 +63,7 @@ export const level2 = [
   }),
   battleQuestion({
     id: 'l2q07',
-    level: 2,
+    level: 3,
     difficulty: 3,
     trap: true,
     trapLead: 'Drie klassen zijn meer dan één id, dus de klassen winnen.',
@@ -76,7 +76,7 @@ export const level2 = [
   }),
   battleQuestion({
     id: 'l2q08',
-    level: 2,
+    level: 3,
     difficulty: 2,
     a: '#app .card',
     b: '#app',
@@ -87,7 +87,7 @@ export const level2 = [
   }),
   battleQuestion({
     id: 'l2q09',
-    level: 2,
+    level: 3,
     difficulty: 3,
     a: '#app.card',
     b: '#app .card',
@@ -98,7 +98,7 @@ export const level2 = [
   }),
   specificityQuestion({
     id: 'l2q10',
-    level: 2,
+    level: 3,
     difficulty: 2,
     selector: '#main .card a',
     answer: tuple(1, 1, 1),
@@ -108,7 +108,7 @@ export const level2 = [
   }),
   specificityQuestion({
     id: 'l2q11',
-    level: 2,
+    level: 3,
     difficulty: 1,
     selector: '#menu',
     answer: tuple(1, 0, 0),
@@ -118,7 +118,7 @@ export const level2 = [
   }),
   specificityQuestion({
     id: 'l2q12',
-    level: 2,
+    level: 3,
     difficulty: 1,
     selector: '[type="email"]',
     answer: tuple(0, 1, 0),
@@ -128,7 +128,7 @@ export const level2 = [
   }),
   specificityQuestion({
     id: 'l2q13',
-    level: 2,
+    level: 3,
     difficulty: 2,
     selector: 'img[alt]',
     answer: tuple(0, 1, 1),
@@ -138,7 +138,7 @@ export const level2 = [
   }),
   specificityQuestion({
     id: 'l2q14',
-    level: 2,
+    level: 3,
     difficulty: 2,
     selector: '#app #nav',
     answer: tuple(2, 0, 0),
@@ -148,7 +148,7 @@ export const level2 = [
   }),
   battleQuestion({
     id: 'l2q15',
-    level: 2,
+    level: 3,
     difficulty: 2,
     a: '[hidden]',
     b: '.hidden',
@@ -159,7 +159,7 @@ export const level2 = [
   }),
   specificityQuestion({
     id: 'l2q16',
-    level: 2,
+    level: 3,
     difficulty: 2,
     selector: 'button[disabled]',
     answer: tuple(0, 1, 1),
@@ -169,7 +169,7 @@ export const level2 = [
   }),
   specificityQuestion({
     id: 'l2q17',
-    level: 2,
+    level: 3,
     difficulty: 3,
     trap: true,
     trapLead: 'Een klasse vast aan een id telt niet extra. Het id is al het zwaarste stuk.',
@@ -181,7 +181,7 @@ export const level2 = [
   }),
   battleQuestion({
     id: 'l2q18',
-    level: 2,
+    level: 3,
     difficulty: 3,
     a: '#a #b',
     b: '#a .b .c .d',
@@ -192,7 +192,7 @@ export const level2 = [
   }),
   specificityQuestion({
     id: 'l2q19',
-    level: 2,
+    level: 3,
     difficulty: 2,
     selector: 'form input[required]',
     answer: tuple(0, 1, 2),
@@ -202,7 +202,7 @@ export const level2 = [
   }),
   specificityQuestion({
     id: 'l2q20',
-    level: 2,
+    level: 3,
     difficulty: 1,
     selector: '[lang="nl"]',
     answer: tuple(0, 1, 0),

@@ -28,7 +28,7 @@ function ask(input: {
   return {
     kind: 'who-matches',
     graded: true,
-    level: 0,
+    level: 1,
     prompt: 'Welke elementen raakt deze selector?',
     ...input,
   }

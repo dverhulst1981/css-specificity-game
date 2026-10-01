@@ -1,4 +1,4 @@
-import { matchQuestions, questions } from '../data/questions/index.ts'
+import { questions } from '../data/questions/index.ts'
 import { useApp } from '../app-context.tsx'
 import { createRun } from '../game/controller.ts'
 import { generateQuestion, mulberry32 } from '../game/engine/generator.ts'
@@ -41,10 +41,10 @@ export function ResultsPage() {
     if (result.replay.mode === 'select') {
       begin(
         createRun({
-          mode: 'select',
+          mode: 'practice',
           pace: 'steady',
-          asked: sampleRound(matchQuestions),
-          set: null,
+          asked: sampleRound(questions.filter((question) => question.level === 1)),
+          set: { from: 1, to: 1 },
         }),
       )
       return

@@ -17,12 +17,6 @@ export function ProgressPage() {
           <p className="progress-line">
             Oefenen en leren staan op {progress.totalXp} xp. De beste reeks is {progress.bestStreak}.
           </p>
-          <p className="progress-line">
-            Wie wordt er geselecteerd:{' '}
-            {progress.selectBest
-              ? `beste ronde ${progress.selectBest.correct}/${progress.selectBest.total}.`
-              : 'nog geen ronde.'}
-          </p>
           <ol className="path">
             {LEVELS.map((level) => {
               const stats = progress.levels[level.level]
