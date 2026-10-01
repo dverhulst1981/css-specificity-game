@@ -223,12 +223,42 @@ button.quiet-link {
   list-style: none;
   margin: 28px 0 0;
   padding: 0;
-  max-width: 40rem;
+}
+
+.path-page .lede,
+.path-page .mode-split,
+.path-page .station p {
+  max-width: none;
+  width: 100%;
+}
+
+.path-page .mode-split {
+  gap: 12px;
+}
+
+.path-page .station-actions {
+  width: 100%;
+}
+
+.path-page .station-actions .btn {
+  flex: 1 1 10rem;
+  min-width: min(100%, 10rem);
+}
+
+@media (min-width: 800px) {
+  .path-page .mode-split {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 28px;
+  }
+
+  .path-page .mode-split p:last-child {
+    grid-column: 1 / -1;
+  }
 }
 
 .station {
   display: grid;
-  grid-template-columns: 3rem 1fr;
+  grid-template-columns: 3rem minmax(0, 1fr);
   gap: 16px;
   position: relative;
   padding-bottom: 28px;

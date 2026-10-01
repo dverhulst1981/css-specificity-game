@@ -21,9 +21,9 @@ export function PathPage() {
   }
 
   return (
-    <div className="page">
+    <div className="page path-page">
       <h1>Het pad</h1>
-      <p className="lede">Zeven levels. Eén ster opent het volgende. Drie sterren eisen elke valkuil in die ronde.</p>
+      <p className="lede">Zeven levels. Haal je 1 ster binnen mag je het volgende level starten.</p>
       <div className="mode-split">
         <p>
           <strong>Oefenen</strong> stelt dezelfde vragen zonder hint. Tempo is een schakelaar in de ronde: 15 seconden
