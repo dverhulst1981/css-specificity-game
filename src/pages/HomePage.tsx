@@ -86,10 +86,14 @@ export function HomePage() {
   return (
     <>
       <section className="home-intro">
-        <h1>Tel de cascade.</h1>
+        <div className="home-title">
+          <h1>Tel de cascade.</h1>
+          <p className="slogan">Waar CSS-selectors de strijd aangaan.</p>
+        </div>
         <p className="lede">
-          Inline, ids, klassen en elementen. Nooit optellen tot één getal. Alleen, of tegen iemand op een tweede
-          toestel.
+          Inline, ids, klassen en elementen. Nooit optellen tot één getal.
+          <br />
+          Alleen, of tegen iemand op een tweede toestel.
         </p>
       </section>
       <section className="arena" aria-label="Start een ronde">
