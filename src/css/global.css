@@ -131,8 +131,8 @@ a {
 }
 
 .lede {
-  max-width: 38ch;
-  font-size: 1.15rem;
+  max-width: min(68ch, 100%);
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
 }
 
 .home-intro {
@@ -527,8 +527,8 @@ button.quiet-link {
 
 .step {
   display: grid;
-  grid-template-columns: 44px 1fr 44px;
-  gap: 8px;
+  grid-template-columns: minmax(0, 1fr) 44px 3ch 44px;
+  gap: 8px 12px;
   align-items: center;
 }
 
@@ -542,31 +542,33 @@ button.quiet-link {
   line-height: 1;
 }
 
-.step-readout {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
+.step-label {
   font-weight: 600;
 }
 
-.step-readout b {
+.step-value {
   font-family: var(--font-mono);
   font-size: 1.5rem;
   font-variant-numeric: tabular-nums;
   font-weight: 500;
+  text-align: center;
 }
 
-.step.is-active .step-readout b {
+.step.is-active .step-value {
   color: var(--honey-deep);
 }
 
 .notation {
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 8px 0 12px;
+}
+
+.notation b {
   font-family: var(--font-mono);
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.04em;
-  margin: 8px 0 16px;
+  font-weight: 500;
 }
 
 .actions {
@@ -921,7 +923,34 @@ button.quiet-link {
 
 .progress-line {
   margin-top: 8px;
-  max-width: 65ch;
+  max-width: min(65ch, 100%);
+}
+
+.progress-split > section > h1,
+.progress-split .section-title {
+  font-size: clamp(2rem, 3vw, 2.5rem);
+}
+
+.progress-split .section-title {
+  margin-top: 28px;
+}
+
+@media (min-width: 900px) {
+  .progress-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(16rem, 0.9fr);
+    gap: 32px 48px;
+    align-items: start;
+  }
+
+  .progress-split .section-title {
+    margin-top: 0;
+  }
+
+  .progress-split .path,
+  .progress-split .badge-list {
+    max-width: none;
+  }
 }
 
 .section-title {

@@ -28,11 +28,12 @@ export function Stepper({
   return (
     <div>
       <p className="notation" aria-live="polite">
-        {formatSpecificity(value)}
+        specificity waarde: <b>{formatSpecificity(value)}</b>
       </p>
-      <div className="stepper" role="group" aria-label="Specificiteit">
+      <div className="stepper" role="group" aria-label="Specificity waarde">
         {FIELDS.map((field, index) => (
           <div className={index === active ? 'step is-active' : 'step'} data-step={index} key={field.key}>
+            <span className="step-label">{field.label}</span>
             <button
               type="button"
               data-step-dir="dec"
@@ -45,10 +46,7 @@ export function Stepper({
             >
               −
             </button>
-            <div className="step-readout">
-              <span>{field.label}</span>
-              <b>{value[field.key]}</b>
-            </div>
+            <b className="step-value">{value[field.key]}</b>
             <button
               type="button"
               data-step-dir="inc"
