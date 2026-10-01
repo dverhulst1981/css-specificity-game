@@ -4,9 +4,7 @@ import { useApp } from '../app-context.tsx'
 import { Sandbox } from '../components/Sandbox.tsx'
 import { Specimen } from '../components/Specimen.tsx'
 import { emptyTuple, Stepper } from '../components/Stepper.tsx'
-import { Ladder, previewLadder } from '../components/Ladder.tsx'
 import { Hearts, Verdict } from '../components/Icons.tsx'
-import { ladderFor } from '../game/engine/ladder.ts'
 import { isCorrect } from '../game/engine/solve.ts'
 import { correctNotation, describeAnswer } from '../game/format.ts'
 import { LEVELS } from '../game/levels/catalog.ts'
@@ -478,7 +476,6 @@ function RemotePlay({ peer, onLeave }: { peer: RemotePeer; onLeave: () => void }
             </div>
           ) : null}
         </div>
-        <Ladder rungs={revealed ? ladderFor(question) : previewLadder()} />
       </div>
     </div>
   )

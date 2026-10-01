@@ -147,7 +147,7 @@ The seed read was “editorial gold.” The classroom scene overrides that mood:
 
 ## Layout
 
-The specimen is the page. Wide play: the cascade ladder sits in a column beside it. Narrow play: the ladder moves under the answer. Home is a heading on paper, then one honey block of actions to the bottom edge. The level path is a single vertical sequence with a 2px spine. No equal card grid, no dashboard of metrics.
+The specimen is the page. Play is one column: the question, the answer, then the explanation. Home is a heading on paper, then one honey block of actions to the bottom edge. The level path is a single vertical sequence with a 2px spine. No equal card grid, no dashboard of metrics.
 
 Spacing steps are 4, 8, 16, 24, and 48. More space above a heading than below it. Page padding is 20px on a phone and 40px from 800px up.
 
@@ -200,10 +200,6 @@ Pills for buttons, stepper controls, and choice chips. Panels and the sandbox fr
 
 - **Style:** four rows, one per tuple slot. Minus and plus are pills. The live notation is IBM Plex Mono.
 
-### Ladder
-
-- **Style:** five rungs. Lit rungs are ink on paper with a honey index. Dim rungs are muted. Locked rungs show a lock and stay readable.
-
 ### Level path
 
 - **Style:** an ordered list, a vertical 2px spine, numbered discs. The open level’s disc is honey. This is the signature, and it is a sequence.
@@ -213,7 +209,6 @@ Pills for buttons, stepper controls, and choice chips. Panels and the sandbox fr
 ### Do:
 
 - **Do** keep honey on the arena, the current station, and the primary action.
-- **Do** show the cascade ladder after every answer, with later rungs locked rather than hidden.
 - **Do** use `0-1-2-1` in IBM Plex Mono whenever a tuple is the point.
 - **Do** fade token entrances when `prefers-reduced-motion: reduce` is set.
 

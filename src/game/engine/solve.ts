@@ -61,11 +61,3 @@ export function isCorrect(question: Question, response: Answer | null): boolean 
   }
   return false
 }
-
-export function tuplesTie(question: Question): boolean {
-  if (question.kind === 'selector-battle') return question.answer === 'tie'
-  if (question.kind !== 'which-rule-wins') return false
-  const decls = question.rules.map(declarationFromRule)
-  const winner = winningDeclaration(decls)
-  return decls.filter((item) => sameSpec(item.specificity, winner.specificity)).length > 1
-}

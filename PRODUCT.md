@@ -20,7 +20,7 @@ Teach people to reason like a browser: which rules match, then origin and import
 
 ## Positioning
 
-The graded rounds are hand-written, and every answer is checked by an owned specificity engine. The same ladder appears after every question. Rungs the current levels do not teach stay visible and locked, so the model is honest before those questions exist.
+The graded rounds are hand-written, and every answer is checked by an owned specificity engine. After each answer, the explanation says why that result won.
 
 ## Operating Context
 
@@ -46,7 +46,7 @@ Original question copy and an original selector engine. No customer quotes, logo
 
 ## Product Principles
 
-- Show the cascade the same way after every answer.
+- Explain the result in words after every answer.
 - Never collapse specificity into a sum.
 - Graded truth is written by hand and proved by the engine.
 - A learning round is not an exam: lives belong to the race, not to solo practice.

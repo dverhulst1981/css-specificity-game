@@ -3,7 +3,6 @@ import { useApp } from '../app-context.tsx'
 import { Sandbox } from '../components/Sandbox.tsx'
 import { Specimen } from '../components/Specimen.tsx'
 import { emptyTuple, Stepper } from '../components/Stepper.tsx'
-import { Ladder, previewLadder, previewMatchLadder } from '../components/Ladder.tsx'
 import { MatchBoard } from '../components/MatchBoard.tsx'
 import { Verdict } from '../components/Icons.tsx'
 import {
@@ -14,7 +13,6 @@ import {
   scoreResponse,
   streakPeak,
 } from '../game/controller.ts'
-import { ladderFor } from '../game/engine/ladder.ts'
 import { generateQuestion, mulberry32 } from '../game/engine/generator.ts'
 import { levelInfo } from '../game/levels/catalog.ts'
 import { formatRange } from '../game/levels/quizSet.ts'
@@ -465,11 +463,6 @@ export function PlayPage() {
             </div>
           ) : null}
         </div>
-        <Ladder
-          rungs={
-            revealed ? ladderFor(question) : question.kind === 'who-matches' ? previewMatchLadder() : previewLadder()
-          }
-        />
       </div>
     </div>
   )
