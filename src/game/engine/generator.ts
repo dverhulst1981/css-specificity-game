@@ -99,7 +99,7 @@ export function generateQuestion(rng: () => number, index: number): Question {
     b,
     answer: verdict,
     prompt: 'Welke selector is specifieker?',
-    lesson: 'Vergelijk de tuples van links naar rechts. Het eerste verschil beslist.',
+    lesson: 'Vergelijk de specificity waarden van links naar rechts. Het eerste verschil beslist.',
     explanation: `A is ${formatSpecificity(solveSpecificity(a))}. B is ${formatSpecificity(solveSpecificity(b))}.`,
   }
 }

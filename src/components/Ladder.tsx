@@ -30,7 +30,7 @@ const lockedPreview: RungView[] = [
     id: 'order',
     label: 'Volgorde in de bron',
     state: 'dim',
-    detail: 'Alleen als de tuples gelijk zijn.',
+    detail: 'Alleen als de specificity waarden gelijk zijn.',
   },
 ]
 

@@ -9,7 +9,7 @@ export const level4 = [
     answer: tuple(0, 1, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: ':not() zelf telt niet. Het argument wel.',
-    explanation: 'Het sterkste argument is `.active`, één klasse. `:not` voegt niets extra’s toe. De tuple is 0-0-1-0.',
+    explanation: 'Het sterkste argument is `.active`, één klasse. `:not` voegt niets extra’s toe. De specificity waarde is 0-0-1-0.',
   }),
   specificityQuestion({
     id: 'l4q02',
@@ -19,7 +19,7 @@ export const level4 = [
     answer: tuple(1, 0, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: ':is() neemt het sterkste argument, niet de som en niet het eerste.',
-    explanation: '`#app` is specifieker dan `.container`. `:is` zelf telt niet. De tuple is 0-1-0-0.',
+    explanation: '`#app` is specifieker dan `.container`. `:is` zelf telt niet. De specificity waarde is 0-1-0-0.',
   }),
   specificityQuestion({
     id: 'l4q03',
@@ -41,7 +41,7 @@ export const level4 = [
     answer: tuple(0, 1, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: ':has() neemt, net als :is(), het sterkste argument en telt zelf niet.',
-    explanation: '`.title` is het argument. De tuple is 0-0-1-0.',
+    explanation: '`.title` is het argument. De specificity waarde is 0-0-1-0.',
   }),
   specificityQuestion({
     id: 'l4q05',
@@ -125,7 +125,7 @@ export const level4 = [
     answer: tuple(0, 1, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Twee even zware argumenten worden niet opgeteld. :is() houdt het zwaarste, hier één klasse.',
-    explanation: '`.a` en `.b` zijn allebei 0-0-1-0. De tuple van `:is()` is dus 0-0-1-0.',
+    explanation: '`.a` en `.b` zijn allebei 0-0-1-0. De specificity waarde van `:is()` is dus 0-0-1-0.',
   }),
   specificityQuestion({
     id: 'l4q13',
@@ -188,7 +188,7 @@ export const level4 = [
     answer: tuple(0, 0, 2),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: ':has() telt zelf niet. De tag erbuiten en het element erin wel.',
-    explanation: '`main` en `h1` zijn twee elementen. De tuple is 0-0-0-2.',
+    explanation: '`main` en `h1` zijn twee elementen. De specificity waarde is 0-0-0-2.',
   }),
   battleQuestion({
     id: 'l4q19',

@@ -29,7 +29,7 @@ export function PathPage() {
           per vraag, of uit.
         </p>
         <p>
-          <strong>Leren</strong> zet de denkstap open voordat je antwoordt. Die hint verklapt de tuple niet. Er loopt
+          <strong>Leren</strong> zet de denkstap open voordat je antwoordt. Die hint verklapt de specificity waarde niet. Er loopt
           geen klok.
         </p>
         <p>Beide rondes tellen voor sterren en xp.</p>

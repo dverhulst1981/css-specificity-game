@@ -380,7 +380,7 @@ function RemotePlay({ peer, onLeave }: { peer: RemotePeer; onLeave: () => void }
               </button>
               <button type="button" className={battle === 'tie' ? 'choice is-selected' : 'choice'} onClick={() => setBattle('tie')}>
                 <strong>Gelijk</strong>
-                <code>dezelfde tuple</code>
+                <code>dezelfde specificity waarde</code>
               </button>
             </div>
           ) : null}

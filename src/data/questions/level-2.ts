@@ -9,7 +9,7 @@ export const level2 = [
     answer: tuple(1, 0, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Een id vult de tweede kolom. Die kolom staat links van klassen.',
-    explanation: '`#app` is één id. De tuple is 0-1-0-0.',
+    explanation: '`#app` is één id. De specificity waarde is 0-1-0-0.',
   }),
   specificityQuestion({
     id: 'l2q02',
@@ -19,7 +19,7 @@ export const level2 = [
     answer: tuple(0, 1, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Een attribuutselector telt als een klasse, ook zonder elementnaam.',
-    explanation: '`[hidden]` is één attribuut. De tuple is 0-0-1-0.',
+    explanation: '`[hidden]` is één attribuut. De specificity waarde is 0-0-1-0.',
   }),
   specificityQuestion({
     id: 'l2q03',
@@ -29,7 +29,7 @@ export const level2 = [
     answer: tuple(0, 1, 1),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Het element en het attribuut tellen allebei. De aanhalingstekens niet.',
-    explanation: '`input` is een element, `[type="text"]` een attribuut. De tuple is 0-0-1-1.',
+    explanation: '`input` is een element, `[type="text"]` een attribuut. De specificity waarde is 0-0-1-1.',
   }),
   specificityQuestion({
     id: 'l2q04',
@@ -39,7 +39,7 @@ export const level2 = [
     answer: tuple(1, 1, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Id en klasse blijven in hun eigen kolom staan.',
-    explanation: '`#app` is een id, `.card` een klasse. De spatie telt niet. De tuple is 0-1-1-0.',
+    explanation: '`#app` is een id, `.card` een klasse. De spatie telt niet. De specificity waarde is 0-1-1-0.',
   }),
   specificityQuestion({
     id: 'l2q05',
@@ -93,7 +93,7 @@ export const level2 = [
     b: '#app .card',
     answer: 'tie',
     prompt: 'Welke selector is specifieker?',
-    lesson: 'Wel of geen spatie verandert wat er matcht, niet de tuple.',
+    lesson: 'Wel of geen spatie verandert wat er matcht, niet de specificity waarde.',
     explanation: 'Compound en nakomeling hebben hier dezelfde delen: één id en één klasse. Beide zijn 0-1-1-0.',
   }),
   specificityQuestion({
@@ -114,7 +114,7 @@ export const level2 = [
     answer: tuple(1, 0, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Een id vult alleen de id-kolom, ongeacht de naam.',
-    explanation: '`#menu` is één id. De tuple is 0-1-0-0.',
+    explanation: '`#menu` is één id. De specificity waarde is 0-1-0-0.',
   }),
   specificityQuestion({
     id: 'l2q12',
@@ -124,7 +124,7 @@ export const level2 = [
     answer: tuple(0, 1, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Een attribuut met een waarde blijft één klasse. De waarde zelf telt niet extra.',
-    explanation: '`[type="email"]` is één attribuut. De tuple is 0-0-1-0.',
+    explanation: '`[type="email"]` is één attribuut. De specificity waarde is 0-0-1-0.',
   }),
   specificityQuestion({
     id: 'l2q13',
@@ -134,7 +134,7 @@ export const level2 = [
     answer: tuple(0, 1, 1),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Element en attribuut komen in twee kolommen, ook als het attribuut geen waarde heeft.',
-    explanation: '`img` is een element, `[alt]` een attribuut. De tuple is 0-0-1-1.',
+    explanation: '`img` is een element, `[alt]` een attribuut. De specificity waarde is 0-0-1-1.',
   }),
   specificityQuestion({
     id: 'l2q14',
@@ -144,7 +144,7 @@ export const level2 = [
     answer: tuple(2, 0, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Twee ids in een keten zijn twee punten in de id-kolom. De spatie telt niet.',
-    explanation: '`#app` en `#nav` zijn twee ids. De tuple is 0-2-0-0.',
+    explanation: '`#app` en `#nav` zijn twee ids. De specificity waarde is 0-2-0-0.',
   }),
   battleQuestion({
     id: 'l2q15',
@@ -177,7 +177,7 @@ export const level2 = [
     answer: tuple(1, 1, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Geen spatie: id en klasse staan op hetzelfde element. Beide kolommen lopen op.',
-    explanation: '`#logo` is een id en `.title` een klasse. De tuple is 0-1-1-0.',
+    explanation: '`#logo` is een id en `.title` een klasse. De specificity waarde is 0-1-1-0.',
   }),
   battleQuestion({
     id: 'l2q18',
@@ -198,7 +198,7 @@ export const level2 = [
     answer: tuple(0, 1, 2),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Twee elementen en één attribuut. Het attribuut hoort bij de klassen.',
-    explanation: '`form` en `input` zijn elementen, `[required]` een attribuut. De tuple is 0-0-1-2.',
+    explanation: '`form` en `input` zijn elementen, `[required]` een attribuut. De specificity waarde is 0-0-1-2.',
   }),
   specificityQuestion({
     id: 'l2q20',

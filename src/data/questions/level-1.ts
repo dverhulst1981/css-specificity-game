@@ -9,7 +9,7 @@ export const level1 = [
     answer: tuple(0, 0, 1),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Een elementnaam vult alleen de laatste kolom.',
-    explanation: '`p` is een element. De tuple is 0-0-0-1.',
+    explanation: '`p` is een element. De specificity waarde is 0-0-0-1.',
   }),
   specificityQuestion({
     id: 'l1q02',
@@ -19,7 +19,7 @@ export const level1 = [
     answer: tuple(0, 1, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Een klasse vult de derde kolom, niet de laatste.',
-    explanation: '`.title` is één klasse. De tuple is 0-0-1-0.',
+    explanation: '`.title` is één klasse. De specificity waarde is 0-0-1-0.',
   }),
   specificityQuestion({
     id: 'l1q03',
@@ -29,7 +29,7 @@ export const level1 = [
     answer: tuple(0, 0, 1),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'De tag-naam telt, de betekenis van de tag niet.',
-    explanation: '`h2` is één element, net als `p`. De tuple is 0-0-0-1.',
+    explanation: '`h2` is één element, net als `p`. De specificity waarde is 0-0-0-1.',
   }),
   specificityQuestion({
     id: 'l1q04',
@@ -39,7 +39,7 @@ export const level1 = [
     answer: tuple(0, 0, 0),
     prompt: 'Welke specificiteit heeft de universele selector?',
     lesson: '`*` matcht alles en telt als niets.',
-    explanation: 'De universele selector voegt geen enkel cijfer toe. De tuple is 0-0-0-0.',
+    explanation: 'De universele selector voegt geen enkel cijfer toe. De specificity waarde is 0-0-0-0.',
   }),
   battleQuestion({
     id: 'l1q05',
@@ -50,7 +50,7 @@ export const level1 = [
     answer: 'tie',
     prompt: 'Welke selector is specifieker?',
     lesson: 'Twee elementnamen zijn allebei 0-0-0-1.',
-    explanation: '`article` en `section` zijn allebei één element. De tuples zijn gelijk: 0-0-0-1.',
+    explanation: '`article` en `section` zijn allebei één element. De specificity waarden zijn gelijk: 0-0-0-1.',
   }),
   specificityQuestion({
     id: 'l1q06',
@@ -60,7 +60,7 @@ export const level1 = [
     answer: tuple(0, 0, 2),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Een spatie is een combinator. Die telt niet mee. De elementen wel.',
-    explanation: '`div` en `span` zijn twee elementen. De nakomeling-combinator voegt niets toe. De tuple is 0-0-0-2.',
+    explanation: '`div` en `span` zijn twee elementen. De nakomeling-combinator voegt niets toe. De specificity waarde is 0-0-0-2.',
   }),
   specificityQuestion({
     id: 'l1q07',
@@ -70,7 +70,7 @@ export const level1 = [
     answer: tuple(0, 2, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Elke klasse in de keten telt, ook de klasse op een voorouder.',
-    explanation: 'Twee klassen, één combinator die niets toevoegt. De tuple is 0-0-2-0.',
+    explanation: 'Twee klassen, één combinator die niets toevoegt. De specificity waarde is 0-0-2-0.',
   }),
   battleQuestion({
     id: 'l1q08',
@@ -93,7 +93,7 @@ export const level1 = [
     answer: tuple(0, 2, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Geen spatie betekent: beide klassen staan op hetzelfde element. Ze tellen allebei.',
-    explanation: '`.btn` en `.primary` zijn twee klassen in één compound. De tuple is 0-0-2-0.',
+    explanation: '`.btn` en `.primary` zijn twee klassen in één compound. De specificity waarde is 0-0-2-0.',
   }),
   specificityQuestion({
     id: 'l1q10',
@@ -103,7 +103,7 @@ export const level1 = [
     answer: tuple(0, 0, 3),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Een keten is geen enkel element. Tel elke naam.',
-    explanation: 'Drie elementen, twee combinators die niets toevoegen. De tuple is 0-0-0-3.',
+    explanation: 'Drie elementen, twee combinators die niets toevoegen. De specificity waarde is 0-0-0-3.',
   }),
   specificityQuestion({
     id: 'l1q11',
@@ -113,7 +113,7 @@ export const level1 = [
     answer: tuple(0, 0, 1),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Elke elementnaam is één punt in de laatste kolom, ook een span.',
-    explanation: '`span` is één element. De tuple is 0-0-0-1.',
+    explanation: '`span` is één element. De specificity waarde is 0-0-0-1.',
   }),
   specificityQuestion({
     id: 'l1q12',
@@ -123,7 +123,7 @@ export const level1 = [
     answer: tuple(0, 2, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Twee klassen zonder spatie staan op hetzelfde element en tellen allebei.',
-    explanation: '`.note` en `.alert` zijn twee klassen. De tuple is 0-0-2-0.',
+    explanation: '`.note` en `.alert` zijn twee klassen. De specificity waarde is 0-0-2-0.',
   }),
   specificityQuestion({
     id: 'l1q13',
@@ -133,7 +133,7 @@ export const level1 = [
     answer: tuple(0, 0, 2),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Het teken > zegt alleen welk element het kind is. Het voegt geen cijfer toe.',
-    explanation: '`main` en `p` zijn twee elementen. De kind-combinator telt niet. De tuple is 0-0-0-2.',
+    explanation: '`main` en `p` zijn twee elementen. De kind-combinator telt niet. De specificity waarde is 0-0-0-2.',
   }),
   battleQuestion({
     id: 'l1q14',
@@ -154,7 +154,7 @@ export const level1 = [
     answer: tuple(0, 0, 2),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'De spatie tussen twee namen is een combinator. Tel de namen, niet de spatie.',
-    explanation: '`em` en `strong` zijn twee elementen. De tuple is 0-0-0-2.',
+    explanation: '`em` en `strong` zijn twee elementen. De specificity waarde is 0-0-0-2.',
   }),
   battleQuestion({
     id: 'l1q16',
@@ -177,7 +177,7 @@ export const level1 = [
     answer: tuple(0, 0, 2),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Combinators sturen het matchen. Ze vullen geen kolom.',
-    explanation: '`div` en `span` zijn twee elementen. `>` voegt niets toe. De tuple is 0-0-0-2.',
+    explanation: '`div` en `span` zijn twee elementen. `>` voegt niets toe. De specificity waarde is 0-0-0-2.',
   }),
   specificityQuestion({
     id: 'l1q18',
@@ -187,7 +187,7 @@ export const level1 = [
     answer: tuple(0, 0, 2),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Lange tagnamen wegen niet zwaarder dan korte. Elke naam is één element.',
-    explanation: '`figure` en `figcaption` zijn twee elementen. De tuple is 0-0-0-2.',
+    explanation: '`figure` en `figcaption` zijn twee elementen. De specificity waarde is 0-0-0-2.',
   }),
   battleQuestion({
     id: 'l1q19',
@@ -208,6 +208,6 @@ export const level1 = [
     answer: tuple(0, 0, 2),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'De plus zegt: het volgende zusje. Dat teken zelf telt niet mee.',
-    explanation: '`h2` en `p` zijn twee elementen. `+` voegt niets toe. De tuple is 0-0-0-2.',
+    explanation: '`h2` en `p` zijn twee elementen. `+` voegt niets toe. De specificity waarde is 0-0-0-2.',
   }),
 ]

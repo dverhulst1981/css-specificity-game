@@ -28,7 +28,7 @@ export const LEVELS: LevelInfo[] = [
   {
     level: 5,
     name: 'De cascade kiest',
-    blurb: 'Bij een gelijke tuple wint de latere regel. Niet eerder.',
+    blurb: 'Bij een gelijke specificity waarde wint de latere regel. Niet eerder.',
   },
 ]
 

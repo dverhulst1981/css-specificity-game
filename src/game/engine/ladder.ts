@@ -46,15 +46,15 @@ export function ladderFor(question: Question): RungView[] {
       label: 'Volgorde in de bron',
       state: tie ? 'lit' : 'dim',
       detail: tie
-        ? 'De tuples zijn gelijk. Dan wint de latere regel in de stylesheet.'
-        : 'De tuples verschillen, dus de volgorde in de bron beslist deze ronde niet.',
+        ? 'De specificity waarden zijn gelijk. Dan wint de latere regel in de stylesheet.'
+        : 'De specificity waarden verschillen, dus de volgorde in de bron beslist deze ronde niet.',
     },
   ]
 }
 
 function specificityDetail(question: Question): string {
   if (question.kind === 'specificity') {
-    return `De tuple is ${formatSpecificity(question.answer)}. De cijfers worden niet opgeteld.`
+    return `De specificity waarde is ${formatSpecificity(question.answer)}. De cijfers worden niet opgeteld.`
   }
   if (question.kind === 'selector-battle') {
     const left = formatSpecificity(specificityOf(question.a))

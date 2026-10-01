@@ -9,7 +9,7 @@ export const level3 = [
     answer: tuple(0, 1, 1),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Een pseudo-klasse zoals :hover telt als een klasse.',
-    explanation: '`button` is een element, `:hover` een klasse. De tuple is 0-0-1-1.',
+    explanation: '`button` is een element, `:hover` een klasse. De specificity waarde is 0-0-1-1.',
   }),
   specificityQuestion({
     id: 'l3q02',
@@ -19,7 +19,7 @@ export const level3 = [
     answer: tuple(0, 0, 2),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Een pseudo-element telt als een element, niet als een klasse.',
-    explanation: '`p` en `::before` zijn allebei elementen. De tuple is 0-0-0-2.',
+    explanation: '`p` en `::before` zijn allebei elementen. De specificity waarde is 0-0-0-2.',
   }),
   specificityQuestion({
     id: 'l3q03',
@@ -60,7 +60,7 @@ export const level3 = [
     answer: tuple(0, 1, 2),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Pseudo-klasse en pseudo-element staan in verschillende kolommen.',
-    explanation: '`a` en `::before` zijn elementen, `:hover` is een klasse. De tuple is 0-0-1-2.',
+    explanation: '`a` en `::before` zijn elementen, `:hover` is een klasse. De specificity waarde is 0-0-1-2.',
   }),
   specificityQuestion({
     id: 'l3q07',
@@ -72,7 +72,7 @@ export const level3 = [
     answer: tuple(0, 0, 2),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Twee dubbele punten betekenen een pseudo-element. Dat hoort bij de elementen.',
-    explanation: '`h1` en `::after` zijn twee elementen. De tuple is 0-0-0-2, niet 0-0-1-1.',
+    explanation: '`h1` en `::after` zijn twee elementen. De specificity waarde is 0-0-0-2, niet 0-0-1-1.',
   }),
   battleQuestion({
     id: 'l3q08',
@@ -139,7 +139,7 @@ export const level3 = [
     answer: tuple(0, 1, 1),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: ':visited is een pseudo-klasse, net als :hover en :focus.',
-    explanation: '`a` is een element, `:visited` een klasse. De tuple is 0-0-1-1.',
+    explanation: '`a` is een element, `:visited` een klasse. De specificity waarde is 0-0-1-1.',
   }),
   specificityQuestion({
     id: 'l3q14',
@@ -149,7 +149,7 @@ export const level3 = [
     answer: tuple(0, 0, 2),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: '::first-line is een pseudo-element. Dat hoort bij de elementen, naast de tag.',
-    explanation: '`p` en `::first-line` zijn twee elementen. De tuple is 0-0-0-2.',
+    explanation: '`p` en `::first-line` zijn twee elementen. De specificity waarde is 0-0-0-2.',
   }),
   battleQuestion({
     id: 'l3q15',
@@ -216,7 +216,7 @@ export const level3 = [
     ],
     answer: 'both',
     prompt: 'Welke declaratie wint voor color?',
-    lesson: 'De zwaardere tuple wint, ook als die regel eerder in het bestand staat.',
+    lesson: 'De zwaardere specificity waarde wint, ook als die regel eerder in het bestand staat.',
     explanation: '`p.kicker` is 0-0-1-1 en `p` is 0-0-0-1. De klasse op de tag wint van de latere, lossere regel.',
   }),
 ]

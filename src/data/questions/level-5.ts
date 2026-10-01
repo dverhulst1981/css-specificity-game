@@ -28,7 +28,7 @@ export const level5 = [
     answer: tuple(0, 2, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'Zonder of-lijst is :nth-child één klasse. Met of tel je daar de sterkste selector in die lijst bij op.',
-    explanation: 'De pseudo-klasse is één klasse. `.item` in de of-lijst is de tweede. De tuple is 0-0-2-0.',
+    explanation: 'De pseudo-klasse is één klasse. `.item` in de of-lijst is de tweede. De specificity waarde is 0-0-2-0.',
   }),
   specificityQuestion({
     id: 'l5q03',
@@ -48,7 +48,7 @@ export const level5 = [
     answer: tuple(0, 2, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: ':nth-last-child() volgt dezelfde regel als :nth-child().',
-    explanation: 'Eén klasse voor de pseudo, plus `.card` uit de of-lijst. De tuple is 0-0-2-0.',
+    explanation: 'Eén klasse voor de pseudo, plus `.card` uit de of-lijst. De specificity waarde is 0-0-2-0.',
   }),
   specificityQuestion({
     id: 'l5q05',
@@ -60,7 +60,7 @@ export const level5 = [
     answer: tuple(0, 1, 0),
     prompt: 'Welke specificiteit heeft deze selector?',
     lesson: 'An+B zegt welk kind het is. Het zegt niets over het gewicht van de selector.',
-    explanation: '`:nth-child(3)` blijft 0-0-1-0. Het cijfer 3 wordt niet bij de tuple opgeteld.',
+    explanation: '`:nth-child(3)` blijft 0-0-1-0. Het cijfer 3 wordt niet bij de specificity waarde opgeteld.',
   }),
   ruleQuestion({
     id: 'l5q06',
@@ -73,7 +73,7 @@ export const level5 = [
     ],
     answer: 'cls',
     prompt: 'Welke declaratie wint voor color?',
-    lesson: 'Eerst de tuple. Pas als die gelijk is, kijk je naar de volgorde in het bestand.',
+    lesson: 'Eerst de specificity waarde. Pas als die gelijk is, kijk je naar de volgorde in het bestand.',
     explanation: '`.intro` is 0-0-1-0 en wint van `p` (0-0-0-1). De latere positie is hier niet de reden.',
   }),
   ruleQuestion({
@@ -103,7 +103,7 @@ export const level5 = [
     ],
     answer: 'second',
     prompt: 'Welke declaratie wint voor color?',
-    lesson: 'Gelijke tuples: de regel die later in de bron staat, wint.',
+    lesson: 'Gelijke specificity waarden: de regel die later in de bron staat, wint.',
     explanation: 'Beide selectors zijn 0-0-1-0. De specificiteit stopt gelijk, dus de latere `.note` wint.',
   }),
   battleQuestion({
@@ -129,7 +129,7 @@ export const level5 = [
     ],
     answer: 'id',
     prompt: 'Welke declaratie wint voor color?',
-    lesson: 'Drie regels, één eigenschap. Sorteer ze op tuple, niet op volgorde.',
+    lesson: 'Drie regels, één eigenschap. Sorteer ze op specificity waarde, niet op volgorde.',
     explanation: '`a` is 0-0-0-1, `a.btn` is 0-0-1-1, `#go` is 0-1-0-0. Het id wint.',
   }),
   specificityQuestion({
@@ -210,7 +210,7 @@ export const level5 = [
     ],
     answer: 'late',
     prompt: 'Welke declaratie wint voor color?',
-    lesson: 'Dezelfde selector twee keer: de tuple stopt gelijk, de latere regel wint.',
+    lesson: 'Dezelfde selector twee keer: de specificity waarde stopt gelijk, de latere regel wint.',
     explanation: 'Beide `li`-regels zijn 0-0-0-1. De regel die later in de bron staat, wint.',
   }),
   specificityQuestion({
@@ -246,7 +246,7 @@ export const level5 = [
     ],
     answer: 'both',
     prompt: 'Welke declaratie wint voor color?',
-    lesson: 'Drie regels. De laatste is niet automatisch de winnaar als een eerdere tuple zwaarder is.',
+    lesson: 'Drie regels. De laatste is niet automatisch de winnaar als een eerdere specificity waarde zwaarder is.',
     explanation: '`.note` is 0-0-1-0, `p.note` is 0-0-1-1, `p` is 0-0-0-1. `p.note` wint, ook al staat `p` later.',
   }),
 ]
