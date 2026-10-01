@@ -28,7 +28,7 @@ A bright classroom, short rounds between other work. Practice, Learn, and two-de
 
 ## Capabilities and Constraints
 
-- Levels 1–5, about ten questions each, three answer shapes: a specificity tuple, a selector battle (`a`, `b`, or `tie`), or the id of the winning rule.
+- Levels 1–7, about ten questions each. Levels 1–5 compare a specificity tuple, a selector battle (`a`, `b`, or `tie`), or the winning rule. Level 6 is `!important`. Level 7 is cascade layers. One star on level 6 earns !important Survivor. One star on level 7 earns CSS Wizard.
 - A separate round, Wie wordt er geselecteerd: a chunk of HTML and one selector. The player marks every element that selector matches. Ten questions, drawn from a hand-written bank. It awards xp and leaves level stars unchanged.
 - Solo rounds use streak and stars. Hearts exist only in two-device play.
 - Next level unlocks at one star. Three stars require 95% and every trap in that run correct.

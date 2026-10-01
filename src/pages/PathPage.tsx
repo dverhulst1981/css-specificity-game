@@ -34,7 +34,7 @@ export function PathPage() {
   return (
     <div className="page">
       <h1>Het pad</h1>
-      <p className="lede">Vijf levels. Eén ster opent het volgende. Drie sterren eisen elke valkuil in die ronde.</p>
+      <p className="lede">Zeven levels. Eén ster opent het volgende. Drie sterren eisen elke valkuil in die ronde.</p>
       <div className="mode-split">
         <p>
           <strong>Oefenen</strong> stelt dezelfde vragen zonder hint. Tempo is een schakelaar in de ronde: 15 seconden

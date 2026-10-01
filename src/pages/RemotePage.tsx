@@ -6,7 +6,7 @@ import { Specimen } from '../components/Specimen.tsx'
 import { emptyTuple, Stepper } from '../components/Stepper.tsx'
 import { Hearts, Verdict } from '../components/Icons.tsx'
 import { isCorrect } from '../game/engine/solve.ts'
-import { correctNotation, describeAnswer } from '../game/format.ts'
+import { correctNotation, describeAnswer, formatDeclaration } from '../game/format.ts'
 import { LEVELS } from '../game/levels/catalog.ts'
 import { formatRange, questionsForRange, sampleRound } from '../game/levels/quizSet.ts'
 import { RemotePeer, SignalError } from '../game/multiplayer/remote.ts'
@@ -395,8 +395,7 @@ function RemotePlay({ peer, onLeave }: { peer: RemotePeer; onLeave: () => void }
                   onClick={() => setRuleId(rule.id)}
                 >
                   <code>
-                    {index + 1}. {rule.selector} {'{ '}
-                    {rule.property}: {rule.value};{' }'}
+                    {index + 1}. {formatDeclaration(rule)}
                   </code>
                 </button>
               ))}

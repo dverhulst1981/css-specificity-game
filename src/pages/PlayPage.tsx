@@ -14,10 +14,10 @@ import {
   streakPeak,
 } from '../game/controller.ts'
 import { generateQuestion, mulberry32 } from '../game/engine/generator.ts'
-import { levelInfo } from '../game/levels/catalog.ts'
+import { levelInfo, MAX_LEVEL } from '../game/levels/catalog.ts'
 import { formatRange } from '../game/levels/quizSet.ts'
 import { isLevelUnlocked, levelStats } from '../game/scoring/scoring.ts'
-import { correctNotation, describeAnswer } from '../game/format.ts'
+import { correctNotation, describeAnswer, formatDeclaration } from '../game/format.ts'
 import type { ResultSummary } from '../game/results.ts'
 import { countCorrect, missedTraps } from '../game/results.ts'
 import { saveResult } from '../storage.ts'
@@ -135,7 +135,7 @@ export function PlayPage() {
           stars: stats.stars,
           correct: stats.correct,
           total: stats.total,
-          unlockedNext: following <= 5 && isLevelUnlocked(following, next),
+          unlockedNext: following <= MAX_LEVEL && isLevelUnlocked(following, next),
         }
       }),
       dailyBest: active.date ? (next.daily[active.date] ?? null) : null,
@@ -423,8 +423,7 @@ export function PlayPage() {
                   onClick={() => setRuleId(rule.id)}
                 >
                   <code>
-                    {index + 1}. {rule.selector} {'{ '}
-                    {rule.property}: {rule.value};{' }'}
+                    {index + 1}. {formatDeclaration(rule)}
                   </code>
                 </button>
               ))}

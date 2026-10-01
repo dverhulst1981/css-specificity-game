@@ -11,7 +11,7 @@ function openLevel(stars: (level: number) => number, unlocked: (level: number) =
   for (const level of LEVELS) {
     if (unlocked(level.level) && stars(level.level) === 0) return level.level
   }
-  return 5
+  return LEVELS[LEVELS.length - 1]?.level ?? 1
 }
 
 export function HomePage() {

@@ -1,8 +1,10 @@
 export type LevelInfo = {
-  level: 1 | 2 | 3 | 4 | 5
+  level: 1 | 2 | 3 | 4 | 5 | 6 | 7
   name: string
   blurb: string
 }
+
+export const MAX_LEVEL = 7
 
 export const LEVELS: LevelInfo[] = [
   {
@@ -29,6 +31,16 @@ export const LEVELS: LevelInfo[] = [
     level: 5,
     name: 'De cascade kiest',
     blurb: 'Bij een gelijke specificity waarde wint de latere regel. Niet eerder.',
+  },
+  {
+    level: 6,
+    name: '!important',
+    blurb: '!important wint van een zwaardere selector. Pas daarna telt de specificity waarde weer.',
+  },
+  {
+    level: 7,
+    name: 'Cascade layers',
+    blurb: 'Een latere @layer wint van een eerdere. Zonder layer wint van een layer. !important draait die volgorde om.',
   },
 ]
 

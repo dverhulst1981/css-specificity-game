@@ -45,7 +45,7 @@ export function isLevelUnlocked(level: number, progress: Progress): boolean {
 }
 
 export function nextLevelAfter(level: number): number | null {
-  if (level >= 5) return null
+  if (level >= 7) return null
   return level + 1
 }
 

@@ -50,16 +50,16 @@ export function evaluateBadges(progress: Progress): Badge[] {
     {
       id: 'css-wizard',
       name: 'CSS Wizard',
-      detail: 'Gesloten tot de levels na deze vijf.',
-      earned: false,
-      locked: true,
+      detail: 'Eén ster op Cascade layers.',
+      earned: stars(7) >= 1,
+      locked: false,
     },
     {
       id: 'important-survivor',
       name: '!important Survivor',
-      detail: 'Gesloten tot !important een vraag is.',
-      earned: false,
-      locked: true,
+      detail: 'Eén ster op !important.',
+      earned: stars(6) >= 1,
+      locked: false,
     },
   ]
 }

@@ -2,7 +2,7 @@ import type { CascadeLayer, Origin, Specificity } from './specificity.ts'
 
 export type Difficulty = 1 | 2 | 3
 
-export type LevelNumber = 0 | 1 | 2 | 3 | 4 | 5
+export type LevelNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
 
 export type RuleSpec = {
   id: string

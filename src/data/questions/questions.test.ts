@@ -3,15 +3,15 @@ import { solveBattle, solveRules, solveSpecificity } from '../../game/engine/sol
 import { questions } from './index.ts'
 
 describe('question bank', () => {
-  it('holds 100 graded questions, twenty per level, and about eight traps', () => {
-    expect(questions).toHaveLength(100)
-    for (const level of [1, 2, 3, 4, 5]) {
+  it('holds 140 graded questions, twenty per level, and a handful of traps', () => {
+    expect(questions).toHaveLength(140)
+    for (const level of [1, 2, 3, 4, 5, 6, 7]) {
       expect(questions.filter((question) => question.level === level)).toHaveLength(20)
     }
     const traps = questions.filter((question) => question.trap)
     expect(traps.length).toBeGreaterThanOrEqual(8)
-    expect(traps.length).toBeLessThanOrEqual(14)
-    expect(new Set(questions.map((question) => question.id)).size).toBe(100)
+    expect(traps.length).toBeLessThanOrEqual(20)
+    expect(new Set(questions.map((question) => question.id)).size).toBe(140)
     expect(questions.every((question) => question.graded)).toBe(true)
     expect(questions.some((question) => question.kind === 'specificity')).toBe(true)
     expect(questions.some((question) => question.kind === 'selector-battle')).toBe(true)
@@ -29,7 +29,9 @@ describe('question bank', () => {
         expect(question.answer).toBe(solveBattle(question.a, question.b))
       } else if (question.kind === 'which-rule-wins') {
         expect(question.answer).toBe(solveRules(question.rules))
-        expect(question.rules.every((rule) => !rule.important && !rule.layer)).toBe(true)
+        if (question.level <= 5) {
+          expect(question.rules.every((rule) => !rule.important && !rule.layer)).toBe(true)
+        }
       }
     }
   })

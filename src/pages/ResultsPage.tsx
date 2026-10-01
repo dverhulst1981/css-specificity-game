@@ -4,7 +4,7 @@ import { createRun } from '../game/controller.ts'
 import { generateQuestion, mulberry32 } from '../game/engine/generator.ts'
 import { dailyQuestions } from '../game/levels/daily.ts'
 import { questionsForRange, sampleRound } from '../game/levels/quizSet.ts'
-import { levelInfo } from '../game/levels/catalog.ts'
+import { levelInfo, MAX_LEVEL } from '../game/levels/catalog.ts'
 import { loadResult } from '../storage.ts'
 import { Stars } from '../components/Icons.tsx'
 
@@ -86,7 +86,7 @@ export function ResultsPage() {
           {single ? (
             <p>
               <Stars count={single.stars} />{' '}
-              {single.unlockedNext && single.level < 5
+              {single.unlockedNext && single.level < MAX_LEVEL
                 ? `${levelInfo(single.level + 1)?.name ?? 'Het volgende level'} is open.`
                 : single.stars === 0
                   ? 'Nog geen ster. 70% opent het volgende level.'
@@ -110,7 +110,7 @@ export function ResultsPage() {
                 <h2>{levelInfo(level.level)?.name}</h2>
                 <p>
                   <Stars count={level.stars} /> {level.correct}/{level.total}
-                  {level.unlockedNext && level.level < 5 ? ' · het volgende level is open' : ''}
+                  {level.unlockedNext && level.level < MAX_LEVEL ? ' · het volgende level is open' : ''}
                 </p>
               </div>
             </li>

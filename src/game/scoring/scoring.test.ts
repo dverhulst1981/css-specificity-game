@@ -30,22 +30,25 @@ describe('scoring', () => {
     expect(isLevelUnlocked(3, progress)).toBe(false)
   })
 
-  it('keeps the last two badges locked', () => {
+  it('earns the last two badges from levels 6 and 7', () => {
     const progress = emptyProgress()
     progress.levels[1] = { bestStars: 1, bestRatio: 1, attempts: 1, xp: 1 }
     progress.levels[2] = { bestStars: 2, bestRatio: 1, attempts: 1, xp: 1 }
     progress.levels[5] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
     progress.bestStreak = 5
-    const badges = evaluateBadges(progress)
-    expect(badges.filter((badge) => badge.earned).map((badge) => badge.id)).toEqual([
+    const before = evaluateBadges(progress)
+    expect(before.filter((badge) => badge.earned).map((badge) => badge.id)).toEqual([
       'selector-rookie',
       'specificity-fighter',
       'id-hunter',
       'cascade-master',
     ])
-    expect(badges.filter((badge) => badge.locked).map((badge) => badge.id)).toEqual([
-      'css-wizard',
-      'important-survivor',
-    ])
+    progress.levels[6] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
+    expect(evaluateBadges(progress).find((badge) => badge.id === 'important-survivor')?.earned).toBe(true)
+    expect(evaluateBadges(progress).find((badge) => badge.id === 'css-wizard')?.earned).toBe(false)
+    progress.levels[7] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
+    const after = evaluateBadges(progress)
+    expect(after.find((badge) => badge.id === 'css-wizard')?.earned).toBe(true)
+    expect(after.every((badge) => !badge.locked)).toBe(true)
   })
 })

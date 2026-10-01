@@ -1,4 +1,5 @@
 import type { Question } from '../../types/question.ts'
+import { MAX_LEVEL } from './catalog.ts'
 
 export type LevelRange = { from: number; to: number }
 
@@ -11,7 +12,7 @@ export function parseSetHash(hash: string): LevelRange | null {
   if (!match) return null
   const from = Number(match[1])
   const to = match[2] ? Number(match[2]) : from
-  if (from < 1 || to > 5 || from > to) return null
+  if (from < 1 || to > MAX_LEVEL || from > to) return null
   return { from, to }
 }
 
