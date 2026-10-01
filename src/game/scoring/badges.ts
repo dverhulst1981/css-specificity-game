@@ -5,8 +5,8 @@ export type BadgeId =
   | 'specificity-fighter'
   | 'id-hunter'
   | 'cascade-master'
-  | 'css-wizard'
   | 'important-survivor'
+  | 'element-scout'
 
 export type Badge = {
   id: BadgeId
@@ -48,17 +48,17 @@ export function evaluateBadges(progress: Progress): Badge[] {
       locked: false,
     },
     {
-      id: 'css-wizard',
-      name: 'CSS Wizard',
-      detail: 'Eén ster op Cascade layers.',
-      earned: stars(7) >= 1,
-      locked: false,
-    },
-    {
       id: 'important-survivor',
       name: '!important Survivor',
       detail: 'Eén ster op !important.',
       earned: stars(6) >= 1,
+      locked: false,
+    },
+    {
+      id: 'element-scout',
+      name: 'Element Scout',
+      detail: '9 van de 10 goed in één ronde Wie wordt er geselecteerd.',
+      earned: (progress.selectBest?.correct ?? 0) >= 9,
       locked: false,
     },
   ]

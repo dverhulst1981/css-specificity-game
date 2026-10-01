@@ -10,7 +10,7 @@ import { spec, type Specificity } from '../../types/specificity.ts'
 
 type Common = {
   id: string
-  level: 1 | 2 | 3 | 4 | 5 | 6 | 7
+  level: 1 | 2 | 3 | 4 | 5 | 6
   difficulty: Difficulty
   prompt: string
   lesson: string
@@ -57,17 +57,6 @@ export function rule(
 
 export function importantRule(id: string, selector: string, value: string, sourceOrder: number): RuleSpec {
   return { ...rule(id, selector, value, sourceOrder), important: true }
-}
-
-export function layerRule(
-  id: string,
-  selector: string,
-  value: string,
-  sourceOrder: number,
-  layer: { order: number; name: string },
-  important = false,
-): RuleSpec {
-  return { ...rule(id, selector, value, sourceOrder), important: important || undefined, layer }
 }
 
 export type { Question }

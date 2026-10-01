@@ -16,7 +16,7 @@ A single learner practicing a round, or two classmates each on their own device.
 
 ## Product Purpose
 
-Teach people to reason like a browser: which rules match, then origin and importance, cascade layers, specificity, then source order. Success is a player who can say why a declaration won, in the `0-1-2-1` tuple, without adding the digits into one number.
+Teach people to reason like a browser: which rules match, then importance, specificity, then source order. Success is a player who can say why a declaration won, in the `0-1-2-1` tuple, without adding the digits into one number.
 
 ## Positioning
 
@@ -28,8 +28,8 @@ A bright classroom, short rounds between other work. Practice, Learn, and two-de
 
 ## Capabilities and Constraints
 
-- Levels 1–7, about ten questions each. Levels 1–5 compare a specificity tuple, a selector battle (`a`, `b`, or `tie`), or the winning rule. Level 6 is `!important`. Level 7 is cascade layers. One star on level 6 earns !important Survivor. One star on level 7 earns CSS Wizard.
-- A separate round, Wie wordt er geselecteerd: a chunk of HTML and one selector. The player marks every element that selector matches. Ten questions, drawn from a hand-written bank. It awards xp and leaves level stars unchanged.
+- Levels 1–6, about ten questions each. Levels 1–5 compare a specificity tuple, a selector battle (`a`, `b`, or `tie`), or the winning rule. Level 6 is `!important`. One star on level 6 earns !important Survivor.
+- A separate round, Wie wordt er geselecteerd: a chunk of HTML and one selector. The player marks every element that selector matches. Ten questions, drawn from a hand-written bank. It awards xp and leaves level stars unchanged. Nine correct in one round earns Element Scout.
 - Solo rounds use streak and stars. Hearts exist only in two-device play.
 - Next level unlocks at one star. Three stars require 95% and every trap in that run correct.
 - The generator may only build ungraded extra practice, and only for specificity and battles, with the engine as the answer.
