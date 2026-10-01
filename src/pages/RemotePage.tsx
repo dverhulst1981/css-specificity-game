@@ -5,8 +5,9 @@ import { Sandbox } from '../components/Sandbox.tsx'
 import { Specimen } from '../components/Specimen.tsx'
 import { emptyTuple, Stepper } from '../components/Stepper.tsx'
 import { Ladder, previewLadder } from '../components/Ladder.tsx'
-import { Hearts } from '../components/Icons.tsx'
+import { Hearts, Verdict } from '../components/Icons.tsx'
 import { ladderFor } from '../game/engine/ladder.ts'
+import { isCorrect } from '../game/engine/solve.ts'
 import { correctNotation, describeAnswer } from '../game/format.ts'
 import { LEVELS } from '../game/levels/catalog.ts'
 import { formatRange, questionsForRange } from '../game/levels/quizSet.ts'
@@ -425,12 +426,18 @@ function RemotePlay({ peer, onLeave }: { peer: RemotePeer; onLeave: () => void }
             <div aria-live="polite">
               <div className="reveal">
                 <div className="reveal-a">
-                  <h2>{view.names.a || 'Speler 1'}</h2>
+                  <h2>
+                    {view.names.a || 'Speler 1'}
+                    <Verdict correct={isCorrect(question, view.shown.a)} />
+                  </h2>
                   <p>{describeAnswer(question, view.shown.a)}</p>
                   <p>{view.score.hearts.a} levens · {view.score.xp.a} xp</p>
                 </div>
                 <div className="reveal-b">
-                  <h2>{view.names.b || 'Speler 2'}</h2>
+                  <h2>
+                    {view.names.b || 'Speler 2'}
+                    <Verdict correct={isCorrect(question, view.shown.b)} />
+                  </h2>
                   <p>{describeAnswer(question, view.shown.b)}</p>
                   <p>{view.score.hearts.b} levens · {view.score.xp.b} xp</p>
                 </div>

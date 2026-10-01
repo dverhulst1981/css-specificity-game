@@ -778,8 +778,26 @@ button.quiet-link {
 }
 
 .reveal h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   font-size: 1.4rem;
   overflow-wrap: anywhere;
+}
+
+.thumb {
+  display: inline-flex;
+  flex: none;
+}
+
+.thumb .icon {
+  width: 1.65rem;
+  height: 1.65rem;
+}
+
+.thumb.is-down .icon {
+  transform: rotate(180deg);
 }
 
 .reveal p {

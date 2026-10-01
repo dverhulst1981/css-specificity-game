@@ -47,6 +47,29 @@ export function Stars({ count }: { count: number }) {
   )
 }
 
+export function Verdict({ correct }: { correct: boolean }) {
+  return (
+    <span className={correct ? 'thumb is-up' : 'thumb is-down'} role="img" aria-label={correct ? 'Juist antwoord' : 'Fout antwoord'}>
+      <svg viewBox="0 0 24 24" aria-hidden="true" className="icon">
+        <path
+          d="M8 11.2 10.4 6.6A1.6 1.6 0 0 1 13 7.4V10h4.1a1.6 1.6 0 0 1 1.6 1.8l-.7 5.8a1.6 1.6 0 0 1-1.6 1.4H8V11.2z"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M4.5 11h2.8v7.2H5.6a1.1 1.1 0 0 1-1.1-1.1v-5A1.1 1.1 0 0 1 5.6 11z"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
+  )
+}
+
 export function Hearts({ count }: { count: number }) {
   return (
     <span className="hearts" aria-label={`${count} van 3 levens`}>

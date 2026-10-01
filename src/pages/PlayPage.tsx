@@ -4,7 +4,7 @@ import { Sandbox } from '../components/Sandbox.tsx'
 import { Specimen } from '../components/Specimen.tsx'
 import { emptyTuple, Stepper } from '../components/Stepper.tsx'
 import { Ladder, previewLadder } from '../components/Ladder.tsx'
-import { Hearts } from '../components/Icons.tsx'
+import { Hearts, Verdict } from '../components/Icons.tsx'
 import {
   applyBankResult,
   applyDailyResult,
@@ -556,14 +556,18 @@ export function PlayPage() {
             <div aria-live="polite">
               <div className="reveal">
                 <div className="reveal-a">
-                  <h2>{run.pass.names.a}</h2>
+                  <h2>
+                    {run.pass.names.a}
+                    <Verdict correct={Boolean(run.pass.answers.a && isPlayerCorrect(question, run.pass.answers.a))} />
+                  </h2>
                   <p>{describeAnswer(question, run.pass.answers.a)}</p>
-                  <p>{run.pass.answers.a && isPlayerCorrect(question, run.pass.answers.a) ? 'Goed.' : 'Mis.'}</p>
                 </div>
                 <div className="reveal-b">
-                  <h2>{run.pass.names.b}</h2>
+                  <h2>
+                    {run.pass.names.b}
+                    <Verdict correct={Boolean(run.pass.answers.b && isPlayerCorrect(question, run.pass.answers.b))} />
+                  </h2>
                   <p>{describeAnswer(question, run.pass.answers.b)}</p>
-                  <p>{run.pass.answers.b && isPlayerCorrect(question, run.pass.answers.b) ? 'Goed.' : 'Mis.'}</p>
                 </div>
               </div>
               <div className="feedback">
