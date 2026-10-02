@@ -20,6 +20,6 @@ npm test
 npm run build
 ```
 
-`npm run build` writes a static site to `dist/`. `dist/404.html` is a copy of `index.html`, so a static host can fall back to the app for routes such as `/pad`.
+`npm run build` writes a static site to `dist/`. `dist/404.html` is a copy of `index.html`, so a static host can fall back to the app for routes such as `/pad`. The build also emits a web app manifest and service worker, so the game installs as a PWA and keeps working offline after the first visit.
 
 Open a shared set with the hash `#set=1-5` (or `#set=3` for one level).

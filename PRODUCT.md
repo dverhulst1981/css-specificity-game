@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Vite, React, and TypeScript. Fully client-side. Vitest for the engine. Progress in localStorage. `npm run build` emits a static site with no backend, auth, database, or API.
+Vite, React, and TypeScript. Fully client-side. Vitest for the engine. Progress in localStorage. `npm run build` emits a static PWA with a service worker and web app manifest, and no backend, auth, database, or API.
 
 ## Users
 
