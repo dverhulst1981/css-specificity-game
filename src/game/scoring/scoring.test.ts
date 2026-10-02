@@ -30,24 +30,29 @@ describe('scoring', () => {
     expect(isLevelUnlocked(3, progress)).toBe(false)
   })
 
-  it('earns the solo badges from level stars', () => {
+  it('earns the solo badges from two stars or more', () => {
     const progress = emptyProgress()
     progress.levels[1] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
-    progress.levels[3] = { bestStars: 2, bestRatio: 1, attempts: 1, xp: 1 }
+    progress.levels[3] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
     progress.levels[6] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
-    const before = evaluateBadges(progress)
-    expect(before.filter((badge) => badge.earned).map((badge) => badge.id)).toEqual([
+    progress.levels[7] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
+    expect(evaluateBadges(progress).every((badge) => !badge.earned)).toBe(true)
+    progress.levels[1] = { bestStars: 2, bestRatio: 0.9, attempts: 1, xp: 1 }
+    progress.levels[3] = { bestStars: 2, bestRatio: 1, attempts: 1, xp: 1 }
+    progress.levels[6] = { bestStars: 2, bestRatio: 0.9, attempts: 1, xp: 1 }
+    progress.levels[7] = { bestStars: 2, bestRatio: 0.9, attempts: 1, xp: 1 }
+    const afterTwo = evaluateBadges(progress)
+    expect(afterTwo.filter((badge) => badge.earned).map((badge) => badge.id)).toEqual([
       'selector-rookie',
       'id-hunter',
       'cascade-master',
+      'important-survivor',
     ])
-    expect(before.map((badge) => badge.id)).not.toContain('specificity-fighter')
-    expect(before.find((badge) => badge.id === 'element-scout')?.earned).toBe(false)
-    progress.levels[7] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
-    expect(evaluateBadges(progress).find((badge) => badge.id === 'important-survivor')?.earned).toBe(true)
-    progress.levels[1] = { bestStars: 2, bestRatio: 0.9, attempts: 1, xp: 1 }
-    const after = evaluateBadges(progress)
-    expect(after.find((badge) => badge.id === 'element-scout')?.earned).toBe(true)
-    expect(after.every((badge) => !badge.locked)).toBe(true)
+    expect(afterTwo.find((badge) => badge.id === 'element-scout')?.earned).toBe(false)
+    progress.levels[1] = { bestStars: 3, bestRatio: 1, attempts: 1, xp: 1 }
+    const afterThree = evaluateBadges(progress)
+    expect(afterThree.find((badge) => badge.id === 'element-scout')?.earned).toBe(true)
+    expect(afterThree.every((badge) => !badge.locked)).toBe(true)
   })
 })
+

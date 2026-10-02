@@ -21,8 +21,8 @@ export function evaluateBadges(progress: Progress): Badge[] {
     {
       id: 'selector-rookie',
       name: 'Selector Rookie',
-      detail: 'Eén ster op level 1.',
-      earned: stars(1) >= 1,
+      detail: 'Twee sterren op level 1.',
+      earned: stars(1) >= 2,
       locked: false,
     },
     {
@@ -35,22 +35,22 @@ export function evaluateBadges(progress: Progress): Badge[] {
     {
       id: 'cascade-master',
       name: 'Cascade Master',
-      detail: 'Eén ster op level 6.',
-      earned: stars(6) >= 1,
+      detail: 'Twee sterren op level 6.',
+      earned: stars(6) >= 2,
       locked: false,
     },
     {
       id: 'important-survivor',
       name: '!important Survivor',
-      detail: 'Eén ster op !important.',
-      earned: stars(7) >= 1,
+      detail: 'Twee sterren op !important.',
+      earned: stars(7) >= 2,
       locked: false,
     },
     {
       id: 'element-scout',
       name: 'Element Scout',
-      detail: '9 van de 10 goed in één ronde Wie wordt er geselecteerd.',
-      earned: stars(1) >= 2,
+      detail: 'Drie sterren op Wie wordt er geselecteerd.',
+      earned: stars(1) >= 3,
       locked: false,
     },
   ]
