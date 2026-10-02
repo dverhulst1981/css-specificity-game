@@ -36,7 +36,7 @@ export function ProgressPage() {
         </section>
         <section>
           <h2 className="section-title">Badges</h2>
-          {!earned ? <p className="progress-line">Nog geen badge. Level 1 opent de eerste.</p> : null}
+          {!earned ? <p className="progress-line">Nog geen badge. Drie sterren op level 1 openen de eerste.</p> : null}
           <ul className="badge-list">
             {badges.map((badge) => (
               <li key={badge.id} className={badge.locked ? 'is-locked' : badge.earned ? '' : 'is-waiting'}>

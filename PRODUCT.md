@@ -28,7 +28,7 @@ A bright classroom, short rounds between other work. Solo practice or learn on t
 
 ## Capabilities and Constraints
 
-- Levels 1–7, about ten questions each. Level 1 is Wie wordt er geselecteerd: a chunk of HTML and one selector, and the player marks every element that selector matches. Badges start at two stars: Selector Rookie at two on level 1, Element Scout at three on level 1. Levels 2–6 compare a specificity tuple, a selector battle (`a`, `b`, or `tie`), or the winning rule. Level 7 is `!important`. Two stars there earn !important Survivor.
+- Levels 1–7, about ten questions each. Level 1 is Wie wordt er geselecteerd: a chunk of HTML and one selector, and the player marks every element that selector matches. Badges follow the level order: Element Scout at three stars on level 1, Selector Rookie at two on Elementen (level 2). Levels 2–6 compare a specificity tuple, a selector battle (`a`, `b`, or `tie`), or the winning rule. Level 7 is `!important`. Two stars there earn !important Survivor.
 - The home screen offers solo play and two-device play. Solo starts the next open level without a star. Two-device play can start any of the seven levels immediately.
 - Solo rounds use streak and stars. Hearts exist only in two-device play.
 - Next level unlocks at one star. Three stars require 95% and every trap in that run correct.

@@ -30,14 +30,22 @@ describe('scoring', () => {
     expect(isLevelUnlocked(3, progress)).toBe(false)
   })
 
-  it('earns the solo badges from two stars or more', () => {
+  it('earns the solo badges from two stars or more, in level order', () => {
     const progress = emptyProgress()
-    progress.levels[1] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
+    progress.levels[1] = { bestStars: 2, bestRatio: 0.9, attempts: 1, xp: 1 }
+    progress.levels[2] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
     progress.levels[3] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
     progress.levels[6] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
     progress.levels[7] = { bestStars: 1, bestRatio: 0.8, attempts: 1, xp: 1 }
     expect(evaluateBadges(progress).every((badge) => !badge.earned)).toBe(true)
-    progress.levels[1] = { bestStars: 2, bestRatio: 0.9, attempts: 1, xp: 1 }
+    expect(evaluateBadges(progress).map((badge) => badge.id)).toEqual([
+      'element-scout',
+      'selector-rookie',
+      'id-hunter',
+      'cascade-master',
+      'important-survivor',
+    ])
+    progress.levels[2] = { bestStars: 2, bestRatio: 0.9, attempts: 1, xp: 1 }
     progress.levels[3] = { bestStars: 2, bestRatio: 1, attempts: 1, xp: 1 }
     progress.levels[6] = { bestStars: 2, bestRatio: 0.9, attempts: 1, xp: 1 }
     progress.levels[7] = { bestStars: 2, bestRatio: 0.9, attempts: 1, xp: 1 }
@@ -48,11 +56,17 @@ describe('scoring', () => {
       'cascade-master',
       'important-survivor',
     ])
-    expect(afterTwo.find((badge) => badge.id === 'element-scout')?.earned).toBe(false)
     progress.levels[1] = { bestStars: 3, bestRatio: 1, attempts: 1, xp: 1 }
     const afterThree = evaluateBadges(progress)
-    expect(afterThree.find((badge) => badge.id === 'element-scout')?.earned).toBe(true)
+    expect(afterThree.filter((badge) => badge.earned).map((badge) => badge.id)).toEqual([
+      'element-scout',
+      'selector-rookie',
+      'id-hunter',
+      'cascade-master',
+      'important-survivor',
+    ])
     expect(afterThree.every((badge) => !badge.locked)).toBe(true)
   })
 })
+
 
